@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
@@ -10,9 +11,11 @@ function classNames(...classes) {
 export default function Navbar() {
   return (
     <div>
-      <div className="flex justify-between w-full h-14 ">
-        <div className="grid content-center ">
-          <strong>logo</strong>
+      <div className="flex justify-between w-full h-[76px] pl-20 pr-20 shadow sticky">
+        <div className="grid content-center">
+          <Link href="/">
+            <a className="text-[24px] text-[#126E64]"><strong>Edutiv.</strong></a>
+          </Link>
         </div>
 
         <div className="grid grid-cols-2 gap-5 content-center">
@@ -20,7 +23,7 @@ export default function Navbar() {
           <div>
             <Menu as="div" className="relative inline-block text-left">
               <div>
-                <Menu.Button className="inline-flex justify-center w-full bg-white font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
+                <Menu.Button className="inline-flex justify-center w-full bg-white font-medium px-2 py-[0.5rem] rounded text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
                   Course
                   <ChevronDownIcon
                     className="-mr-1 ml-1 h-6 w-4 text-sm"
@@ -37,12 +40,12 @@ export default function Navbar() {
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
               >
-                <Menu.Items className="origin-top-right absolute left-0 mt-2 w-80 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <Menu.Items className="origin-top-right absolute left-0 mt-2 py-2 w-80 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                   <div className=" mx-4">
                     <Menu.Item>
                       {({ active }) => (
                         <a href="#">
-                            <div className=" block px-2 py-2 grid grid-cols-5">
+                            <div className="px-2 py-2 grid grid-cols-5">
                                 <div className="w-10 h-10 rounded-full p-0" style={{ backgroundColor: "blue" }}>
                                 </div>
                                 <div className=" col-span-4">
@@ -64,7 +67,7 @@ export default function Navbar() {
                     <Menu.Item>
                       {({ active }) => (
                         <a href="#">
-                            <div className=" block px-2 py-2 grid grid-cols-5">
+                            <div className="px-2 py-2 grid grid-cols-5">
                                 <div className="w-10 h-10 rounded-full p-0" style={{ backgroundColor: "blue" }}>
                                 </div>
                                 <div className=" col-span-4">
@@ -85,7 +88,7 @@ export default function Navbar() {
                     <Menu.Item>
                       {({ active }) => (
                         <a href="#">
-                            <div className=" block px-2 py-2 grid grid-cols-5">
+                            <div className="px-2 py-2 grid grid-cols-5">
                                 <div className="w-10 h-10 rounded-full p-0" style={{ backgroundColor: "blue" }}>
                                 </div>
                                 <div className=" col-span-4">
@@ -107,7 +110,7 @@ export default function Navbar() {
                     <Menu.Item>
                       {({ active }) => (
                         <a href="#">
-                            <div className=" block px-2 py-2 grid grid-cols-5">
+                            <div className="px-2 py-2 grid grid-cols-5">
                                 <div className="w-10 h-10 rounded-full p-0" style={{ backgroundColor: "blue" }}>
                                 </div>
                                 <div className=" col-span-4">
@@ -132,17 +135,14 @@ export default function Navbar() {
             </Menu>
           </div>
 
-          <div className="inline-flex justify-center bg-white font-medium text-gray-700">
+          <div className="inline-flex justify-center bg-white font-medium text-gray-700 px-2 py-[0.5rem]">
             Request
           </div>
         </div>
 
         <div className="grid content-center">
-          <div
-            style={{ backgroundColor: "#126E64" }}
-            className="grid content-center w-14 h-7 rounded-lg text-white"
-          >
-            <button className=" text-sm">Login</button>
+          <div className="grid content-center px-4 py-2 rounded-md text-white bg-[#126E64] hover:bg-[#09423c] hover:-translate-y-[0.1rem] hover:transition hover:duration-100 hover:ease-in-out hover:drop-shadow-md">
+            <button className="text-sm">LOGIN</button>
           </div>
         </div>
       </div>
