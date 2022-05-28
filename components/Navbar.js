@@ -37,86 +37,111 @@ export default function Navbar() {
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
               >
-                <Menu.Items className="origin-top-right absolute left-0 mt-2 w-36 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                  <div className="">
+                <Menu.Items className="origin-top-right absolute left-0 mt-2 w-80 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                  <div className=" mx-4">
                     <Menu.Item>
                       {({ active }) => (
-                        <a
-                          href="#"
-                          className={classNames(
-                            active ? " text-gray-400" : "text-gray-600/100",
-                            "block px-4 py-2 text-sm font-semibold"
-                          )}
-                        >
-                          Edit Profile
+                        <a href="#">
+                            <div className=" block px-2 py-2 grid grid-cols-5">
+                                <div className="w-10 h-10 rounded-full p-0" style={{ backgroundColor: "blue" }}>
+                                </div>
+                                <div className=" col-span-4">
+                                    <h1
+                                        className={classNames(
+                                            active ? " text-gray-400" : "text-gray-600/100",
+                                        " text-base font-semibold"
+                                        )}
+                                        >
+                                        All Course
+                                    </h1>
+                                    <p className="text-xs transpare text-slate-300 "> Lots of interesting courses ready to learn </p>
+                                </div>
+                            </div>
+                        </a>
+                      )}
+                    </Menu.Item>
+                    
+                    <Menu.Item>
+                      {({ active }) => (
+                        <a href="#">
+                            <div className=" block px-2 py-2 grid grid-cols-5">
+                                <div className="w-10 h-10 rounded-full p-0" style={{ backgroundColor: "blue" }}>
+                                </div>
+                                <div className=" col-span-4">
+                                    <h1
+                                        className={classNames(
+                                            active ? " text-gray-400" : "text-gray-600/100",
+                                        " text-base font-semibold"
+                                        )}
+                                        >
+                                        Coding Course
+                                    </h1>
+                                    <p className="text-xs transpare text-slate-300 "> Full-Stack Web & Mobile Developer </p>
+                                </div>
+                            </div>
                         </a>
                       )}
                     </Menu.Item>
                     <Menu.Item>
                       {({ active }) => (
-                        <a
-                          href="#"
-                          className={classNames(
-                            active ? "text-gray-400" : "text-gray-700",
-                            "block px-4 py-2 text-sm font-semibold"
-                          )}
-                        >
-                          My Course
+                        <a href="#">
+                            <div className=" block px-2 py-2 grid grid-cols-5">
+                                <div className="w-10 h-10 rounded-full p-0" style={{ backgroundColor: "blue" }}>
+                                </div>
+                                <div className=" col-span-4">
+                                    <h1
+                                        className={classNames(
+                                            active ? " text-gray-400" : "text-gray-600/100",
+                                        " text-base font-semibold"
+                                        )}
+                                        >
+                                        Design Course
+                                    </h1>
+                                    <p className="text-xs transpare text-slate-300 "> UI/UX & Graphic Design </p>
+                                </div>
+                            </div>
                         </a>
                       )}
                     </Menu.Item>
+
                     <Menu.Item>
                       {({ active }) => (
-                        <a
-                          href="#"
-                          className={classNames(
-                            active ? "text-gray-400" : "text-gray-700",
-                            "block px-4 py-2 text-sm font-semibold"
-                          )}
-                        >
-                          Certificate
+                        <a href="#">
+                            <div className=" block px-2 py-2 grid grid-cols-5">
+                                <div className="w-10 h-10 rounded-full p-0" style={{ backgroundColor: "blue" }}>
+                                </div>
+                                <div className=" col-span-4">
+                                    <h1
+                                        className={classNames(
+                                            active ? " text-gray-400" : "text-gray-600/100",
+                                        " text-base font-semibold"
+                                        )}
+                                        >
+                                        Soft Skill Course
+                                    </h1>
+                                    <p className="text-xs transpare text-slate-300 "> Improve your skills </p>
+                                </div>
+                            </div>
                         </a>
                       )}
                     </Menu.Item>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <a
-                          href="#"
-                          className={classNames(
-                            active ? "text-gray-400" : "text-gray-700",
-                            "block px-4 py-2 text-sm font-semibold"
-                          )}
-                        >
-                          History Course
-                        </a>
-                      )}
-                    </Menu.Item>
-                    <form method="POST" action="#">
-                      <Menu.Item>
-                        {({ active }) => (
-                          <button
-                            type="submit"
-                            className={classNames(
-                              active ? "text-gray-400" : "text-gray-700",
-                              "block w-full text-left px-4 py-2 text-sm font-semibold"
-                            )}
-                          >
-                            Logout
-                          </button>
-                        )}
-                      </Menu.Item>
-                    </form>
+                    
                   </div>
                 </Menu.Items>
               </Transition>
             </Menu>
           </div>
 
-          <div className="inline-flex justify-center bg-white font-medium text-gray-700">Request</div>
+          <div className="inline-flex justify-center bg-white font-medium text-gray-700">
+            Request
+          </div>
         </div>
 
         <div className="grid content-center">
-          <div style={{ backgroundColor : "#126E64" }} className="grid content-center w-14 h-7 rounded-lg text-white">
+          <div
+            style={{ backgroundColor: "#126E64" }}
+            className="grid content-center w-14 h-7 rounded-lg text-white"
+          >
             <button className=" text-sm">Login</button>
           </div>
         </div>
