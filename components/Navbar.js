@@ -1,12 +1,29 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 
+import codingCourse from "../public/assets/img/coding-course.png";
+import designCourse from "../public/assets/img/design-course.png";
+import softskillCourse from "../public/assets/img/soft-skills.png";
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
+
+// eslint-disable-next-line react/display-name
+const MyLink = forwardRef((props, ref) => {
+  let { href, children, ...rest } = props;
+  return (
+    <Link href={href}>
+      <a ref={ref} {...rest}>
+        {children}
+      </a>
+    </Link>
+  )
+})
 
 export default function Navbar() {
   return (
@@ -18,15 +35,15 @@ export default function Navbar() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-2 gap-5 content-center">
+        <div className="grid content-center grid-cols-2 gap-5">
           {/* dropdown */}
           <div>
             <Menu as="div" className="relative inline-block text-left">
               <div>
-                <Menu.Button className="inline-flex justify-center w-full bg-white font-medium px-2 py-[0.5rem] rounded text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
+                <Menu.Button className="inline-flex justify-center w-full bg-white font-medium px-2 py-[0.5rem] rounded text-gray-700 hover:bg-gray-50">
                   Course
                   <ChevronDownIcon
-                    className="-mr-1 ml-1 h-6 w-4 text-sm"
+                    className="w-4 h-6 ml-1 -mr-1 text-sm"
                     aria-hidden="true"
                   />
                 </Menu.Button>
@@ -40,95 +57,112 @@ export default function Navbar() {
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
               >
-                <Menu.Items className="origin-top-right absolute left-0 mt-2 py-2 w-80 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                  <div className=" mx-4">
+                <Menu.Items className="absolute left-0 py-2 mt-2 origin-top-right bg-white rounded-md shadow-lg w-80 ring-1 ring-black ring-opacity-5 focus:outline-none">
+                  <div className="mx-4 ">
                     <Menu.Item>
                       {({ active }) => (
-                        <a href="#">
-                            <div className="px-2 py-2 grid grid-cols-5">
-                                <div className="w-10 h-10 rounded-full p-0" style={{ backgroundColor: "blue" }}>
-                                </div>
-                                <div className=" col-span-4">
-                                    <h1
-                                        className={classNames(
-                                            active ? " text-gray-400" : "text-gray-600/100",
-                                        " text-base font-semibold"
-                                        )}
-                                        >
-                                        All Course
-                                    </h1>
-                                    <p className="text-xs transpare text-slate-300 "> Lots of interesting courses ready to learn </p>
-                                </div>
+                        <MyLink href="/test">
+                          <div className="grid grid-cols-5 px-2 py-2">
+                            <div className="w-10 h-10 p-0 rounded-full" style={{ backgroundColor: "blue" }}>
                             </div>
-                        </a>
-                      )}
-                    </Menu.Item>
-                    
-                    <Menu.Item>
-                      {({ active }) => (
-                        <a href="#">
-                            <div className="px-2 py-2 grid grid-cols-5">
-                                <div className="w-10 h-10 rounded-full p-0" style={{ backgroundColor: "blue" }}>
-                                </div>
-                                <div className=" col-span-4">
-                                    <h1
-                                        className={classNames(
-                                            active ? " text-gray-400" : "text-gray-600/100",
-                                        " text-base font-semibold"
-                                        )}
-                                        >
-                                        Coding Course
-                                    </h1>
-                                    <p className="text-xs transpare text-slate-300 "> Full-Stack Web & Mobile Developer </p>
-                                </div>
+                            <div className="col-span-4 ">
+                              <h1
+                                className={classNames(
+                                  active ? " text-gray-400" : "text-gray-600/100",
+                                  " text-base font-semibold"
+                                )}
+                              >
+                                All Course
+                              </h1>
+                              <p className="text-xs text-slate-300 "> Lots of interesting courses ready to learn </p>
                             </div>
-                        </a>
-                      )}
-                    </Menu.Item>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <a href="#">
-                            <div className="px-2 py-2 grid grid-cols-5">
-                                <div className="w-10 h-10 rounded-full p-0" style={{ backgroundColor: "blue" }}>
-                                </div>
-                                <div className=" col-span-4">
-                                    <h1
-                                        className={classNames(
-                                            active ? " text-gray-400" : "text-gray-600/100",
-                                        " text-base font-semibold"
-                                        )}
-                                        >
-                                        Design Course
-                                    </h1>
-                                    <p className="text-xs transpare text-slate-300 "> UI/UX & Graphic Design </p>
-                                </div>
-                            </div>
-                        </a>
+                          </div>
+                        </MyLink>
                       )}
                     </Menu.Item>
 
                     <Menu.Item>
                       {({ active }) => (
-                        <a href="#">
-                            <div className="px-2 py-2 grid grid-cols-5">
-                                <div className="w-10 h-10 rounded-full p-0" style={{ backgroundColor: "blue" }}>
-                                </div>
-                                <div className=" col-span-4">
-                                    <h1
-                                        className={classNames(
-                                            active ? " text-gray-400" : "text-gray-600/100",
-                                        " text-base font-semibold"
-                                        )}
-                                        >
-                                        Soft Skill Course
-                                    </h1>
-                                    <p className="text-xs transpare text-slate-300 "> Improve your skills </p>
-                                </div>
+                        <MyLink href="#">
+                          <div className="grid grid-cols-5 px-2 py-2">
+                            <div className="w-10 h-10 p-0">
+                              <Image
+                                src={codingCourse}
+                                alt="Course1"
+                                className="object-scale-down rounded-full"
+                              />
                             </div>
-                        </a>
+                            <div className="col-span-4 ">
+                              <h1
+                                className={classNames(
+                                  active ? " text-gray-400" : "text-gray-600/100",
+                                  " text-base font-semibold"
+                                )}
+                              >
+                                Coding Course
+                              </h1>
+                              <p className="text-xs text-slate-300 "> Full-Stack Web & Mobile Developer </p>
+                            </div>
+                          </div>
+                        </MyLink>
                       )}
                     </Menu.Item>
-                    
+                    <Menu.Item>
+                      {({ active }) => (
+                        <MyLink href="/test">
+                          <div className="grid grid-cols-5 px-2 py-2">
+                            <div className="w-10 h-10 p-0 rounded-full">
+                              <Image
+                                src={designCourse}
+                                alt="Course1"
+                                className="object-scale-down rounded-full"
+                              />
+                            </div>
+                            <div className="col-span-4 ">
+                              <h1
+                                className={classNames(
+                                  active ? " text-gray-400" : "text-gray-600/100",
+                                  " text-base font-semibold"
+                                )}
+                              >
+                                Design Course
+                              </h1>
+                              <p className="text-xs text-slate-300 "> UI/UX & Graphic Design </p>
+                            </div>
+                          </div>
+                        </MyLink>
+                      )}
+                    </Menu.Item>
+
+                    <Menu.Item>
+                      {({ active }) => (
+                        <MyLink href="#">
+                          <div className="grid grid-cols-5 px-2 py-2">
+                            <div className="w-10 h-10 p-0 rounded-full">
+                              <Image
+                                src={softskillCourse}
+                                alt="Course1"
+                                className="object-scale-down rounded-full"
+                                layout="responsive"
+                                loading="lazy"
+                              />
+                            </div>
+                            <div className="col-span-4 ">
+                              <h1
+                                className={classNames(
+                                  active ? " text-gray-400" : "text-gray-600/100",
+                                  " text-base font-semibold"
+                                )}
+                              >
+                                Soft Skill Course
+                              </h1>
+                              <p className="text-xs text-slate-300 "> Improve your skills </p>
+                            </div>
+                          </div>
+                        </MyLink>
+                      )}
+                    </Menu.Item>
+
                   </div>
                 </Menu.Items>
               </Transition>
