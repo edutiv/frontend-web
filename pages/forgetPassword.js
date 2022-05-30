@@ -1,4 +1,6 @@
 import Head from "next/head";
+import Button from "../components/Button";
+import { KeyIcon } from "@heroicons/react/solid";
 
 function ForgetPassword() {
 	return (
@@ -7,13 +9,17 @@ function ForgetPassword() {
 				<title>Halaman Login</title>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
-
 			<main className="bgMain">
 				<div className="logo">
 					<h1>Eductiv.</h1>
 				</div>
 
 				<div className="item-center justify-center mt-40">
+					<div className="rounded-full bg-green-300 flex-none w-6 ">
+						<KeyIcon
+							className= "rounded-full w-6 p-0"
+						/>
+					</div>
 					<div>
 						<h4 className="fontHeader1">Forget Password</h4>
 					</div>
@@ -22,7 +28,7 @@ function ForgetPassword() {
 							No worries, we’ll send you reset instruction
 						</p>
 					</div>
-					<form className="items-center justify-center">
+					<form className="items-center justify-center mb-8 mt-10">
 						<div className="mb-5 mt-12 w-3/12 items-center justify-center">
 							<label
 								htmlFor="password"
@@ -34,11 +40,14 @@ function ForgetPassword() {
 								type="email"
 								name="email"
 								id="email"
-								className="w-full text-sm rounded-lg px-3 py-1 focus:outline-none focus:ring focus:ring-sky-200 focus:border-sky-700 transition duration-200 shadow-sm border-emerald-800"
+								className="w-full text-sm rounded-lg px-3 py-1 focus:outline-none focus:ring focus:ring-sky-200 focus:border-sky-700 transition duration-200 shadow-sm border-emerald-800 border"
 								placeholder="Enter your email"
 							/>
 						</div>
 					</form>
+				</div>
+				<div className="mb-5 mt-12 w-3/12 items-center justify-center">
+					<Button>SEND RESET LINK</Button>
 				</div>
 			</main>
 		</div>
