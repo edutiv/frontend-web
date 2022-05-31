@@ -33,6 +33,20 @@ export default function Home() {
           </div>
         </div>
         {/* get started */}
+
+        {/* features icon */}
+        
+        <div className=" mx-20 my-24">
+            <div className="flex justify-between mx-24">
+              <div className=" flex items-center"> <i className="bg-[#126E6433] rounded-full w-20 h-20 grid place-content-center"><Image src={"/assets/icon/Video.png"} className=" w-12" width='48px' height='48px' alt='video'/></i> <p className=" ml-6">Video Learning</p> </div>
+              <div className=" flex items-center"> <i className="bg-[#126E6433] rounded-full w-20 h-20 grid place-content-center"><Image src={"/assets/icon/Certificate.png"}  className=" w-12" width='48px' height='48px' alt='certif'/></i> <p className=" ml-6">Certificates</p>  </div>
+              <div className=" flex items-center"> <i className="bg-[#126E6433] rounded-full w-20 h-20 grid place-content-center"><Image src={"/assets/icon/Test Passed.png"}  className=" w-12" width='48px' height='48px' alt='test passed'/></i> <p className=" ml-6">Quiz</p>  </div>
+            </div>
+          </div>
+
+        {/* features icon */}
+
+        {/* Course */}
       </main>
 
       <footer></footer>
