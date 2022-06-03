@@ -30,11 +30,18 @@ function ForgetPwd() {
 						</p>
 					</div>
 				</div>
-				<div className="mb-5 mt-12 w-3/12 items-center justify-center">
-					<Button>OPEN EMAIL APP</Button>
+				<div className="button-password">
+					<Button>
+						<div className="text-button-forgetpwd">
+							OPEN EMAIL APP
+						</div>
+					</Button>
 				</div>
-				<div>
-					<p>Dont' receive the email? </p> <a href="#"><i>Resend Again</i></a>
+				<div className="text-gray-400 text-sm mt-8 text-center ">
+					Don't receive the email?  {" "}
+					<a href="#" className="hoverText font-semibold">
+								Resend again
+					</a>
 				</div>
 			</main>
 		</div>

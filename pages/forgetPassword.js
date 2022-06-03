@@ -29,10 +29,10 @@ function ForgetPassword() {
 						</p>
 					</div>
 					<form className="items-center justify-center mb-8 mt-10">
-						<div className="mb-5 mt-12 w-3/12 items-center justify-center">
+						<div className="mb-5 mt-12 w-auto items-center justify-center mx-96 pl-36 pr-36 ">
 							<label
 								htmlFor="password"
-								className="block  mb-1  font-medium  text-sm"
+								className="block  mb-1  font-semibold  text-sm"
 							>
 								Email
 							</label>
@@ -46,7 +46,7 @@ function ForgetPassword() {
 						</div>
 					</form>
 				</div>
-				<div className="mb-5 mt-12 w-3/12 items-center justify-center">
+				<div className="mb-5 mt-10 w-auto items-center justify-center mx-96 pl-36 pr-36">
 					<Button>SEND RESET LINK</Button>
 				</div>
 			</main>
