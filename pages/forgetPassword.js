@@ -15,9 +15,9 @@ function ForgetPassword() {
 				</div>
 
 				<div className="flex item-center justify-center mt-40 flex-col align-middle items-center">
-					<div className="rounded-full bg-green-300 p-3 max-w-xs m-6">
+					<div className="rounded-full bg-[#D4E4E4] p-4 max-w-xs m-6">
 						<KeyIcon
-							className="rounded-full w-8 text-[#126E64]"
+							className="rounded-full w-6 text-[#126E64]"
 						/>
 					</div>
 					<div>
@@ -40,12 +40,12 @@ function ForgetPassword() {
 								type="email"
 								name="email"
 								id="email"
-								className="w-full text-sm rounded-lg py-2 px-4 focus:outline-none focus:ring focus:ring-sky-200 focus:border-sky-700 transition duration-200 shadow-sm border-emerald-800 border"
+								className="w-full text-sm rounded-lg py-2 px-4 focus:outline-none focus:ring focus:ring-sky-200 focus:border-sky-700 transition duration-200 drop-shadow-lg border-emerald-800 border"
 								placeholder="Enter your email"
 							/>
 						</div>
 					</form>
-					<div className="mb-5 items-center justify-center w-[420px]">
+					<div className="mb-5 items-center justify-center w-[420px] mt-4">
 						<Button>SEND RESET LINK</Button>
 					</div>
 				</div>

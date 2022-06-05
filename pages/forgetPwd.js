@@ -14,10 +14,10 @@ function ForgetPwd() {
 					<h1>Eductiv.</h1>
 				</div>
 
-				<div className="item-center justify-center mt-40">
-					<div className="rounded-full bg-green-300 flex-none w-6 ">
+				<div className="flex item-center justify-center mt-36 flex-col align-middle items-center">
+					<div className="rounded-full bg-[#D4E4E4] p-4 max-w-xs m-6">
 						<MailIcon
-							className= "rounded-full w-6 p-0"
+							className= "rounded-full w-6 text-[#126E64]"
 						/>
 					</div>
 					<div>
@@ -30,12 +30,8 @@ function ForgetPwd() {
 						</p>
 					</div>
 				</div>
-				<div className="button-password">
-					<Button>
-						<div className="text-button-forgetpwd">
-							OPEN EMAIL APP
-						</div>
-					</Button>
+				<div className="mb-5 items-center justify-center w-[400px] mt-8 flex ml-[515px]">
+					<Button>OPEN EMAIL APP</Button>
 				</div>
 				<div className="text-gray-400 text-sm mt-8 text-center ">
 					Don't receive the email?  {" "}

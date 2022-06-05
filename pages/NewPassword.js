@@ -14,10 +14,10 @@ function NewPassword() {
 					<h1>Eductiv.</h1>
 				</div>
 
-				<div className="item-center justify-center mt-40">
-					<div className="rounded-full bg-green-300 flex-none w-6 ">
+				<div className="flex item-center justify-center mt-24 flex-col align-middle items-center">
+					<div className="rounded-full bg-[#D4E4E4] p-4 max-w-xs m-6">
 						<KeyIcon
-							className= "rounded-full w-6 p-0"
+							className= "rounded-full w-6 text-[#126E64]"
 						/>
 					</div>
 					<div>
@@ -28,8 +28,8 @@ function NewPassword() {
 							Your new password must be different to <br></br>previously used password
 						</p>
 					</div>
-                    <form className="items-center justify-center mb-8 mt-10" >
-                    <div className="mb-5 mt-12 w-auto items-center justify-center mx-96 pl-36 pr-36">
+                    <form className="items-center w-[420px] justify-center mt-10" >
+                    <div className="mb-5 w-full items-center justify-center">
 						<label
 							htmlFor="password"
 							className="block  mb-1  text-sm font-semibold">
@@ -39,11 +39,12 @@ function NewPassword() {
 									type="password"
 									name="password"
 									id="password"
-									className="w-full text-sm rounded-lg px-3 py-1 focus:outline-none focus:ring focus:ring-sky-200 focus:border-sky-700 transition duration-200 shadow-sm border-emerald-800 border"
+									className="w-full text-sm rounded-lg py-2 px-4 pb-3 focus:outline-none focus:ring focus:ring-sky-200 focus:border-sky-700 transition duration-200 drop-shadow-lg border-emerald-800 border"
 									placeholder="Enter your password"
 								/>
+							<span className="text-gray-600 text-sm pt-4 pb-0">Must be at 8 characters</span>
 							</div>
-							<div className="mb-5 mt-12 w-auto items-center justify-center mx-96 pl-36 pr-36">
+							<div className="mb-5 w-full items-center justify-center">
 								<label
 									htmlFor="confirmPassword"
 									className="block  mb-1  font-semibold  text-sm"
@@ -54,17 +55,15 @@ function NewPassword() {
 									type="password"
 									name="password"
 									id="password"
-									className="w-full text-sm rounded-lg px-3 py-1 focus:outline-none focus:ring focus:ring-sky-200 focus:border-sky-700 transition duration-200 shadow-sm border-emerald-800 border"
+									className="w-full text-sm rounded-lg py-2 px-4 focus:outline-none focus:ring focus:ring-sky-200 focus:border-sky-700 transition duration-200 drop-shadow-lg border-emerald-800 border"
 									placeholder="Enter the same password"
 								/>
 							</div>
                     </form>
 				</div>
-				<div className="mb-5 mt-8 w-auto items-center justify-center mx-96 pl-36 pr-36">
+				<div className="mb-5 items-center justify-center w-[420px] mt-4 ml-[500px]">
 					<Button>
-                        <div className="text-button-forgetpwd">
                             RESET PASSWORD
-                        </div>
                     </Button>
 				</div>
 			</main>

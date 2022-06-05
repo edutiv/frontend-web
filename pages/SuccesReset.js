@@ -14,10 +14,10 @@ function SuccesReset() {
 					<h1>Eductiv.</h1>
 				</div>
 
-				<div className="item-center justify-center mt-40">
-					<div className="icon-password">
+				<div className="flex item-center justify-center mt-40 flex-col align-middle items-center">
+					<div className="rounded-full bg-[#D4E4E4] p-4 max-w-xs m-6">
 						<CheckIcon
-							className= "icon-logo-password"
+							className= "rounded-full w-6 text-[#126E64]"
 						/>
 					</div>
 					<div>
@@ -30,7 +30,7 @@ function SuccesReset() {
 						</p>
 					</div>
 				</div>
-				<div className="button-password">
+				<div className="mb-5 items-center justify-center w-[390px] mt-7 ml-[515px]">
 					<Button>CONTINUE</Button>
 				</div>
 			</main>
