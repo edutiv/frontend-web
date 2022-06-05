@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Button from "../components/Button";
-import { CheckCircleIcon } from "@heroicons/react/solid";
+import { CheckIcon } from "@heroicons/react/solid";
 
 function SuccesReset() {
 	return (
@@ -16,7 +16,7 @@ function SuccesReset() {
 
 				<div className="item-center justify-center mt-40">
 					<div className="icon-password">
-						<CheckCircleIcon
+						<CheckIcon
 							className= "icon-logo-password"
 						/>
 					</div>
