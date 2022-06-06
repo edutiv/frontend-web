@@ -1,6 +1,9 @@
 import Head from "next/head";
+import Link from "next/link";
 import Image from "next/image";
 import Button from "../components/Button";
+
+import bgLogin from "../public/assets/img/bg-Login.png"
 
 function Login() {
 	return (
@@ -16,7 +19,7 @@ function Login() {
 					<div className="basis 1/2">
 						<Image
 							class="floa-none"
-							src="/../public/assets/img/bg-Login.png"
+							src={bgLogin}
 							alt="bg-Login"
 							width={680}
 							height={720}
@@ -68,7 +71,9 @@ function Login() {
 								/>
 							</div>
 							<div className="mb-5 text-right text-sm hover:text-emerald-300">
-								<a href="#">Forgot password?</a>
+								<Link href="/forgetPassword">
+									<a>Forgot password?</a>
+								</Link>
 							</div>
 						</form>
 
