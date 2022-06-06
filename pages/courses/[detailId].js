@@ -1,7 +1,7 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 
-export default function detail() {
+export default function Detail() {
 
   const router = useRouter()
   console.log(router.query);

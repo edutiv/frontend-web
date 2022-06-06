@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 import Button from "../components/Button";
 import { MailIcon } from "@heroicons/react/solid";
 
@@ -17,7 +18,7 @@ function ForgetPwd() {
 				<div className="flex item-center justify-center mt-36 flex-col align-middle items-center">
 					<div className="rounded-full bg-[#D4E4E4] p-4 max-w-xs m-6">
 						<MailIcon
-							className= "rounded-full w-6 text-[#126E64]"
+							className="rounded-full w-6 text-[#126E64]"
 						/>
 					</div>
 					<div>
@@ -29,14 +30,20 @@ function ForgetPwd() {
 							earlanorpena@gmail.com
 						</p>
 					</div>
-				</div>
-				<div className="mb-5 items-center justify-center w-[400px] mt-8 flex ml-[515px]">
-					<Button>OPEN EMAIL APP</Button>
+					<Link href="/NewPassword">
+						<a>
+							<div className="mb-5 items-center justify-center w-[400px] mt-8 flex">
+								<Button>
+									OPEN EMAIL APP
+								</Button>
+							</div>
+						</a>
+					</Link>
 				</div>
 				<div className="text-gray-400 text-sm mt-8 text-center ">
-					Don't receive the email?  {" "}
+					Don&apos;t receive the email?  {" "}
 					<a href="#" className="hoverText font-semibold">
-								Resend again
+						Resend again
 					</a>
 				</div>
 			</main>

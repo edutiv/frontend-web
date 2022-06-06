@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 import Button from "../components/Button";
 import { KeyIcon } from "@heroicons/react/solid";
 
@@ -45,9 +46,15 @@ function ForgetPassword() {
 							/>
 						</div>
 					</form>
-					<div className="mb-5 items-center justify-center w-[420px] mt-4">
-						<Button>SEND RESET LINK</Button>
-					</div>
+					<Link href="/forgetPwd">
+						<a>
+							<div className="mb-5 items-center justify-center w-[420px] mt-4">
+								<Button>
+									SEND RESET LINK
+								</Button>
+							</div>
+						</a>
+					</Link>
 				</div>
 			</main>
 		</div>
