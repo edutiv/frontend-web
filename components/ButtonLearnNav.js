@@ -1,5 +1,5 @@
 import React from 'react'
-import { CheckCircleIcon } from "@heroicons/react/solid";
+import { CheckCircleIcon, LockClosedIcon } from "@heroicons/react/solid";
 
 
 export default function ButtonLearnNav(props) {
@@ -13,7 +13,7 @@ export default function ButtonLearnNav(props) {
         <i className='play-icon mx-2'><Icon icon={props.icon} /></i>
         <p className=' text-[11px] w-[182px] text-[#404040]'>{props.title}</p>
         {
-          props.check ? <i className='check-icon mx-2'><CheckCircleIcon className=' w-4' /></i> : <i></i>
+          props.disabled?  <i className='check-icon mx-2'><LockClosedIcon className=' w-4' /></i> : props.check ? <i className='check-icon mx-2'><CheckCircleIcon className=' w-4' /></i> : <i></i>
         }
     </div>
   )
