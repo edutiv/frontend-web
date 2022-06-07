@@ -16,6 +16,7 @@ export default function CardCourse({image, mentor}) {
         <div className="pt-2">
           <h1 className=" mb-4 text-base font-bold">Bootstrap 5 - Membuat Landing Page</h1>
           <div className=" mb-4 grid content-center">
+            
             <div className="flex">
               <div className="w-5 h-5 rounded-full">
                 <Image
