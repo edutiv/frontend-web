@@ -39,11 +39,11 @@ export default function Detail() {
       </div>
 
       {/* contents video */}
-      <div className="mx-20 grid grid-cols-12 gap-10 my-10 h-[424px]">
+      <div className="mx-20 grid grid-cols-12 gap-10 my-10 h-[424px] my-">
         {/* video */}
         <div className=" border-2 col-span-9 ">
 
-          <iframe className=" w-full aspect-video" src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
+          <iframe className="w-full h-full aspect-auto" src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
 
         </div>
         {/* video */}
