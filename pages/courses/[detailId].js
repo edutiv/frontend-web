@@ -80,8 +80,8 @@ export default function Detail() {
                 <Tab
                   className={({ selected }) =>
                     classNames(
-                      "w-full py-2.5 text-sm font-medium  w-[71px]",
-                      selected ? " border-b-2 border-black" : ""
+                      "py-2.5 text-sm font-medium w-[71px]",
+                      selected ? " border-b-2 border-black focus-visible:outline-none" : ""
                     )
                   }
                 >
@@ -92,8 +92,8 @@ export default function Detail() {
                 <Tab
                   className={({ selected }) =>
                     classNames(
-                      "w-full py-2.5 text-sm font-medium  w-[71px]",
-                      selected ? " border-b-2 border-black" : ""
+                      "py-2.5 text-sm font-medium w-[71px]",
+                      selected ? " border-b-2 border-black focus-visible:outline-none" : ""
                     )
                   }
                 >
@@ -104,8 +104,8 @@ export default function Detail() {
                 <Tab
                   className={({ selected }) =>
                     classNames(
-                      "w-full py-2.5 text-sm font-medium  w-[71px]",
-                      selected ? " border-b-2 border-black" : ""
+                      "py-2.5 text-sm font-medium w-[71px]",
+                      selected ? " border-b-2 border-black focus-visible:outline-none" : ""
                     )
                   }
                 >
@@ -116,8 +116,8 @@ export default function Detail() {
                 <Tab
                   className={({ selected }) =>
                     classNames(
-                      "w-full py-2.5 text-sm font-medium  w-[71px]",
-                      selected ? " border-b-2 border-black" : ""
+                      "py-2.5 text-sm font-medium  w-[71px]",
+                      selected ? " border-b-2 border-black focus-visible:outline-none" : ""
                     )
                   }
                 >
