@@ -10,9 +10,28 @@ import softskillCourse from "../public/assets/img/soft-skills.png";
 import titleImg from "../public/assets/img/head-title.svg";
 import courseBs from "../public/assets/img/bs5.png";
 import mentorCourseBs from "../public/assets/img/mentor.png";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 
 export default function Home() {
+
+  let api;
+  const [data, setData] = useState();
+
+  // get api
+  useEffect(() => {
+    axios
+      .get("https://62a0b46ea9866630f815f720.mockapi.io//course")
+      .then( (response) => {      
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        api = response
+        setData(api.data);
+      });
+  }, [api]);
+  console.log(data);
+
+
   return (
     <>
       <header>
@@ -141,7 +160,14 @@ export default function Home() {
         <div className="mx-20 pb-20">
           <p className="text-base text-[#126E64]">Top Course</p>
           <h1 className="mb-12 text-[39px]">Excellent Course For You</h1>
-          <CardCourse image={courseBs} mentor={mentorCourseBs} />
+          <div className=" grid grid-cols-4 gap-3">
+            {
+              data?.map((item) => (
+                <CardCourse key={item.courseId} image={courseBs} mentor={mentorCourseBs} mentorName={"bessie chopper"} title={item.courseName} courseId={item.courseId} />
+              ))
+            }
+          </div>
+          
         </div>
         {/* Course Card */}
       </main>
