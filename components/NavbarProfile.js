@@ -5,15 +5,16 @@ import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 
-import codingCourse from "../public/assets/img/coding-course.png";
-import designCourse from "../public/assets/img/design-course.png";
-import softskillCourse from "../public/assets/img/soft-skills.png";
+// import codingCourse from "../public/assets/img/coding-course.png";
+// import designCourse from "../public/assets/img/design-course.png";
+// import softskillCourse from "../public/assets/img/soft-skills.png";
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
 }
 
 
+// eslint-disable-next-line react/display-name
 const MyLink = forwardRef((props, ref) => {
     let { href, children, ...rest } = props;
     return (
