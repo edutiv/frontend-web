@@ -11,8 +11,6 @@ import vscLogo from "../../public/assets/img/vscode.png";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -25,39 +23,46 @@ export default function Detail() {
   useEffect(() => {
     axios
       .get("https://62a0b46ea9866630f815f720.mockapi.io//course")
-      .then( async (response) => {      
+      .then(async (response) => {
         const courseId = query.detailId;
         // eslint-disable-next-line react-hooks/exhaustive-deps
-        api = response?.data.filter((data) => (data.courseId == courseId));
+        api = response?.data.filter((data) => data.courseId == courseId);
         const data = api[0];
         setData(data);
       });
   }, [api]);
-  
+
+  console.log(data);
   return (
     <div>
       <Navbar />
       <div className=" mt-20">
         <div className=" text-center">
-          <h1 className=" text-4xl">
-            {data?.courseName}
-          </h1>
+          <h1 className=" text-4xl">{data?.courseName}</h1>
         </div>
         <div className=" flex justify-center mt-6">
           <div className="flex-col justify-center">
             <h1 className="flex justify-center">Member</h1>
-            <p>24 enrolled</p>
+            <p>{data?.courseStatus.member}</p>
           </div>
           <div className=" mx-12 flex-col justify-center">
             <h1>Serifikat</h1>
             <i className="flex justify-center">
-              <CheckCircleIcon className=" w-4" />
+              {data?.courseStatus.sertificate ? (
+                <CheckCircleIcon className=" w-4" />
+              ) : (
+                <div></div>
+              )}
             </i>
           </div>
           <div>
             <h1>Quiz</h1>
             <i className="flex justify-center">
-              <CheckCircleIcon className=" w-4" />
+              {data?.courseStatus.quiz ? (
+                <CheckCircleIcon className=" w-4" />
+              ) : (
+                <div></div>
+              )}
             </i>
           </div>
         </div>
@@ -68,7 +73,7 @@ export default function Detail() {
           <div className=" border-2 col-span-9 ">
             <iframe
               className="w-full h-full aspect-auto"
-              src={data?.courseVideo[0].videoUrl}
+              src={data?.courseIntroductionVideo}
             />
           </div>
           {/* video */}
@@ -76,18 +81,25 @@ export default function Detail() {
           {/* ennroll button */}
           <div className=" bg-[#F5F5F5] rounded-md col-span-3 p-6 grid">
             <h1 className=" font-bold mb-4 text-base">
-              24 Video Lesson (1h 5m)
+              {`24 Video Lesson (${data?.courseLearningTime})`}
             </h1>
-            {
-            data?.courseVideo.map((item) => (
+            <div className=" flex-col">
+              {data?.courseLessons.map((item, index) => (
+                <ButtonLearnNav
+                  key={index}
+                  className="mb-4"
+                  icon={"video"}
+                  title={item.name}
+                  disabled={true}
+                />
+              ))}
               <ButtonLearnNav
-                key={item.videoDetailId}
                 className="mb-4"
                 icon={"video"}
-                title={item.videoDetailName}
+                title={"more video"}
+                disabled={true}
               />
-            ))
-            }
+            </div>
             <button className=" h-[41px] bg-[#126E64] rounded-md w-full place-self-end text-white">
               ENROLL NOW
             </button>
@@ -166,38 +178,32 @@ export default function Detail() {
                   <Tab.Panel>
                     <div>
                       <div className=" my-12">
-                        <p>
-                          Golang is a multifunctional programming language that
-                          is widely used by large Indonesian companies such as
-                          Tokopedia, Gojek and many more. Therefore, mastering
-                          the Golang language and being able to create web
-                          applications using this language is a very valuable
-                          skill nowadays. In this class, we will learn the
-                          fundamentals or basics of website programming using
-                          Golang which can be used to create the website
-                          application of your dreams!
-                        </p>
+                        <p>{data?.courseAbout.about}</p>
                       </div>
 
                       <div className=" mb-12">
                         <h1>Learning Objective</h1>
                         <ul>
-                          <li>Learn & Understand Basic Programming</li>
-                          <li>Learn & Understand Basic Programming</li>
+                          {data?.courseAbout.LearningObjectives.map(
+                            (data, index) => (
+                              <div key={index} className="flex">
+                                <CheckCircleIcon className=" w-4 mr-2" /> {data}{" "}
+                              </div>
+                            )
+                          )}
                         </ul>
                       </div>
 
                       <div className=" mb-12">
                         <h1>Advantages of using Golang</h1>
                         <ul>
-                          <li>
-                            Golang produces applications with high performance,
-                            but the structure is quite simple.
-                          </li>
-                          <li>
-                            Golang has been widely used by large companies, both
-                            in Indonesia and abroad.
-                          </li>
+                          {data?.courseAbout.advantages.map((data, index) => (
+                            <li key={index}>
+                              <div className="flex">
+                                <CheckCircleIcon className=" w-4 mr-2" /> {data}{" "}
+                              </div>
+                            </li>
+                          ))}
                         </ul>
                       </div>
                     </div>
@@ -206,13 +212,21 @@ export default function Detail() {
                   {/* =================  tab lesson =================*/}
                   <Tab.Panel>
                     <div>
-                      <h1 className=" mb-3">Basic Programming</h1>
-
-                      <ButtonLearnNav
-                        icon={"video"}
-                        title={"introduction programming"}
-                        time={"11 min"}
-                      />
+                      {data?.courseLessons.map((data, index) => {
+                        return (
+                          <div key={index}>
+                            <h1 className=" mb-3">{data.name}</h1>
+                            {data.listLearn.map((data, index) => (
+                              <ButtonLearnNav
+                                key={index}
+                                icon={"video"}
+                                title={data}
+                                time={"11 min"}
+                              />
+                            ))}
+                          </div>
+                        );
+                      })}
                     </div>
                   </Tab.Panel>
 
@@ -224,24 +238,29 @@ export default function Detail() {
                         Complete all the supports below before learning
                       </p>
                     </div>
-                    <div>
-                      <div className=" w-[147px] h-[125px] bg-[#F5F5F5] p-2 text-center grid place-content-center">
-                        <div>
-                          <Image
-                            src={vscLogo}
-                            alt="Course1"
-                            quality={100}
-                            width="50px"
-                          />
+                    <div className="flex ">
+                      {data?.courseTools.map((data, index) => (
+                        <div
+                          key={index}
+                          className=" ml-3 w-[147px] h-[125px] bg-[#F5F5F5] p-2 text-center grid place-content-center"
+                        >
+                          <div>
+                            <Image
+                              src={vscLogo}
+                              alt="Course1"
+                              quality={100}
+                              width="50px"
+                            />
+                          </div>
+                          <div className="flex-col">
+                            <h1 className=" text-sm">{data.name}</h1>
+                            <p className="flex justify-center text-xs">
+                              {" "}
+                              <DownloadIcon className=" w-3" /> <a>Download</a>{" "}
+                            </p>
+                          </div>
                         </div>
-                        <div className="flex-col">
-                          <h1 className=" text-sm">Visual Studio Code</h1>
-                          <p className="flex justify-center text-xs">
-                            {" "}
-                            <DownloadIcon className=" w-3" /> <a>Download</a>{" "}
-                          </p>
-                        </div>
-                      </div>
+                      ))}
                     </div>
                   </Tab.Panel>
 
@@ -289,9 +308,9 @@ export default function Detail() {
                 />
               </div>
               <div>
-                <p className=" text-sm my-1 ml-2 ">Bessie Cooper</p>
+                <p className=" text-sm my-1 ml-2 ">{data?.courseMentor.name}</p>
                 <p className=" text-xs text-slate-300 my-1 ml-2 ">
-                  Fullstack Developer
+                  {data?.courseMentor.skill}
                 </p>
               </div>
             </div>
