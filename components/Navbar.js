@@ -5,9 +5,11 @@ import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 
-import codingCourse from "../public/assets/img/coding-course.png";
-import designCourse from "../public/assets/img/design-course.png";
-import softskillCourse from "../public/assets/img/soft-skills.png";
+import allCourse from "../public/assets/img/all-course.png";
+import backendCourse from "../public/assets/img/backend-course.png";
+import frontendCourse from "../public/assets/img/frontend-course.png";
+import mobileCourse from "../public/assets/img/mobile-course.png";
+import uiuxCourse from "../public/assets/img/ui-ux-course.png";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -62,7 +64,14 @@ export default function Navbar() {
                     {({ active }) => (
                       <MyLink href="/test">
                         <div className="grid grid-cols-5 px-2 py-2">
-                          <div className="w-10 h-10 p-0 rounded-full" style={{ backgroundColor: "blue" }}>
+                          <div className="w-10 h-10 p-0 rounded-full">
+                            <Image
+                              src={allCourse}
+                              alt="Course1"
+                              className="object-scale-down rounded-full"
+                              layout="responsive"
+                              loading="lazy"
+                            />
                           </div>
                           <div className="col-span-4 ">
                             <h1
@@ -84,11 +93,13 @@ export default function Navbar() {
                     {({ active }) => (
                       <MyLink href="#">
                         <div className="grid grid-cols-5 px-2 py-2">
-                          <div className="w-10 h-10 p-0">
+                          <div className="w-10 h-10 p-0 rounded-full">
                             <Image
-                              src={codingCourse}
+                              src={backendCourse}
                               alt="Course1"
                               className="object-scale-down rounded-full"
+                              layout="responsive"
+                              loading="lazy"
                             />
                           </div>
                           <div className="col-span-4 ">
@@ -98,7 +109,7 @@ export default function Navbar() {
                                 " text-base font-semibold"
                               )}
                             >
-                              Coding Course
+                              Backend Engineer
                             </h1>
                             <p className="text-xs text-slate-300 "> Full-Stack Web & Mobile Developer </p>
                           </div>
@@ -112,9 +123,11 @@ export default function Navbar() {
                         <div className="grid grid-cols-5 px-2 py-2">
                           <div className="w-10 h-10 p-0 rounded-full">
                             <Image
-                              src={designCourse}
+                              src={frontendCourse}
                               alt="Course1"
                               className="object-scale-down rounded-full"
+                              layout="responsive"
+                              loading="lazy"
                             />
                           </div>
                           <div className="col-span-4 ">
@@ -124,7 +137,7 @@ export default function Navbar() {
                                 " text-base font-semibold"
                               )}
                             >
-                              Design Course
+                              Frontend Engineer
                             </h1>
                             <p className="text-xs text-slate-300 "> UI/UX & Graphic Design </p>
                           </div>
@@ -139,7 +152,7 @@ export default function Navbar() {
                         <div className="grid grid-cols-5 px-2 py-2">
                           <div className="w-10 h-10 p-0 rounded-full">
                             <Image
-                              src={softskillCourse}
+                              src={mobileCourse}
                               alt="Course1"
                               className="object-scale-down rounded-full"
                               layout="responsive"
@@ -153,7 +166,36 @@ export default function Navbar() {
                                 " text-base font-semibold"
                               )}
                             >
-                              Soft Skill Course
+                              Mobile Engineer
+                            </h1>
+                            <p className="text-xs text-slate-300 "> Improve your skills </p>
+                          </div>
+                        </div>
+                      </MyLink>
+                    )}
+                  </Menu.Item>
+
+                  <Menu.Item>
+                    {({ active }) => (
+                      <MyLink href="#">
+                        <div className="grid grid-cols-5 px-2 py-2">
+                          <div className="w-10 h-10 p-0 rounded-full">
+                            <Image
+                              src={uiuxCourse}
+                              alt="Course1"
+                              className="object-scale-down rounded-full"
+                              layout="responsive"
+                              loading="lazy"
+                            />
+                          </div>
+                          <div className="col-span-4 ">
+                            <h1
+                              className={classNames(
+                                active ? " text-gray-400" : "text-gray-600/100",
+                                " text-base font-semibold"
+                              )}
+                            >
+                              UI/UX Designer
                             </h1>
                             <p className="text-xs text-slate-300 "> Improve your skills </p>
                           </div>
