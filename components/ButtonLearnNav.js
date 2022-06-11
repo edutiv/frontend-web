@@ -12,11 +12,11 @@ export default function ButtonLearnNav(props) {
   return (
     <div className=' bg-[#EDEDED] h-[33px] mb-2 flex py-2 rounded-md w-full'>   
         <i className='mx-2 play-icon'><Icon icon={props.icon} /></i>
-        <p className=' text-[11px] text-[#404040]'>{props.title}</p>
+        <p className=' text-[11px] text-[#404040] w-full'>{props.title}</p>
         {
           props.disabled?  <i className='mx-2 check-icon'><LockClosedIcon className='w-4 ' /></i> : props.check ? <i className='mx-2 check-icon'><CheckCircleIcon className='w-4 ' /></i> : <i></i>
         }
-        {props.time ? <p className=' text-[11px] text-[#404040] text-right w-full px-3'>{props.time}</p> : <p></p>}
+        {props.time ? <p className=' text-[11px] text-[#404040] text-right w-10 mr-3'>{props.time}</p> : <p></p>}
     </div>
   )
 }
