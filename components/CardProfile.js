@@ -14,7 +14,7 @@ export default function CardProfile() {
 		<div className="max-w-[304px] md:content-center">
 			<div className="px-4 py-4 border-[1px] border-[#C2C2C2] rounded-md justify-center align-center items-center">
 				{/* Picture of Profile */}
-				<div className="w-10 h-10 rounded-full">
+				<div className="w-10 h-10 rounded-full ml-[110px]">
 					<Image
 						src={bgLogin}
 						alt="Course1"
@@ -24,9 +24,9 @@ export default function CardProfile() {
 				{/* Name and Title */}
 				<div className="mt-4 content-center">
 					<div>
-						<p>Annete Black</p>
+						<p className="text-md font-medium ml-[90px]">Annete Black</p>
 					</div>
-					<p className=" text-xs mt-1">Full-Stack Developer</p>
+					<p className=" text-xs mt-1 ml-20">Full-Stack Developer</p>
 				</div>
 				{/* Menu Edit Profile */}
 				<div className="mt-[48px] space-y-4">
