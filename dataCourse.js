@@ -7,7 +7,7 @@
          {
             "video_detail_id": 1,
             "video_detail_name": "A1",
-            "video_detail_description": "",
+            "video_detail_description": "Detail Video A1",
             "video_url": "",
             "video_duration": "",
          },

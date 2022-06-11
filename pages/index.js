@@ -4,9 +4,7 @@ import Navbar from "../components/Navbar";
 import CardCourse from "../components/CardCourse";
 
 // Asset Import
-import codingCourse from "../public/assets/img/coding-course.png";
-import designCourse from "../public/assets/img/design-course.png";
-import softskillCourse from "../public/assets/img/soft-skills.png";
+import codingCourse from "../public/assets/img/frontend-course.png";
 import titleImg from "../public/assets/img/head-title.svg";
 import courseBs from "../public/assets/img/bs5.png";
 import mentorCourseBs from "../public/assets/img/mentor.png";
@@ -78,46 +76,46 @@ export default function Home() {
 
         {/* features icon */}
 
-        <div className=" mx-20 my-24">
+        <div className="mx-20 my-24 ">
           <div className="flex justify-between mx-24">
-            <div className=" flex items-center">
+            <div className="flex items-center ">
               {" "}
               <i className="bg-[#126E6433] rounded-full w-20 h-20 grid place-content-center">
                 <Image
                   src={"/assets/icon/Video.png"}
-                  className=" w-12"
+                  className="w-12 "
                   width="48px"
                   height="48px"
                   alt="video"
                 />
               </i>{" "}
-              <p className=" ml-6">Video Learning</p>{" "}
+              <p className="ml-6 ">Video Learning</p>{" "}
             </div>
-            <div className=" flex items-center">
+            <div className="flex items-center ">
               {" "}
               <i className="bg-[#126E6433] rounded-full w-20 h-20 grid place-content-center">
                 <Image
                   src={"/assets/icon/Certificate.png"}
-                  className=" w-12"
+                  className="w-12 "
                   width="48px"
                   height="48px"
                   alt="certif"
                 />
               </i>{" "}
-              <p className=" ml-6">Certificates</p>{" "}
+              <p className="ml-6 ">Certificates</p>{" "}
             </div>
-            <div className=" flex items-center">
+            <div className="flex items-center ">
               {" "}
               <i className="bg-[#126E6433] rounded-full w-20 h-20 grid place-content-center">
                 <Image
                   src={"/assets/icon/Test Passed.png"}
-                  className=" w-12"
+                  className="w-12 "
                   width="48px"
                   height="48px"
                   alt="test passed"
                 />
               </i>{" "}
-              <p className=" ml-6">Quiz</p>{" "}
+              <p className="ml-6 ">Quiz</p>{" "}
             </div>
           </div>
         </div>
@@ -135,15 +133,15 @@ export default function Home() {
               have prepared for you
             </h1>
             <div className="bg-white max-w-[280px] border-[1px] border-[#C2C2C2] container rounded-md hover:border-[#126E64] hover:-translate-y-[0.15rem] hover:transition hover:duration-100 hover:ease-in-out hover:drop-shadow-md hover:cursor-pointer">
-              <div className="grid grid-cols-1 place-content-center h-full px-6 py-6">
-                <div className="rounded-full overflow-hidden grid place-content-center">
+              <div className="grid h-full grid-cols-1 px-6 py-6 place-content-center">
+                <div className="grid overflow-hidden rounded-full place-content-center">
                   <Image
                     src={codingCourse}
                     alt="Course1"
                     className="object-scale-down rounded-full"
                   />
                 </div>
-                <div className=" text-center mt-3">
+                <div className="mt-3 text-center ">
                   <h1>Coding Course</h1>
                   <p className="text-xs text-slate-300 ">
                     Full-Stack Web & Mobile Developer
@@ -157,14 +155,14 @@ export default function Home() {
         {/* Course Category */}
 
         {/* Course Card  */}
-        <div className="mx-20 pb-20">
+        <div className="pb-20 mx-20">
           <p className="text-base text-[#126E64]">Top Course</p>
           <h1 className="mb-12 text-[39px]">Excellent Course For You</h1>
-          <div className=" grid grid-cols-4 gap-3">
+          <div className="grid grid-cols-4 gap-3 ">
             {
-              data?.map((item) => (
-                <CardCourse key={item.courseId} image={courseBs} mentor={mentorCourseBs} mentorName={"bessie chopper"} title={item.courseName} courseId={item.courseId} />
-              ))
+              data ? data?.map((item) => (
+                <CardCourse key={item.courseId} image={item.courseBannerImg} mentor={mentorCourseBs} mentorName={"bessie chopper"} title={item.courseName} courseId={item.courseId} />
+              )) : <div className="">Loading...</div>
             }
           </div>
           
