@@ -1,4 +1,4 @@
-import CardProfile from "../components/CardProfile";
+import CardProfile from "../../components/CardProfile";
 import Head from "next/head";
 
 function EditProfile() {
