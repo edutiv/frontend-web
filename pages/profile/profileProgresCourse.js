@@ -2,11 +2,12 @@ import Head from "next/head";
 import Image from "next/image";
 import CardProfile from "../../components/CardProfile";
 import NavbarProfile from "../../components/NavbarProfile";
+import Navbar from "../../components/Navbar";
 
-import backendImg from '../public/assets/img/backendCourse.png';
-import uiuxImg from '../public/assets/img/uiuxCourse.png';
-import mobileImg from '../public/assets/img/mobileCourse.png';
-import figmaImg from '../public/assets/img/figmaCourse.png';
+import backendImg from '../../public/assets/img/backendCourse.png';
+import uiuxImg from '../../public/assets/img/uiuxCourse.png';
+import mobileImg from '../../public/assets/img/mobileCourse.png';
+import figmaImg from '../../public/assets/img/figmaCourse.png';
 import CardProgres from "../../components/CardProgres";
 
 function progresCourse() {
@@ -17,7 +18,7 @@ function progresCourse() {
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
 			<header>
-				<NavbarProfile />
+				<Navbar />
 			</header>
 			<main>
 				<div className="grid content-center pl-20 pr-20 md:mt-16 ">
