@@ -1,5 +1,5 @@
 import Head from "next/head";
-import CardProfile from "../components/CardProfile";
+import CardProfile from "../../components/CardProfile";
 
 function ProfileMyCourse() {
 	return (

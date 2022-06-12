@@ -1,13 +1,13 @@
 import Head from "next/head";
 import Image from "next/image";
-import CardProfile from "../components/CardProfile";
-import NavbarProfile from "../components/NavbarProfile";
+import CardProfile from "../../components/CardProfile";
+import NavbarProfile from "../../components/NavbarProfile";
 
 import backendImg from '../public/assets/img/backendCourse.png';
 import uiuxImg from '../public/assets/img/uiuxCourse.png';
 import mobileImg from '../public/assets/img/mobileCourse.png';
 import figmaImg from '../public/assets/img/figmaCourse.png';
-import CardProgres from "../components/CardProgres";
+import CardProgres from "../../components/CardProgres";
 
 function progresCourse() {
 	return (
