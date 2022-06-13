@@ -172,6 +172,11 @@ export default function Learn() {
                     </Tab.Panel>
                   ))
                 }
+                <Tab.Panel key={totalCourse + 1}>
+                  <div className="flex items-center justify-center w-full text-center align-top">
+                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScJYtdaGRe-zHrtxKWtvKKzTqY7uFWzvcvhccYqbzyg2YDQxw/viewform?embedded=true" width="1200" height="2503" frameBorder="0" marginHeight="0" marginWidth="0">Memuat…</iframe>
+                  </div>
+                </Tab.Panel>
               </Tab.Panels>
               {/* tools reference */}
             </div>
