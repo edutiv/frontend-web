@@ -26,20 +26,20 @@ export default function CardCourse({image, mentor, title, mentorName, courseId})
               <p className="my-1 ml-2 text-xs text-slate-300">{mentorName}</p>
             </div>
           </div>
-          <div className="grid grid-cols-3 mb-4 ">
-            <div className=" w-20 h-[25px] bg-[#126E6433] grid place-content-center rounded-sm">
+          <div className="grid grid-cols-3 mb-4 gap-2 ">
+            <div className="  h-[25px] bg-[#126E6433] grid place-content-center rounded-sm">
               <div className="flex">
                 <ClockIcon className="text-[#4A5568] w-5" /> <p className="text-xs border-2 border-transparent ">1h 5m</p>
               </div>
             </div>
 
-            <div className=" w-20 h-[25px] bg-[#126E6433] grid place-content-center rounded-sm">
+            <div className="  h-[25px] bg-[#126E6433] grid place-content-center rounded-sm">
               <div className="flex">
                 <VideoCameraIcon className="text-[#4A5568] w-5" /> <p className="text-xs border-2 border-transparent ">8 Video</p>
               </div>
             </div>
 
-            <div className=" w-20 h-[25px] bg-[#126E6433] grid place-content-center rounded-sm">
+            <div className="  h-[25px] bg-[#126E6433] grid place-content-center rounded-sm">
               <div className="flex">
                 <StarIcon className="text-[#4A5568] w-5" /> <p className="text-xs border-2 border-transparent ">4.6</p>
               </div>

@@ -11,6 +11,7 @@ import Navbar from "../../components/Navbar";
 import vscLogo from "../../public/assets/img/vscode.png";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Link from 'next/link';
 
 
 function classNames(...classes) {
@@ -102,9 +103,11 @@ export default function Detail() {
                 disabled={true}
               />
             </div>
-            <button className=" h-[41px] bg-[#126E64] rounded-md w-full place-self-end text-white">
-              ENROLL NOW
-            </button>
+            <Link href={`/learns/${query.detailId}`}>
+              <button className=" h-[41px] bg-[#126E64] rounded-md w-full place-self-end text-white">
+                ENROLL NOW
+              </button>
+            </Link>
           </div>
           {/* ennroll button */}
         </div>
