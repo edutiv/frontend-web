@@ -394,16 +394,16 @@ export default function CardTable({ color, title, sidebutton }) {
                   leaveFrom="opacity-100 scale-100"
                   leaveTo="opacity-0 scale-95"
                 >
-                  <Dialog.Panel className="w-full max-w-md p-6 text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+                  <Dialog.Panel className="w-full max-w-md text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
                     <Dialog.Title
                       as="h3"
-                      className="mb-6 text-lg font-medium leading-6 text-gray-900"
+                      className="px-6 pt-6 mb-6 text-lg font-medium leading-6 text-gray-900"
                     >
                       Add Member Course
                     </Dialog.Title>
 
-                    <form action="">
-                      <div className="grid grid-cols-2 gap-4">
+                    <form className="rounded-b-2xl">
+                      <div className="grid grid-cols-2 gap-4 px-6">
                         <div className="mb-6 form-group">
                           <label htmlFor="">First Name</label>
                           <input type="text" className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput123" aria-describedby="emailHelp123" placeholder="First name" />
@@ -428,11 +428,11 @@ export default function CardTable({ color, title, sidebutton }) {
                             aria-describedby="emailHelp124" placeholder="Last name" />
                         </div>
                       </div>
-                      <div className="mb-6 form-group">
+                      <div className="px-6 mb-6 form-group">
                         <label htmlFor="">Email Password</label>
                         <input type="email" className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput125" placeholder="Email address" />
                       </div>
-                      <div className="mb-6 form-group">
+                      <div className="px-6 mb-6 form-group">
                         <label htmlFor="">Password</label>
                         <input type="password" className="form-control block
                               w-full
@@ -450,7 +450,7 @@ export default function CardTable({ color, title, sidebutton }) {
                               focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput126"
                           placeholder="Password" />
                       </div>
-                      <div className="mb-6 form-group">
+                      <div className="px-6 mb-6 form-group">
                         <label htmlFor="">Confirm Password</label>
                         <input type="password" className="form-control block
                               w-full
@@ -469,11 +469,11 @@ export default function CardTable({ color, title, sidebutton }) {
                           placeholder="Password" />
                       </div>
                       <Listbox value={selected} onChange={setSelected}>
-                        <label htmlFor="">Specialist</label>
-                        <div className="relative mt-1">
+                        <label htmlFor="" className="px-6">Specialist</label>
+                        <div className="relative px-6 mt-1">
                           <Listbox.Button className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none">
                             <span className="block truncate">{selected.name}</span>
-                            <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                            <span className="absolute inset-y-0 flex items-center pr-2 pointer-events-none right-6">
                               <SelectorIcon
                                 className="w-5 h-5 text-gray-400"
                                 aria-hidden="true"
@@ -486,7 +486,7 @@ export default function CardTable({ color, title, sidebutton }) {
                             leaveFrom="opacity-100"
                             leaveTo="opacity-0"
                           >
-                            <Listbox.Options className="absolute w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                            <Listbox.Options className="max-w-[400px] absolute w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                               {specialist.map((specialist, specialistIdx) => (
                                 <Listbox.Option
                                   key={specialistIdx}
@@ -517,7 +517,7 @@ export default function CardTable({ color, title, sidebutton }) {
                           </Transition>
                         </div>
                       </Listbox>
-                      <div className="flex flex-row-reverse w-full gap-3 mt-4">
+                      <div className="flex flex-row-reverse w-full gap-3 px-6 py-6 mt-5 bg-slate-200 rounded-b-2xl">
                         <button
                           type="button"
                           className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md bg-darkGreen focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
