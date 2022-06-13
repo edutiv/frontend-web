@@ -2,7 +2,7 @@ import CardProfile from "../components/CardProfile";
 import Head from "next/head";
 import NavbarProfile from "../components/NavbarProfile";
 
-function EditProfile() {
+function ChangePassword() {
 	return (
         <div>
 			<Head>
@@ -82,4 +82,4 @@ function EditProfile() {
 	);
 }
 
-export default EditProfile;
+export default ChangePassword;

@@ -29,43 +29,43 @@ export default function CardProfile() {
 					<p className=" text-xs mt-1 ml-20">Full-Stack Developer</p>
 				</div>
 				{/* Menu Edit Profile */}
-				<div className="mt-[48px] space-y-4">
-					<div className="bg-neutral-200 grid rounded-md">
+				<div className="mt-[48px] space-y-4 cursor-pointer">
+					<div className="bg-neutral-200 grid rounded-md hover:bg-[#43a89c63]">
 						<div className="flex p-1 font-medium ">
 							<PencilAltIcon className="text-[#4A5568] w-5" />
-							<p className="text-sm border-2 text-[#4A5568] border-transparent pl-2">
+							<p className="text-sm border-2 text-[#4A5568] border-transparent pl-2 ">
 								Edit profile
 							</p>
 						</div>
 					</div>
-					<div className="bg-neutral-200 grid rounded-md">
+					<div className="bg-neutral-200 grid rounded-md hover:bg-[#43a89c63]">
 						<div className="flex p-1 font-medium ">
 							<KeyIcon className="text-[#4A5568] w-5" />
-							<p className="text-sm border-2 text-[#4A5568] border-transparent pl-2">
+							<p className="text-sm border-2 text-[#4A5568] border-transparent pl-2 ">
 								Change Password
 							</p>
 						</div>
 					</div>
-					<div className="bg-neutral-200 grid rounded-md">
+					<div className="bg-neutral-200 grid rounded-md hover:bg-[#43a89c63]">
 						<div className="flex p-1 font-medium ">
 							<AcademicCapIcon className="text-[#4A5568] w-5" />
-							<p className="text-sm border-2 text-[#4A5568] border-transparent pl-2">
+							<p className="text-sm border-2 text-[#4A5568] border-transparent pl-2  ">
 								My Course
 							</p>
 						</div>
 					</div>
-					<div className="bg-neutral-200 grid rounded-md">
+					<div className="bg-neutral-200 grid rounded-md hover:bg-[#43a89c63] ">
 						<div className="flex p-1 font-medium ">
 							<PresentationChartLineIcon className="text-[#4A5568] w-5 " />
-							<p className="text-sm border-2 text-[#4A5568] border-transparent pl-2">
+							<p className="text-sm border-2 text-[#4A5568] border-transparent pl-2 ">
 								Progress Course
 							</p>
 						</div>
 					</div>
-					<div className="bg-neutral-200 grid rounded-md">
+					<div className="bg-neutral-200 grid rounded-md hover:bg-[#43a89c63] text-[#126E64]">
 						<div className="flex p-1 font-medium ">
 							<GiftIcon className="text-[#4A5568] w-5" />
-							<p className="text-sm border-2 text-[#4A5568] border-transparent pl-2">
+							<p className="text-sm border-2 text-[#4A5568] border-transparent pl-2 ">
 								Centificate
 							</p>
 						</div>
