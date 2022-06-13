@@ -153,7 +153,7 @@ export default function Home() {
               <br />
               have prepared for you
             </h1>
-            <div className="grid grid-cols-4">
+            <div className="grid grid-cols-4 gap-4">
               {
                 categories?.map((category) => (
                   <CardCategory key={category.id} image={codingCourse} name={category.name} desc={category.description} />

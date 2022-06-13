@@ -16,7 +16,7 @@ function Login() {
 			<main>
 				<div className="grid content-center h-[440px] mt-32">
 					<div className="grid content-center grid-cols-1 gap-4 md:grid-cols-2">
-						{/* <div className="bgMain grid auto-cols-max">
+						{/* <div className="grid bgMain auto-cols-max">
 					<div className="grid min-h-screen"> */}
 						{/* Left Side Picture */}
 						<div>
@@ -32,7 +32,7 @@ function Login() {
 								<span className="logo">
 									<h1>Eductiv.</h1>
 								</span>
-								<div className="bg-white item-center justify-center px-14 py-2">
+								<div className="justify-center py-2 bg-white item-center px-14">
 									<div>
 										<h4 className="fontHeader1">Welcome Back</h4>
 									</div>
@@ -43,10 +43,10 @@ function Login() {
 									</div>
 								</div>
 								<form>
-									<div className="mb-5 mt-12">
+									<div className="mt-12 mb-5">
 										<label
 											htmlFor="password"
-											className="block  mb-1  font-medium  text-sm"
+											className="block mb-1 text-sm font-medium"
 										>
 											Email
 										</label>
@@ -54,14 +54,14 @@ function Login() {
 											type="email"
 											name="email"
 											id="email"
-											className="w-full text-sm rounded-lg px-3 py-1 focus:outline-none focus:ring focus:ring-sky-200 focus:border-sky-700 transition duration-200 shadow-sm border-emerald-800 border"
+											className="w-full px-3 py-1 text-sm transition duration-200 border rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-sky-200 focus:border-sky-700 border-emerald-800"
 											placeholder="Enter your email"
 										/>
 									</div>
 									<div className="mb-5">
 										<label
 											htmlFor="password"
-											className="block  mb-1  font-medium  text-sm"
+											className="block mb-1 text-sm font-medium"
 										>
 											Password
 										</label>
@@ -69,26 +69,34 @@ function Login() {
 											type="password"
 											name="password"
 											id="password"
-											className="w-full text-sm rounded-lg px-3 py-1 focus:outline-none focus:ring focus:ring-sky-200 focus:border-sky-700 transition duration-200 shadow-sm border-emerald-800 border"
+											className="w-full px-3 py-1 text-sm transition duration-200 border rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-sky-200 focus:border-sky-700 border-emerald-800"
 											placeholder="Enter your password"
 										/>
 									</div>
-									<div className="mb-5 text-right text-sm hover:text-emerald-300">
+									<div className="mb-5 text-sm text-right hover:text-emerald-300">
 										<Link href="/forgetPassword">
 											<a>Forgot password?</a>
 										</Link>
 									</div>
 								</form>
 
-								<div className="space-y-3">
-									<Button>LOGIN</Button>
-									<Button className="border text-teal-700   hover:bg-teal-100 focus:ring-emerald-30">
-										LOGIN WITH GOOGLE
-									</Button>
+								<div className="flex flex-col gap-3">
+									<Link href="/">
+									<a>
+										<Button>LOGIN</Button>
+									</a>
+									</Link>
+									<Link href="/admin/dashboard">
+										<a>
+										<Button className="text-teal-700 border hover:bg-teal-100 focus:ring-emerald-30">
+											LOGIN ADMIN
+										</Button>
+										</a>
+									</Link>
 								</div>
-								<div className="hoverText md:mb-12">
+								{/* <div className="hoverText md:mb-12">
 									<a href="#">Sign Up</a>
-								</div>
+								</div> */}
 							</div>
 						</div>
 					</div>
