@@ -2,6 +2,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import { CheckCircleIcon } from "@heroicons/react/solid";
 import ButtonLearnNav from "../../components/ButtonLearnNav";
+import ReviewCard from "../../components/ReviewCard";
 import { Tab } from "@headlessui/react";
 import mentor from "../../public/assets/img/mentor.png";
 import Image from "next/image";
@@ -10,6 +11,7 @@ import Navbar from "../../components/Navbar";
 import vscLogo from "../../public/assets/img/vscode.png";
 import axios from "axios";
 import { useEffect, useState } from "react";
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -265,29 +267,13 @@ export default function Detail() {
                   </Tab.Panel>
 
                   {/* =================  tab Reviews =================*/}
-                  <Tab.Panel
-                    className={classNames(
-                      "rounded-xl bg-white",
-                      "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2"
-                    )}
-                  >
-                    <ul>
-                      <li className="relative rounded-md  hover:bg-gray-100">
-                        <h3 className="text-sm font-medium ">lesson</h3>
-
-                        <ul className="mt-1 flex space-x-1 text-xs font-normal leading-4 text-gray-500">
-                          <li>lesson</li>
-                        </ul>
-
-                        <a
-                          href="#"
-                          className={classNames(
-                            "absolute inset-0 rounded-md",
-                            "ring-blue-400 focus:z-10 focus:outline-none focus:ring-2"
-                          )}
-                        />
-                      </li>
-                    </ul>
+                  <Tab.Panel>
+                    <div className=" h-80 grid grid-cols-4 w-full gap-4">
+                      <ReviewCard />
+                      <ReviewCard />
+                      <ReviewCard />
+                      <ReviewCard />
+                    </div>
                   </Tab.Panel>
                 </Tab.Panels>
               </Tab.Group>
