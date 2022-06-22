@@ -25,14 +25,14 @@ export default function Home() {
   const getEdutivData = () => {
     let endpoints = [
       'https://62a0b46ea9866630f815f720.mockapi.io//course',
-      'https://62a0b46ea9866630f815f720.mockapi.io//category'
+      'https://edutiv-springboot.herokuapp.com/category,'
     ]
 
     Promise.all(endpoints.map((endpoint) => axios.get(endpoint))).then(([{ data: course }, { data: categories }]) => {
       setDataCourse(course)
       setCategories(categories)
       console.log(dataCourse);
-      console.log(categories);
+      console.log("categories", categories);
     });
   }
 
@@ -155,8 +155,6 @@ export default function Home() {
         </div>
         {/* Course Card */}
       </main>
-
-      <Footer />
     </>
   );
 }

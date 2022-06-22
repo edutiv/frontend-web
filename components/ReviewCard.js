@@ -11,7 +11,7 @@ export default function ReviewCard() {
 
 
   return (
-    <div className=" p-3 h-[148px] grid grid-cols-1 border-2 place-content-center drop-shadow-xl rounded-md">
+    <div className=" p-3 h-fit grid grid-cols-1 border-2 place-content-center drop-shadow-xl rounded-md">
       <div className=" w-full rounded-full">
         <div className=" w-10 h-10 rounded-full mx-auto">
           <Image

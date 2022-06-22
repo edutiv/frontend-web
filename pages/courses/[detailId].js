@@ -71,11 +71,11 @@ export default function Detail() {
         </div>
 
         {/* contents video */}
-        <div className="mx-20 grid grid-cols-12 gap-10 my-10 h-[424px] my-">
+        <div className="mx-10 md:mx-20 md:grid grid-cols-12 gap-10 my-10 h-[424px]">
           {/* video */}
-          <div className=" border-2 col-span-9 ">
+          <div className="col-span-9 border-2  ">
             <iframe
-              className="w-full h-full aspect-auto"
+              className="w-full h-fit aspect-auto md:h-full "
               src={data?.courseIntroductionVideo}
             />
           </div>
@@ -114,12 +114,12 @@ export default function Detail() {
         {/* contents video */}
 
         {/* content detail */}
-        <div className=" grid grid-cols-12 gap-10 mx-20">
+        <div className=" relative grid md:grid-cols-12 grid-cols-1 gap-10 md:mx-20 mx-10 text-sm md:text-base">
           {/* tabs content */}
-          <div className=" col-span-9">
+          <div className=" col-span-9 mt-10 md:mt-0 mx-5 md:mx-0">
             <div className="w-full px-2 sm:px-0">
               <Tab.Group>
-                <Tab.List className="flex space-x-1 rounded-xl p-1">
+                <Tab.List className="flex space-x-1 rounded-xl md:p-1 px-10">
                   <div className=" flex ">
                     {/* ====== tab about ====== */}
                     <Tab
@@ -182,7 +182,7 @@ export default function Detail() {
                   {/* =================  tab about =================*/}
                   <Tab.Panel>
                     <div>
-                      <div className=" my-12">
+                      <div className=" my-12 text-center md:text-left">
                         <p>{data?.courseAbout.about}</p>
                       </div>
 
@@ -191,9 +191,10 @@ export default function Detail() {
                         <ul>
                           {data?.courseAbout.LearningObjectives.map(
                             (data, index) => (
-                              <div key={index} className="flex">
-                                <CheckCircleIcon className=" w-4 mr-2" /> {data}{" "}
-                              </div>
+                              
+                              <li key={index} className="flex">
+                                <CheckCircleIcon className=" w-4 mr-2 hidden md:block " /> {data}{" "}
+                              </li>
                             )
                           )}
                         </ul>
@@ -205,7 +206,7 @@ export default function Detail() {
                           {data?.courseAbout.advantages.map((data, index) => (
                             <li key={index}>
                               <div className="flex">
-                                <CheckCircleIcon className=" w-4 mr-2" /> {data}{" "}
+                                <CheckCircleIcon className=" w-4 mr-2 hidden md:block" /> {data}{" "}
                               </div>
                             </li>
                           ))}
@@ -271,7 +272,7 @@ export default function Detail() {
 
                   {/* =================  tab Reviews =================*/}
                   <Tab.Panel>
-                    <div className=" h-80 grid grid-cols-4 w-full gap-4">
+                    <div className=" md:h-80 grid md:grid-cols-4 w-full gap-4">
                       <ReviewCard />
                       <ReviewCard />
                       <ReviewCard />
@@ -286,7 +287,7 @@ export default function Detail() {
 
           {/* mentor profil */}
 
-          <div className="grid col-span-3 border-2 h-[173px] p-3 content-center">
+          <div className="grid col-span-7 md:col-span-3 border-2 h-[173px] p-3 content-center">
             <h1 className=" pb-4 font-bold">Mentor Expert</h1>
             <div className="flex">
               <div className=" w-10 rounded-full">
