@@ -12,8 +12,6 @@ import titleImg from "../public/assets/img/head-title.svg";
 import courseBs from "../public/assets/img/bs5.png";
 import mentorCourseBs from "../public/assets/img/mentor.png";
 import { icons } from "./icons";
-import Footer from "../components/Footer";
-
 
 export default function Home() {
 
@@ -22,17 +20,20 @@ export default function Home() {
   const [dataCourse, setDataCourse] = useState([]);
   const [categories, setCategories] = useState([]);
 
+  // 'https://edutiv-springboot.herokuapp.com//category'
+  // 'https://62a0b46ea9866630f815f720.mockapi.io//category'
+
   const getEdutivData = () => {
     let endpoints = [
-      'https://62a0b46ea9866630f815f720.mockapi.io//course',
-      'https://edutiv-springboot.herokuapp.com/category,'
+      'https://edutiv-springboot.herokuapp.com/course',
+      'https://edutiv-springboot.herokuapp.com/category'
     ]
 
     Promise.all(endpoints.map((endpoint) => axios.get(endpoint))).then(([{ data: course }, { data: categories }]) => {
-      setDataCourse(course)
-      setCategories(categories)
-      console.log(dataCourse);
-      console.log("categories", categories);
+      setDataCourse(course.data)
+      setCategories(categories.data)
+      console.log(course);
+      console.log(categories);
     });
   }
 
@@ -100,7 +101,7 @@ export default function Home() {
         {/* features icon */}
 
         <div className="px-20 py-6 md:py-24">
-          <div className="hidden md:flex justify-center flex-col md:flex-row gap-3 md:gap-10">
+          <div className="hidden md:flex justify-center md:justify-around flex-col md:flex-row gap-3 md:gap-10">
             {icons.map((icon) => (
               <div className="flex items-center" key={icon.src}>
                 <div className={'bg-[#126E6433] rounded-full p-2 md:p-4 grid place-content-center'}>
@@ -131,7 +132,7 @@ export default function Home() {
             <div className="flex flex-col md:flex-row gap-3 justify-center md:justify-start w-full">
               {
                 categories?.map((category) => (
-                  <CardCategory key={category.id} image={codingCourse} name={category.name} desc={category.description} />
+                  <CardCategory key={category.id} image={category.category_image} name={category.category_name} desc={category.description} />
                 ))
               }
             </div>
@@ -146,9 +147,18 @@ export default function Home() {
           <h1 className="mb-12 text-[30px] md:text-[2.5rem]">Excellent Course For You</h1>
           <div className="grid gap-3 grid-cols-1 lg:grid-cols-4 md:grid-cols-2">
             {
-              dataCourse ? dataCourse?.map((item) => (
-                <CardCourse key={item.courseId} image={item.courseBannerImg} mentor={mentorCourseBs} mentorName={"bessie chopper"} title={item.courseName} courseId={item.courseId} />
-              )) : <div>Loading...</div>
+              dataCourse?.slice(0, 4).map((item) => (
+                <CardCourse 
+                key={item.id} 
+                image={item.course_image} 
+                mentor={mentorCourseBs} 
+                mentorName={"bessie chopper"} 
+                title={item.course_name} 
+                courseId={item.id}
+                totaltimes={item.total_times}
+                totalvideo={item.total_video}
+                />
+              ))
             }
           </div>
 

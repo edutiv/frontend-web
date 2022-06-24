@@ -1,29 +1,18 @@
-// Base Import
+import React, {useState, useEffect} from "react";
+import { SearchIcon } from "@heroicons/react/solid";
+import CardCourse from "../../components/CardCourse";
+import Navbar from "../../components/Navbar";
 import axios from "axios";
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
-import CardCourse from "../components/CardCourse";
-import CardCategory from "../components/CardCategory";
+import mentorCourseBs from "../../public/assets/img/mentor.png";
 
-// Asset Import
-import codingCourse from "../public/assets/img/frontend-course.png";
-import titleImg from "../public/assets/img/head-title.svg";
-import courseBs from "../public/assets/img/bs5.png";
-import mentorCourseBs from "../public/assets/img/mentor.png";
-import { icons } from "./icons";
-import Footer from "../components/Footer";
+export default function courseListPage() {
 
-
-export default function Home() {
-
-  let api;
+  
   // const [data, setData] = useState();
   const [dataCourse, setDataCourse] = useState([]);
   const [categories, setCategories] = useState([]);
-
-  // 'https://edutiv-springboot.herokuapp.com//category'
-  // 'https://62a0b46ea9866630f815f720.mockapi.io//category'
+  const [searchValue, setSearchValue] = useState();
+  const [datafilterCourse, setDataFilterCourse] = useState();
 
   const getEdutivData = () => {
     let endpoints = [
@@ -34,8 +23,7 @@ export default function Home() {
     Promise.all(endpoints.map((endpoint) => axios.get(endpoint))).then(([{ data: course }, { data: categories }]) => {
       setDataCourse(course.data)
       setCategories(categories.data)
-      console.log(course);
-      console.log(categories);
+      setDataFilterCourse(course.data)
     });
   }
 
@@ -43,113 +31,117 @@ export default function Home() {
     getEdutivData();
   }, []);
 
-  // get api
-  // useEffect(() => {
-  //   axios
-  //     .get("https://62a0b46ea9866630f815f720.mockapi.io//course")
-  //     .then((response) => {
-  //       // eslint-disable-next-line react-hooks/exhaustive-deps
-  //       api = response
-  //       setData(api.data);
-  //     });
-  // }, [api]);
-  // console.log(data);
+  const handleChange = (e) => {
+    if(e.target.name == "search") {
+      let value = e.target.value;
+      setSearchValue(value);
+    }
+  }
 
+  const handleSubmitSearch = (e) => {
+    e.preventDefault();
+    console.log(searchValue);
+    
+    const results = dataCourse.filter((item) => {
+      return item.course_name.toLowerCase().includes(searchValue.toLowerCase());
+      // Use the toLowerCase() method to make it case-insensitive
+    })
+    console.log(results);
+    setDataFilterCourse(results);
+
+    
+  }
+
+  console.log(datafilterCourse)
 
   return (
-    <>
-      <header>
-        <Navbar />
+    <div>
+      <header className="h-[324px] bg-[#F5F5F5] mb-7">
+      <Navbar />
+        <div className="grid grid-cols-1 place-content-center h-full mx-20">
+          <div className=" text-center">
+            <h1 className=" text-4xl mb-5">Course Learning</h1>
+            <p>
+              Improve your skills in technology to compete with your interests
+              and expertise
+            </p>
+            <form className=" flex justify-center mt-10" onSubmit={handleSubmitSearch}>
+              <div className="rounded-lg border-2 w-fit flex shadow-md ">
+                <input
+                  className="w-[560px] h-[29px]  border-none rounded-lg"
+                  type="text"
+                  name="search"
+                  placeholder="Search Course..."
+                  onChange={handleChange}
+                />
+                <button className="mx-2">
+                  <SearchIcon className="w-5" />
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       </header>
 
       <main>
-        {/* get started */}
-        <div className="px-8 md:px-20 grid content-center mt-6 md:mt-16">
-          <div className="grid content-center grid-cols-1 gap-6 md:grid-cols-2">
-            {/* title */}
-            <div className="grid content-center">
-              <div>
-                <p className="text-[30px] md:text-[2.5rem] text-center md:text-left">
-                  <strong className=" text-[#126E64]">Grow</strong> Your Skills
-                  to <br /> Advance <br />
-                  Your <strong className="text-[#126E64]">Career Path </strong>
-                </p>
-                <p className="text-[#9E9E9E] pt-1 text-center md:text-left">
-                  Learn from expert professionals and join the largest online
-                  community <br /> for creatives
-                </p>
-              </div>
-              <div className="flex mt-[48px] justify-center md:justify-start flex-col md:flex-row gap-3 md:gap-2">
-                <button className="px-5 py-3 bg-[#126E64] rounded-md text-white text-[11px] hover:bg-[#09423c] hover:-translate-y-[0.15rem] hover:transition hover:duration-100 hover:ease-in-out hover:drop-shadow-md">
-                  GET STARTED
-                </button>
-                <button className="bg-white px-5 py-3 text-[#126E64] rounded-md border-[1px] border-[#E0E0E0] text-[11px] hover:border-[#126E64] hover:-translate-y-[0.15rem] hover:transition hover:duration-100 hover:ease-in-out hover:drop-shadow-md">
-                  CATALOG COURSE
-                </button>
-              </div>
-            </div>
-            {/* image */}
-            <div className="flex justify-center">
-              <Image
-                className="w-full max-h-[600px]"
-                src={titleImg}
-                alt="titleImage"
-              />
-            </div>
-          </div>
-        </div>
-        {/* get started */}
+        <div className="mx-20 grid-cols-12 grid gap-3">
+          {/* card filter */}
+          <div className="col-span-3">
+            <div className="h-[370px] border-2 p-6 rounded-md">
+              <form>
+                <label>Sort</label>
+                <select
+                  name="filterCourse"
+                  className=" w-full text-sm h-[36px] rounded-md"
+                >
+                  <option value="latest">Latest</option>
+                  <option value="pupuler">Populer</option>
+                  <option value="new">New</option>
+                </select>
 
-        {/* features icon */}
-
-        <div className="px-20 py-6 md:py-24">
-          <div className="hidden md:flex justify-center md:justify-around flex-col md:flex-row gap-3 md:gap-10">
-            {icons.map((icon) => (
-              <div className="flex items-center" key={icon.src}>
-                <div className={'bg-[#126E6433] rounded-full p-2 md:p-4 grid place-content-center'}>
-                  <Image
-                    src={icon.src}
-                    width={icon.width}
-                    height={icon.height}
-                    alt={icon.alt}
-                  />
+                <div className="my-5">
+                  <label>Filter Categories</label>
                 </div>
-                <p className="ml-6 ">{icon.name}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* features icon */}
-
-        {/* Course Category */}
-
-        <div className="mb-20 mx-8 md:mx-20">
-          <div>
-            <p className="text-base text-[#126E64]">Let’s learning today</p>
-            <h1 className=" mb-12 text-[30px] md:text-[2.5rem] w-full md:w-7/12">
-              Courses with categories that we
-              have prepared for you
-            </h1>
-            <div className="flex flex-col md:flex-row gap-3 justify-center md:justify-start w-full">
-              {
-                categories?.map((category) => (
-                  <CardCategory key={category.id} image={category.category_image} name={category.category_name} desc={category.description} />
-                ))
-              }
+                <div>
+                  <div className=" mb-2">
+                    <input
+                      type="checkbox"
+                      className=" rounded-md my-auto mx-1"
+                    />{" "}
+                    <label>Backeng Engineer</label>
+                  </div>
+                  
+                  <div className=" mb-2">
+                    <input
+                      type="checkbox"
+                      className=" rounded-md my-auto mx-1  "
+                    />{" "}
+                    <label>Frontend Engineer</label>
+                  </div>
+                  <div className=" mb-2">
+                    <input
+                      type="checkbox"
+                      className=" rounded-md my-auto mx-1  "
+                    />{" "}
+                    <label>Mobile Engineer</label>
+                  </div>
+                  <div className=" mb-2">
+                    <input
+                      type="checkbox"
+                      className=" rounded-md my-auto mx-1  "
+                    />{" "}
+                    <label>UI/UX Designer</label>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
-        </div>
+          {/* card filter */}
 
-        {/* Course Category */}
-
-        {/* Course Card  */}
-        <div className="pb-20 mx-8 md:mx-20">
-          <p className="text-base text-[#126E64]">Top Course</p>
-          <h1 className="mb-12 text-[30px] md:text-[2.5rem]">Excellent Course For You</h1>
-          <div className="grid gap-3 grid-cols-1 lg:grid-cols-4 md:grid-cols-2">
-            {
-              dataCourse?.slice(0, 4).map((item) => (
+          {/* list card course */}
+          <div className=" col-span-9 grid-cols-3 gap-3 grid">
+          {
+              datafilterCourse?.map((item) => (
                 <CardCourse 
                 key={item.id} 
                 image={item.course_image} 
@@ -163,12 +155,8 @@ export default function Home() {
               ))
             }
           </div>
-
         </div>
-        {/* Course Card */}
       </main>
-
-      <Footer />
-    </>
+    </div>
   );
 }
