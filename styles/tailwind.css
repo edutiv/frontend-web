@@ -1381,7 +1381,7 @@ select {
 
 .bg-darkGreen {
   --tw-bg-opacity: 1;
-  background-color: rgba(18, 110, 100, var(--tw-bg-opacity));
+  background-color: rgba(18, 110, 100, var(--tw-bg-opacity))!important;
 }
 
 .focus\:bg-white:focus {

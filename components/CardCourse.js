@@ -7,7 +7,7 @@ import { ClockIcon, VideoCameraIcon, StarIcon } from "@heroicons/react/solid";
 export default function CardCourse({image, mentor, title, mentorName, courseId, totaltimes, totalvideo}) {
   return (
     <div className="">
-      <div className="px-4 py-4 border-[1px] border-[#C2C2C2] rounded-md">
+      <div className="px-4 py-4 border-[1px] border-[#C2C2C2] rounded-md md:min-h-[391px]">
         <div className="mb-3">
           <img src={image} alt={title+'-'+courseId} className="max-h-[240px] md:min-h-[119px] md:max-h-[120px] w-full object-cover object-center"/>
         </div>
@@ -26,7 +26,7 @@ export default function CardCourse({image, mentor, title, mentorName, courseId, 
               <p className="my-1 ml-2 text-xs text-slate-300">{mentorName}</p>
             </div>
           </div>
-          <div className="grid grid-cols-3 mb-4 gap-2 ">
+          <div className="grid grid-cols-3 gap-2 mb-4 ">
             <div className="  h-[25px] bg-[#126E6433] grid place-content-center rounded-sm">
               <div className="flex">
                 <ClockIcon className="text-[#4A5568] w-4 sm:w-5" /> <p className="text-[10px] sm:text-xs border-2 border-transparent ">{totaltimes}</p>
