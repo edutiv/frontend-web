@@ -13,6 +13,7 @@ export default function courseListPage() {
   const [categories, setCategories] = useState([]);
   const [searchValue, setSearchValue] = useState();
   const [datafilterCourse, setDataFilterCourse] = useState();
+  const [checked, setChecked] = useState(false);
 
   const getEdutivData = () => {
     let endpoints = [
@@ -37,6 +38,24 @@ export default function courseListPage() {
       setSearchValue(value);
     }
   }
+  
+  const handleCheckbox = (e) => {
+    let input = e.target.value
+
+    if(checked == false){
+      const results = dataCourse.filter((item) => {
+        return item.course_name.toLowerCase().includes(input.toLowerCase());
+        // Use the toLowerCase() method to make it case-insensitive
+      })
+      console.log(e.target.value);
+      setDataFilterCourse(results);
+      setChecked(true);
+    } else {
+      setChecked(false);
+      setDataFilterCourse(dataCourse);
+    }
+    
+  }
 
   const handleSubmitSearch = (e) => {
     e.preventDefault();
@@ -47,12 +66,10 @@ export default function courseListPage() {
       // Use the toLowerCase() method to make it case-insensitive
     })
     console.log(results);
-    setDataFilterCourse(results);
-
-    
+    setDataFilterCourse(results);   
   }
 
-  console.log(datafilterCourse)
+  
 
   return (
     <div>
@@ -107,6 +124,10 @@ export default function courseListPage() {
                     <input
                       type="checkbox"
                       className=" rounded-md my-auto mx-1"
+                      name="backend"
+                      value="backend"
+                      onClick={handleCheckbox}
+                      defaultChecked={checked}
                     />{" "}
                     <label>Backeng Engineer</label>
                   </div>
@@ -114,7 +135,10 @@ export default function courseListPage() {
                   <div className=" mb-2">
                     <input
                       type="checkbox"
-                      className=" rounded-md my-auto mx-1  "
+                      className=" rounded-md my-auto mx-1"
+                      name="frontend"
+                      value="frontend"
+                      onClick={handleCheckbox}
                     />{" "}
                     <label>Frontend Engineer</label>
                   </div>
@@ -122,6 +146,9 @@ export default function courseListPage() {
                     <input
                       type="checkbox"
                       className=" rounded-md my-auto mx-1  "
+                      name="mobile"
+                      value="mobile"
+                      onClick={handleCheckbox}
                     />{" "}
                     <label>Mobile Engineer</label>
                   </div>
@@ -129,6 +156,9 @@ export default function courseListPage() {
                     <input
                       type="checkbox"
                       className=" rounded-md my-auto mx-1  "
+                      name="ui/ux"
+                      value="ui/ux"
+                      onClick={handleCheckbox}
                     />{" "}
                     <label>UI/UX Designer</label>
                   </div>
