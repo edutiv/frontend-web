@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { MinusCircleIcon, PlusCircleIcon, SearchIcon } from "@heroicons/react/solid";
 import React from "react";
 import Navbar from "../../components/Navbar";

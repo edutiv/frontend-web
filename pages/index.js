@@ -12,8 +12,6 @@ import titleImg from "../public/assets/img/head-title.svg";
 import courseBs from "../public/assets/img/bs5.png";
 import mentorCourseBs from "../public/assets/img/mentor.png";
 import { icons } from "./icons";
-import Footer from "../components/Footer";
-
 
 export default function Home() {
 
@@ -167,8 +165,6 @@ export default function Home() {
         </div>
         {/* Course Card */}
       </main>
-
-      <Footer />
     </>
   );
 }
