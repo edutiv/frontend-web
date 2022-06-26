@@ -1381,7 +1381,7 @@ select {
 
 .bg-darkGreen {
   --tw-bg-opacity: 1;
-  background-color: rgba(18, 110, 100, var(--tw-bg-opacity));
+  background-color: rgba(18, 110, 100, var(--tw-bg-opacity))!important;
 }
 
 .focus\:bg-white:focus {
@@ -3777,6 +3777,14 @@ select {
 @media (min-width: 640px) {
   .sm\:block {
     display: block;
+  }
+
+  .sm\:hidden {
+    display: none;
+  }
+
+  .sm\:flex {
+    display: flex;
   }
 
   .sm\:mt-0 {
