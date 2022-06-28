@@ -20,7 +20,7 @@ function classNames(...classes) {
 }
 
 export default function Detail() {
-  const [data, setData] = useState();
+  const [checked, setChecked] = useState(true);
   const { query } = useRouter();
   const [dataCourse, setDataCourse] = useState([]);
   const [video, setVideo] = useState();
@@ -51,9 +51,9 @@ export default function Detail() {
   return (
     <div>
       <Navbar />
-      <div className=" mt-20">
+      <div className=" mt-20 ">
         <div className=" text-center">
-          <h1 className=" text-4xl">{dataCourse?.course_name}</h1>
+          <h1 className=" text-4xl px-3">{dataCourse?.course_name}</h1>
         </div>
         <div className=" flex justify-center mt-6">
           <div className="flex-col justify-center text-center">
@@ -63,7 +63,7 @@ export default function Detail() {
           <div className=" mx-12 flex-col justify-center">
             <h1>Serifikat</h1>
             <i className="flex justify-center">
-              {data?.courseStatus.sertificate ? (
+              {checked ? (
                 <CheckCircleIcon className=" w-4" />
               ) : (
                 <div></div>
@@ -73,7 +73,7 @@ export default function Detail() {
           <div>
             <h1>Quiz</h1>
             <i className="flex justify-center">
-              {data?.courseStatus.quiz ? (
+              {checked ? (
                 <CheckCircleIcon className=" w-4" />
               ) : (
                 <div></div>
@@ -83,7 +83,7 @@ export default function Detail() {
         </div>
 
         {/* contents video */}
-        <div className="mx-10 md:mx-20 md:grid grid-cols-12 gap-10 my-10 h-[424px]">
+        <div className="mx-10 md:mx-20 md:grid grid-cols-12 gap-10 my-10 max-h-[424px]">
           {/* video */}
           <div className="col-span-9 border-2  ">
             <iframe
@@ -201,27 +201,27 @@ export default function Detail() {
                       <div className=" mb-12">
                         <h1>Learning Objective</h1>
                         <ul>
-                          {data?.courseAbout.LearningObjectives.map(
+                          {/* {dataCourse?.map(
                             (data, index) => (
                               
                               <li key={index} className="flex">
                                 <CheckCircleIcon className=" w-4 mr-2 hidden md:block " /> {data}{" "}
                               </li>
                             )
-                          )}
+                          )} */}
                         </ul>
                       </div>
 
                       <div className=" mb-12">
                         <h1>Advantages of using Golang</h1>
                         <ul>
-                          {data?.courseAbout.advantages.map((data, index) => (
+                          {/* {dataCourse?.map((data, index) => (
                             <li key={index}>
                               <div className="flex">
                                 <CheckCircleIcon className=" w-4 mr-2 hidden md:block" /> {data}{" "}
                               </div>
                             </li>
-                          ))}
+                          ))} */}
                         </ul>
                       </div>
                     </div>
@@ -318,9 +318,9 @@ export default function Detail() {
                 />
               </div>
               <div>
-                <p className=" text-sm my-1 ml-2 ">{data?.courseMentor.name}</p>
+                <p className=" text-sm my-1 ml-2 ">{dataCourse?.name}</p>
                 <p className=" text-xs text-slate-300 my-1 ml-2 ">
-                  {data?.courseMentor.skill}
+                  {dataCourse?.skill}
                 </p>
               </div>
             </div>
