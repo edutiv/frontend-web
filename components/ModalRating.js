@@ -86,6 +86,10 @@ export default function ModalRating() {
                         className=" rounded-md bg-[#F5F5F5] border-none"
                       >
                       </textarea>
+
+                      <button className="px-5 py-3 bg-[#126E64] rounded-md text-white text-[11px] hover:bg-[#09423c] hover:-translate-y-[0.15rem] hover:transition hover:duration-100 hover:ease-in-out hover:drop-shadow-md">
+                        give rating
+                      </button>
                     </form>
                   </div>
                 </Dialog.Panel>
