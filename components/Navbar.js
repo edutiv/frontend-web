@@ -29,7 +29,7 @@ const MyLink = forwardRef((props, ref) => {
 
 export default function Navbar() {
   return (
-    <div className="flex justify-between w-full h-[76px] pl-20 pr-20 shadow sticky z-50">
+    <div className="flex justify-between w-full h-[76px] px-5 md:px-20 shadow sticky z-50 bg-white">
       <div className="grid content-center">
         <Link href="/">
           <a className="text-[24px] text-[#126E64]"><strong>Edutiv.</strong></a>

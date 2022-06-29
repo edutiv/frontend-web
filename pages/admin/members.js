@@ -13,7 +13,7 @@ export default function Tables() {
     <>
       <div className="flex flex-wrap mt-4">
         <div className="w-full px-4 mb-12">
-          <CardTable title={"Member Table"} sidebutton={true} />
+          <CardTable title={"Member Table"} sidebutton={true} type={'member'} data={0}/>
         </div>
         {/* <div className="w-full px-4 mb-12">
           <CardTable color="dark" />

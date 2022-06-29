@@ -4,12 +4,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { ClockIcon, VideoCameraIcon, StarIcon } from "@heroicons/react/solid";
 
-export default function CardCourse({image, mentor, title, mentorName, courseId}) {
+export default function CardCourse({image, mentor, title, mentorName, courseId, totaltimes, totalvideo}) {
   return (
-    <div className="max-w-[304px]">
-      <div className="container px-4 py-4 border-[1px] border-[#C2C2C2] rounded-md">
-        <div className="h-40 mb-4">
-          <img src={image} alt={title+'-'+courseId} />
+    <div className="">
+      <div className="px-4 py-4 border-[1px] border-[#C2C2C2] rounded-md md:min-h-[391px]">
+        <div className="mb-3">
+          <img src={image} alt={title+'-'+courseId} className="max-h-[240px] md:min-h-[119px] md:max-h-[120px] w-full object-cover object-center"/>
         </div>
         <div className="pt-2">
           <h1 className="mb-4 text-base font-bold ">{title}</h1>
@@ -26,22 +26,22 @@ export default function CardCourse({image, mentor, title, mentorName, courseId})
               <p className="my-1 ml-2 text-xs text-slate-300">{mentorName}</p>
             </div>
           </div>
-          <div className="grid grid-cols-3 mb-4 gap-2 ">
+          <div className="grid grid-cols-3 gap-2 mb-4 ">
             <div className="  h-[25px] bg-[#126E6433] grid place-content-center rounded-sm">
               <div className="flex">
-                <ClockIcon className="text-[#4A5568] w-5" /> <p className="text-xs border-2 border-transparent ">1h 5m</p>
+                <ClockIcon className="text-[#4A5568] w-4 sm:w-5" /> <p className="text-[10px] sm:text-xs border-2 border-transparent ">{totaltimes}</p>
               </div>
             </div>
 
             <div className="  h-[25px] bg-[#126E6433] grid place-content-center rounded-sm">
               <div className="flex">
-                <VideoCameraIcon className="text-[#4A5568] w-5" /> <p className="text-xs border-2 border-transparent ">8 Video</p>
+                <VideoCameraIcon className="text-[#4A5568] w-4 sm:w-5" /> <p className="text-[10px] sm:text-[11px] border-2 border-transparent ">{totalvideo} Video</p>
               </div>
             </div>
 
-            <div className="  h-[25px] bg-[#126E6433] grid place-content-center rounded-sm">
+            <div className=" h-[25px] bg-[#126E6433] grid place-content-center rounded-sm">
               <div className="flex">
-                <StarIcon className="text-[#4A5568] w-5" /> <p className="text-xs border-2 border-transparent ">4.6</p>
+                <StarIcon className="text-[#4A5568] w-4 sm:w-5" /> <p className="text-[10px] sm:text-xs border-2 border-transparent ">4.6</p>
               </div>
             </div>
           </div>
