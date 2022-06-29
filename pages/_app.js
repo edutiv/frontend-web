@@ -3,7 +3,6 @@ import Head from 'next/head';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "../styles/tailwind.css";
 import '../styles/globals.css';
-import Footer from '../components/Footer';
 
 function MyApp({ Component, pageProps }) {
 
@@ -18,7 +17,6 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <Layout>
         <Component {...pageProps} />
-        <Footer />
       </Layout>
     </React.Fragment>
   );
