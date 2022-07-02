@@ -2,7 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ClockIcon, VideoCameraIcon, StarIcon } from "@heroicons/react/solid";
+import { ClockIcon, VideoCameraIcon, StarIcon, ArrowRightIcon } from "@heroicons/react/solid";
 
 export default function CardCourse({image, mentor, title, mentorName, courseId, totaltimes, totalvideo}) {
   return (
@@ -11,7 +11,7 @@ export default function CardCourse({image, mentor, title, mentorName, courseId, 
         <div className="mb-3">
           <img src={image} alt={title+'-'+courseId} className="max-h-[240px] md:min-h-[119px] md:max-h-[120px] w-full object-cover object-center"/>
         </div>
-        <div className="pt-2">
+        <div className="pt-2 h-full">
           <h1 className="mb-4 text-base font-bold ">{title}</h1>
           <div className="grid content-center mb-4 ">
 
@@ -46,10 +46,10 @@ export default function CardCourse({image, mentor, title, mentorName, courseId, 
             </div>
           </div>
           <Link href={`/courses/${courseId}`}>
-            <button className=" border-2 w-full bg-[#126E64] rounded-md text-white py-1 hover:bg-[#09423c] hover:-translate-y-[0.15rem] hover:transition hover:duration-100 hover:ease-in-out hover:drop-shadow-md">See More</button>
-          </Link>
-          <Link href={`/learns/${courseId}`}>
-            <button className=" border-2 w-full bg-[#126E64] rounded-md text-white py-1 hover:bg-[#09423c] hover:-translate-y-[0.15rem] hover:transition hover:duration-100 hover:ease-in-out hover:drop-shadow-md">Start Learning</button>
+            <div className="flex mt-12">
+              <button className=" h-full  w-fit py-1 text-md text-[#126E64] focus:outline-0">See More</button>
+              <ArrowRightIcon className="w-4 ml-1 text-[#126E64] "  />
+            </div>
           </Link>
         </div>
       </div>

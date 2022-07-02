@@ -20,7 +20,7 @@ export default function ModalCertificate({ dataCourse }) {
     <div>
       <button
         onClick={() => setIsOpen(true)}
-        className="bg-white w-full py-3 text-[#126E64] rounded-md border-[1px] border-[#E0E0E0] text-[11px] hover:border-[#126E64] hover:-translate-y-[0.15rem] hover:transition hover:duration-100 hover:ease-in-out hover:drop-shadow-md"
+        className="w-80 py-3 bg-[#126E64] rounded-md text-white text-[11px] hover:bg-[#09423c] hover:-translate-y-[0.15rem] hover:transition hover:duration-100 hover:ease-in-out hover:drop-shadow-md"
       >
         Download Certificate
       </button>

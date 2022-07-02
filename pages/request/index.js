@@ -4,12 +4,12 @@ import Navbar from "../../components/Navbar";
 
 export default function Request() {
   return (
-    <div className=" h-[100vh]">
+    <div className=" h-[100vh] mb-48">
       <header>
         <Navbar />
       </header>
-      <main className=" mx-20 h-full">
-        <div className="grid grid-cols-12 h-full">
+      <main className=" mx-20 h-full ">
+        <div className="grid grid-cols-12 h-full ">
             
           {/* title request */}
           <div className=" col-span-5 grid grid-cols-1 place-content-center h-full">
@@ -87,7 +87,7 @@ export default function Request() {
                   <label className=" text-sm">Categories</label>
                   <select
                     name="categories"
-                    className=" w-full text-sm h-[36px] rounded-md"
+                    className=" w-full text-sm h-[36px] rounded-md px-2"
                     placeholder="choose categories"
                   >
                     <option value="latest">Latest</option>
@@ -100,7 +100,7 @@ export default function Request() {
                   <label className=" text-sm">Type Request</label>
                   <select
                     name="typeRequest"
-                    className=" w-full text-sm h-[36px] rounded-md"
+                    className=" w-full text-sm h-[36px] rounded-md px-2"
                     placeholder="choose type request"
                   >
                     <option value="latest">Latest</option>

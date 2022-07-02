@@ -5,7 +5,7 @@ import ReactStars from "react-rating-stars-component";
 import axios from "axios";
 import { useRouter } from "next/router";
 
-export default function ModalRating({ dataCourse }) {
+export default function ModalRating({ dataCourse, handleHidden}) {
   const [isOpen, setIsOpen] = useState(false);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState();
@@ -26,10 +26,13 @@ export default function ModalRating({ dataCourse }) {
         )
         .then((response) => {
           console.log(response);
+          handleHidden();
         });
       setComment('');
       setRating(0);
       setIsOpen(false);
+
+      
     }
 
     console.log(rating, comment);
@@ -117,6 +120,7 @@ export default function ModalRating({ dataCourse }) {
                         placeholder="review"
                         className=" rounded-md bg-[#F5F5F5] border-none p-3"
                         onChange={handleChange}
+                        required
                       ></textarea>
 
                       <button className="px-5 py-3 bg-[#126E64] rounded-md text-white text-[11px] hover:bg-[#09423c] hover:-translate-y-[0.15rem] hover:transition hover:duration-100 hover:ease-in-out hover:drop-shadow-md">
