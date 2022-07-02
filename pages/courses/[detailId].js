@@ -51,14 +51,14 @@ export default function Detail() {
   return (
     <div>
       <Navbar />
-      <div className=" mt-20 ">
+      <div className=" mt-20">
         <div className=" text-center">
           <h1 className=" text-4xl px-3">{dataCourse?.course_name}</h1>
         </div>
         <div className=" flex justify-center mt-6">
           <div className="flex-col justify-center text-center">
             <h1 className="flex justify-center">Member</h1>
-            <p>{dataCourse?.enrolled_courses?.length}</p>
+            <p>{`${dataCourse?.enrolled_courses?.length} enrolled`}</p>
           </div>
           <div className=" mx-12 flex-col justify-center">
             <h1>Serifikat</h1>
@@ -99,7 +99,15 @@ export default function Detail() {
               {`${dataCourse?.sections?.length} Video Lesson (${dataCourse?.total_times})`}
             </h1>
             <div className=" flex-col">
-              {dataCourse?.sections?.slice(0, 5).map((item) => (
+            {dataCourse?.sections?.slice(0, 1).map((item) => (
+                <ButtonLearnNav
+                  key={item.id}
+                  className="mb-4"
+                  icon={"video"}
+                  title={item.section_name}
+                />
+              ))}
+              {dataCourse?.sections?.slice(1, 5).map((item) => (
                 <ButtonLearnNav
                   key={item.id}
                   className="mb-4"
@@ -139,7 +147,7 @@ export default function Detail() {
                         classNames(
                           "py-2.5 text-sm font-medium w-[71px]",
                           selected
-                            ? " border-b-2 border-black focus-visible:outline-none"
+                            ? " border-b-2 border-black focus-visible:outline-none focus:outline-0"
                             : ""
                         )
                       }
@@ -153,7 +161,7 @@ export default function Detail() {
                         classNames(
                           "py-2.5 text-sm font-medium w-[71px]",
                           selected
-                            ? " border-b-2 border-black focus-visible:outline-none"
+                            ? " border-b-2 border-black focus-visible:outline-none focus:outline-0"
                             : ""
                         )
                       }
@@ -167,7 +175,7 @@ export default function Detail() {
                         classNames(
                           "py-2.5 text-sm font-medium w-[71px]",
                           selected
-                            ? " border-b-2 border-black focus-visible:outline-none"
+                            ? " border-b-2 border-black focus-visible:outline-none focus:outline-0"
                             : ""
                         )
                       }
@@ -181,7 +189,7 @@ export default function Detail() {
                         classNames(
                           "py-2.5 text-sm font-medium  w-[71px]",
                           selected
-                            ? " border-b-2 border-black focus-visible:outline-none"
+                            ? " border-b-2 border-black focus-visible:outline-none focus:outline-0"
                             : ""
                         )
                       }
@@ -230,6 +238,7 @@ export default function Detail() {
                   {/* =================  tab lesson =================*/}
                   <Tab.Panel>
                     <div>
+                      
                       {dataCourse?.sections?.map((data) => {
                         return (
                           <div key={data.id}>
@@ -281,7 +290,9 @@ export default function Detail() {
                             <h1 className=" text-sm">{data.tool_name}</h1>
                             <p className="flex justify-center text-xs">
                               {" "}
-                              <DownloadIcon className=" w-3" /> <a>Download</a>{" "}
+                              <a href={data.tool_url} className="flex mt-2">
+                                <DownloadIcon className=" w-3" /> <a>Download</a>{" "}
+                              </a>
                             </p>
                           </div>
                         </div>
