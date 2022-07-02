@@ -38,7 +38,7 @@ export default function Course() {
     <>
       <div className="flex flex-wrap mt-4">
         <div className="w-full px-4 mb-12">
-          <CardTable title={"Course Table"} sidebutton={true} type={'course'} data={dataCourse}/>
+          <CardTable title={"Course Table"} sidebutton={true} type={'course'} data={dataCourse} refresh={getEdutivData}/>
         </div>
         {/* <div className="w-full px-4 mb-12">
           <CardTable color="dark" />

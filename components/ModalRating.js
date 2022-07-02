@@ -1,12 +1,39 @@
 import React from "react";
 import { useState, Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { StarIcon } from "@heroicons/react/solid";
 import ReactStars from "react-rating-stars-component";
+import axios from "axios";
+import { useRouter } from "next/router";
 
-export default function ModalRating() {
+export default function ModalRating({ dataCourse }) {
   const [isOpen, setIsOpen] = useState(false);
   const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState();
+  const { query } = useRouter();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let idCourse = query.succes;
+    if (idCourse) {
+      axios
+        .post(
+          `https://edutiv-springboot.herokuapp.com/course/${idCourse}/review`,
+          {
+            user_id: 1,
+            rating: rating,
+            review: comment,
+          }
+        )
+        .then((response) => {
+          console.log(response);
+        });
+      setComment('');
+      setRating(0);
+      setIsOpen(false);
+    }
+
+    console.log(rating, comment);
+  };
 
   const ratingChanged = (newRating) => {
     setRating(newRating);
@@ -24,6 +51,11 @@ export default function ModalRating() {
     setIsOpen(true);
   }
 
+  const handleChange = (e) => {
+    setComment(e.target.value);
+  };
+
+  console.log("yakin bisa");
   return (
     <div>
       <button
@@ -63,7 +95,7 @@ export default function ModalRating() {
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
                   >
-                    Introduction to UI/UX Designer
+                    {dataCourse.course_name}
                   </Dialog.Title>
 
                   <div>
@@ -76,16 +108,20 @@ export default function ModalRating() {
                     ,
                   </div>
                   <div>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                       <textarea
                         id="comments"
                         name="comments"
                         rows="4"
                         cols="40"
                         placeholder="review"
-                        className=" rounded-md bg-[#F5F5F5] border-none"
-                      >
-                      </textarea>
+                        className=" rounded-md bg-[#F5F5F5] border-none p-3"
+                        onChange={handleChange}
+                      ></textarea>
+
+                      <button className="px-5 py-3 bg-[#126E64] rounded-md text-white text-[11px] hover:bg-[#09423c] hover:-translate-y-[0.15rem] hover:transition hover:duration-100 hover:ease-in-out hover:drop-shadow-md">
+                        give rating
+                      </button>
                     </form>
                   </div>
                 </Dialog.Panel>
