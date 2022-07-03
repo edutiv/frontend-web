@@ -6,12 +6,14 @@ import axios from 'axios';
 import Admin from "../../../layouts/Admin.js";
 import CardCourseDetail from '../../../components/admin/Cards/CardCourseDetail.js';
 
+// API Base Url
+import { BASE_URL } from '../../../config/API.js';
 
 export default function DetailCourse() {
 
    const { query } = useRouter();
 
-   console.log('courses query', query);
+   // console.log('courses query', query);
 
    let api;
    const [detailCourse, setDetailCourse] = useState();
@@ -19,10 +21,10 @@ export default function DetailCourse() {
 
    const getDetailCourse = () => {
       axios
-         .get(`https://edutiv-springboot.herokuapp.com/course`)
+         .get(`${BASE_URL}/course`)
          .then((response) => {
             const courseId = query.detailCourse;
-            console.log(response.data.data);
+            // console.log(response.data.data);
             // eslint-disable-next-line react-hooks/exhaustive-deps
             api = response?.data.data.filter((data) => (data.id == courseId));
             const data = api[0];
@@ -32,19 +34,19 @@ export default function DetailCourse() {
 
    useEffect(() => {
       axios
-         .get(`https://edutiv-springboot.herokuapp.com/course`)
+         .get(`${BASE_URL}/course`)
          .then((response) => {
             const courseId = query.detailCourse;
-            console.log(response.data.data);
+            // console.log(response.data.data);
             // eslint-disable-next-line react-hooks/exhaustive-deps
             api = response?.data.data.filter((data) => (data.id == courseId));
             const data = api[0];
             setDetailCourse(data);
          });
    }, [api]);
-   console.log('detailcourse', detailCourse);
-   console.log('detailcourse section', detailCourse?.sections);
-   console.log('detailcourse id', detailCourse?.id);
+   // console.log('detailcourse', detailCourse);
+   // console.log('detailcourse section', detailCourse?.sections);
+   // console.log('detailcourse id', detailCourse?.id);
 
    return (
       <>

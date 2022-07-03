@@ -7,11 +7,14 @@ import axios from "axios";
 import { Dialog, Transition } from "@headlessui/react";
 import { PencilIcon, TrashIcon, InformationCircleIcon } from "@heroicons/react/solid";
 
+import { BASE_URL } from "../../../config/API";
 
 const CardCourseDetail = ({ color, title, sidebutton, type, data, refresh, courseId }) => {
 
    let [isOpenSection, setIsOpenSection] = useState(false);
+   let [isOpenUpdateSection, setIsOpenUpdateSection] = useState(false);
    const [sectionName, setSectionName] = useState("");
+   const [detailSection, setDetailSection] = useState(0);
    const selectedCourseId = courseId;
    
    function closeModalSection() {
@@ -22,9 +25,17 @@ const CardCourseDetail = ({ color, title, sidebutton, type, data, refresh, cours
       setIsOpenSection(true)
    }
 
+   function closeModalUpdateSection() {
+      setIsOpenUpdateSection(false)
+   }
+
+   function openModalUpdateSection() {
+      setIsOpenUpdateSection(true)
+   }
+
    const handleSubmitSection = (e) => {
       e.preventDefault();
-      axios.post(`https://edutiv-springboot.herokuapp.com/course/${courseId}/section`, {
+      axios.post(`${BASE_URL}/course/${courseId}/section`, {
          section_name: sectionName,
       })
          .then(function (response) {
@@ -35,6 +46,47 @@ const CardCourseDetail = ({ color, title, sidebutton, type, data, refresh, cours
          .catch(function (error) {
             console.log(error);
          })
+   }
+
+   const handleDeleteSection = (id) => {
+      axios
+         .delete(`${BASE_URL}/course/${courseId}/section/${id}`)
+         .then(function (response) {
+            console.log(response);
+            refresh();
+         })
+         .catch(function (error) {
+            console.log(error);
+         })
+   }
+
+   const handleDetailSection = (id) => {
+      axios.get(`${BASE_URL}/course/${courseId}/section/${id}`)
+      .then(function (response) {
+         console.log(response);
+         setDetailSection(id);
+         setSectionName(response.data.data.section_name);
+         openModalUpdateSection();
+      })
+      .catch(function (error) {
+         console.log(error);
+      })
+   }
+
+   const handleUpdateSection = (id) => {
+      axios
+      .put(`${BASE_URL}/course/${courseId}/section/${id}`, {
+         section_name: sectionName
+      })
+      .then(function (response) {
+         console.log(response);
+         setSectionName("");
+         closeModalUpdateSection();
+         refresh();
+      })
+      .catch(function (error) {
+         console.log(error);
+      })
    }
 
    useEffect(() => {
@@ -150,17 +202,17 @@ const CardCourseDetail = ({ color, title, sidebutton, type, data, refresh, cours
                                           <InformationCircleIcon className="w-4 h-4"></InformationCircleIcon>
                                        </button>
                                     </Link>
-                                    <button>
+                                    <button onClick={() => handleDetailSection(items.id)}>
                                        <PencilIcon className="w-4 h-4"></PencilIcon>
                                     </button>
-                                    <button className="focus:outline-none">
+                                    <button onClick={() => handleDeleteSection(items.id)} className="focus:outline-none">
                                        <TrashIcon className="w-4 h-4"></TrashIcon>
                                     </button>
                                  </div>
                               </td>
                            </tr>
                         )) : (
-                           <div className=""></div>
+                           ''
                         )
                      }
                   </tbody>
@@ -224,6 +276,76 @@ const CardCourseDetail = ({ color, title, sidebutton, type, data, refresh, cours
                                        type="button"
                                        className="inline-flex justify-center px-4 py-2 text-sm font-medium text-black border border-transparent border-green-800 rounded-md hover:bg-green-800 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                                        onClick={closeModalSection}
+                                    >
+                                       Close
+                                    </button>
+                                 </div>
+                              </form>
+                           </Dialog.Panel>
+                        </Transition.Child>
+                     </div>
+                  </div>
+               </Dialog>
+            </Transition>
+
+            <Transition appear show={isOpenUpdateSection} as={Fragment}>
+               <Dialog as="div" className="relative z-10" onClose={closeModalUpdateSection}>
+                  <Transition.Child
+                     as={Fragment}
+                     enter="ease-out duration-300"
+                     enterFrom="opacity-0"
+                     enterTo="opacity-100"
+                     leave="ease-in duration-200"
+                     leaveFrom="opacity-100"
+                     leaveTo="opacity-0"
+                  >
+                     <div className="fixed inset-0 bg-opacity-75 bg-slate-800" />
+                  </Transition.Child>
+
+                  <div className="fixed inset-0 overflow-y-auto">
+                     <div className="flex items-center justify-center min-h-full p-4 text-center">
+                        <Transition.Child
+                           as={Fragment}
+                           enter="ease-out duration-300"
+                           enterFrom="opacity-0 scale-95"
+                           enterTo="opacity-100 scale-100"
+                           leave="ease-in duration-200"
+                           leaveFrom="opacity-100 scale-100"
+                           leaveTo="opacity-0 scale-95"
+                        >
+                           <Dialog.Panel className="w-full max-w-md text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+                              <Dialog.Title
+                                 as="h3"
+                                 className="px-6 pt-6 mb-6 text-lg font-medium leading-6 text-gray-900"
+                              >
+                                 Update Section
+                              </Dialog.Title>
+
+                              <form className="rounded-b-2xl">
+                                 <div className="mb-6 form-group px-6">
+                                    <label htmlFor="sectionNameInput">Section Name</label>
+                                    <input
+                                       type="text"
+                                       className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                       id="sectionNameInput"
+                                       aria-describedby="sectionName"
+                                       placeholder="Insert Section Name"
+                                       value={sectionName}
+                                       onChange={(e) => setSectionName(e.target.value)}
+                                    />
+                                 </div>
+                                 <div className="flex flex-row-reverse w-full gap-3 px-6 py-6 mt-5 bg-slate-200 rounded-b-2xl">
+                                    <button
+                                       type="button"
+                                       className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md bg-darkGreen focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                                       onClick={() => handleUpdateSection(detailSection)}
+                                    >
+                                       Update Section
+                                    </button>
+                                    <button
+                                       type="button"
+                                       className="inline-flex justify-center px-4 py-2 text-sm font-medium text-black border border-transparent border-green-800 rounded-md hover:bg-green-800 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                                       onClick={closeModalUpdateSection}
                                     >
                                        Close
                                     </button>

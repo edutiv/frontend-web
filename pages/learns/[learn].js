@@ -10,9 +10,11 @@ import { MenuIcon, XIcon } from "@heroicons/react/solid";
 import Link from 'next/link';
 import LearnTools from '../../components/LearnTools';
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
+// function classNames(...classes) {
+//   return classes.filter(Boolean).join(' ')
+// }
+
+import { BASE_URL } from '../../config/API';
 
 export default function Learn() {
 
@@ -20,22 +22,9 @@ export default function Learn() {
   const [data, setData] = useState();
   const { query } = useRouter();
 
-  // useEffect(() => {
-  //   axios
-  //     .get("https://62a0b46ea9866630f815f720.mockapi.io//course")
-  //     .then(async (response) => {
-  //       const courseId = query.learn;
-  //       // eslint-disable-next-line react-hooks/exhaustive-deps
-  //       api = response?.data.filter((data) => (data.courseId == courseId));
-  //       const data = api[0];
-  //       setData(data);
-  //       // console.log(data);
-  //     });
-  // }, [api]);
-
   useEffect(() => {
     axios
-      .get("https://edutiv-springboot.herokuapp.com/course")
+      .get(`${BASE_URL}/course`)
       .then(async (response) => {
         const courseId = query.learn;
         console.log(query);
