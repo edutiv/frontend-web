@@ -2,7 +2,7 @@
 import React from "react";
 import { useState, Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import Certificate from "./certificate";
+import Certificate from "./Certificate";
 
 export default function ModalCertificate({ dataCourse }) {
   const [isOpen, setIsOpen] = useState(false);

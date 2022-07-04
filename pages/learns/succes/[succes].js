@@ -6,7 +6,7 @@ import ModalRating from "../../../components/ModalRating";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import ModalCertificate from "../../../components/modalCertificate";
+import ModalCertificate from "../../../components/ModalCertificate";
 import Navbar from "../../../components/Navbar";
 import { BASE_URL } from '../../../config/API'
 
@@ -38,6 +38,7 @@ export default function SuccesCourse() {
 
   useEffect(() => {
     getEdutivData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

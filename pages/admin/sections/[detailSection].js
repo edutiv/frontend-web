@@ -13,9 +13,11 @@ const SectionDetail = () => {
    let api;
    const { query } = useRouter();
    const [courseId, setCourseId] = useState(() => {
-      const saved = localStorage.getItem("courseId");
-      const initialValue = JSON.parse(saved);
-      return initialValue || "";
+      if (typeof window !== 'undefined') {
+         const saved = localStorage.getItem("courseId");
+         const initialValue = JSON.parse(saved);
+         return initialValue || "";
+      }
    });
    const [detailSection, setDetailSection] = useState();
 

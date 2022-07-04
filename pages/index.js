@@ -11,11 +11,12 @@ import codingCourse from "../public/assets/img/frontend-course.png";
 import titleImg from "../public/assets/img/head-title.svg";
 import courseBs from "../public/assets/img/bs5.png";
 import mentorCourseBs from "../public/assets/img/mentor.png";
-import { icons } from "./icons";
+import icons from "../icons";
 import { BASE_URL } from '../config/API';
 import Link from "next/link";
 
 import { ArrowSmRightIcon } from "@heroicons/react/solid";
+import Footer from "../components/Footer";
 
 export default function Home() {
 
@@ -108,7 +109,7 @@ export default function Home() {
 
         <div className="px-20 py-6 md:py-24">
           <div className="hidden md:flex justify-center md:justify-around flex-col md:flex-row gap-3 md:gap-10">
-            {icons.map((icon) => (
+            {icons.icons.map((icon) => (
               <div className="flex items-center" key={icon.src}>
                 <div className={'bg-[#126E6433] rounded-full p-2 md:p-4 grid place-content-center'}>
                   <Image
@@ -181,6 +182,8 @@ export default function Home() {
         </div>
         {/* Course Card */}
       </main>
+
+      <Footer />
     </>
   );
 }
