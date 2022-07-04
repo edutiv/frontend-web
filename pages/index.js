@@ -16,6 +16,7 @@ import { BASE_URL } from '../config/API';
 import Link from "next/link";
 
 import { ArrowSmRightIcon } from "@heroicons/react/solid";
+import Footer from "../components/Footer";
 
 export default function Home() {
 
@@ -181,6 +182,8 @@ export default function Home() {
         </div>
         {/* Course Card */}
       </main>
+
+      <Footer />
     </>
   );
 }

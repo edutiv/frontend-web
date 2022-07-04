@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Link from "next/link";
 import moment from "moment";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 import { Dialog, Transition, Listbox } from "@headlessui/react";
 import { PencilIcon, TrashIcon, SelectorIcon, CheckIcon, InformationCircleIcon } from "@heroicons/react/solid";
@@ -164,6 +165,11 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
         setMaterialName("");
         setMaterialUrl("");
         closeModalMaterial();
+        Swal.fire(
+          'New Course Created!',
+          'Now Add More Sections and Material!',
+          'success'
+        )
         refresh();
       })
       .catch(function (error) {
@@ -172,14 +178,40 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
   }
 
   const handleDeleteCourse = (id) => {
-    axios.delete(`${BASE_URL}/course/${id}`)
-      .then(function (response) {
-        console.log(response);
-        refresh();
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.delete(`${BASE_URL}/course/${id}`)
+          .then(function (response) {
+            console.log(response);
+            refresh();
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
+        Swal.fire(
+          'Deleted!',
+          'Course has been deleted.',
+          'success'
+        )
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        Swal.fire(
+          'Cancelled',
+          'Delete Course Canceled',
+          'error'
+        )
+      }
+    })
   }
 
   const handleDetailCourse = (id) => {
@@ -216,6 +248,11 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
         setCourseDesc("");
         setCourseTotalVideo(0);
         setCourseTotalTimes("");
+        Swal.fire(
+          'Course Updated!',
+          'Successfully changed course details!',
+          'success'
+        )
         closeModalUpdateCourse();
         refresh();
       })
