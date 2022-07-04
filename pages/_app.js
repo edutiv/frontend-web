@@ -19,7 +19,6 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <Layout>
         <Component {...pageProps} />
-        <Footer />
       </Layout>
     </React.Fragment>
   );
