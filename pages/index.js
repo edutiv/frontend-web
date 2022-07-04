@@ -12,6 +12,7 @@ import titleImg from "../public/assets/img/head-title.svg";
 import courseBs from "../public/assets/img/bs5.png";
 import mentorCourseBs from "../public/assets/img/mentor.png";
 import { icons } from "./icons";
+import { BASE_URL } from '../config/API';
 
 export default function Home() {
 
@@ -25,8 +26,8 @@ export default function Home() {
 
   const getEdutivData = () => {
     let endpoints = [
-      'https://edutiv-springboot.herokuapp.com/course',
-      'https://edutiv-springboot.herokuapp.com/category'
+      `${BASE_URL}/course`,
+      `${BASE_URL}/category`
     ]
 
     Promise.all(endpoints.map((endpoint) => axios.get(endpoint))).then(([{ data: course }, { data: categories }]) => {

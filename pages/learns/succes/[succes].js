@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import ModalCertificate from "../../../components/modalCertificate";
 import Navbar from "../../../components/Navbar";
+import { BASE_URL } from '../../../config/API'
 
 export default function SuccesCourse() {
   const [dataCourse, setDataCourse] = useState([]);
@@ -21,7 +22,7 @@ export default function SuccesCourse() {
   const getEdutivData = () => {
     let idCourse = query.succes;
     let endpoints = [
-      `https://edutiv-springboot.herokuapp.com/course/${idCourse}`,
+      `${BASE_URL}/course/${idCourse}`,
     ];
 
     if (idCourse) {
