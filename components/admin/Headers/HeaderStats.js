@@ -4,7 +4,8 @@ import React from "react";
 
 import CardStats from "../Cards/CardStats.js";
 
-export default function HeaderStats() {
+export default function HeaderStats({ course, material }) {
+
   return (
     <>
       {/* Header */}
@@ -13,7 +14,7 @@ export default function HeaderStats() {
           <div>
             {/* Card stats */}
             <div className="flex flex-wrap">
-            <div className="w-full px-4 lg:w-6/12 xl:w-4/12">
+            <div className="w-full px-4 lg:w-6/12 xl:w-3/12">
                 <CardStats
                   statSubtitle="Total Members"
                   statTitle="100"
@@ -21,15 +22,23 @@ export default function HeaderStats() {
                   statIconColor="bg-pink-500"
                 />
               </div>
-              <div className="w-full px-4 lg:w-6/12 xl:w-4/12">
+              <div className="w-full px-4 lg:w-6/12 xl:w-3/12">
                 <CardStats
                   statSubtitle="Total Course"
-                  statTitle="48"
+                  statTitle={course.toString()}
                   statIconName="fas fa-book-open"
                   statIconColor="bg-red-500"
                 />
               </div>
-              <div className="w-full px-4 lg:w-6/12 xl:w-4/12">
+              <div className="w-full px-4 lg:w-6/12 xl:w-3/12">
+                <CardStats
+                  statSubtitle="Total Materials"
+                  statTitle={material.toString()}
+                  statIconName="fas fa-book-open"
+                  statIconColor="bg-red-500"
+                />
+              </div>
+              <div className="w-full px-4 lg:w-6/12 xl:w-3/12">
                 <CardStats
                   statSubtitle="Total Request"
                   statTitle="24"

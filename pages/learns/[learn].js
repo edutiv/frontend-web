@@ -10,32 +10,22 @@ import { MenuIcon, XIcon } from "@heroicons/react/solid";
 import Link from 'next/link';
 import LearnTools from '../../components/LearnTools';
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
+// function classNames(...classes) {
+//   return classes.filter(Boolean).join(' ')
+// }
+
+import { BASE_URL } from '../../config/API';
 
 export default function Learn() {
 
   let api;
   const [data, setData] = useState();
   const { query } = useRouter();
-
-  // useEffect(() => {
-  //   axios
-  //     .get("https://62a0b46ea9866630f815f720.mockapi.io//course")
-  //     .then(async (response) => {
-  //       const courseId = query.learn;
-  //       // eslint-disable-next-line react-hooks/exhaustive-deps
-  //       api = response?.data.filter((data) => (data.courseId == courseId));
-  //       const data = api[0];
-  //       setData(data);
-  //       // console.log(data);
-  //     });
-  // }, [api]);
+  const selectedCourseId = query.learn;
 
   useEffect(() => {
     axios
-      .get("https://edutiv-springboot.herokuapp.com/course")
+      .get(`${BASE_URL}/course`)
       .then(async (response) => {
         const courseId = query.learn;
         console.log(query);
@@ -106,12 +96,6 @@ export default function Learn() {
               ) : ''
             }
             <div className={toggleShow ? 'absolute navbar bg-[#F5F5F5] p-6 rounded-md mb-8 h-fit max-h-[85vh] overflow-auto left-0 top-28 right-0 mr-auto ml-auto z-50 w-[66.6vw]' : 'navbar col-span-4 bg-[#F5F5F5] p-6 rounded-md mb-8 h-fit lg:block hidden'}>
-              {/* <div className='mb-8 prepatation'>
-                <h2 className=' text-[13px] mb-4'>Downloadable Material</h2>
-                <div>
-                  <ButtonLearnNav icon={"preparation"} title={"Download Slide Materi"} />
-                </div>
-              </div> */}
               <Tab.List>
                 {
                   toggleShow ? (
@@ -141,6 +125,14 @@ export default function Learn() {
                   ))
                 }
               </Tab.List>
+              <div className='mb-8 prepatation'>
+                <h2 className=' text-[13px] mb-4'>Certificate</h2>
+                <Link href={`/learns/succes/${selectedCourseId}`}>
+                  <a>
+                    <ButtonLearnNav icon={"preparation"} title={"Download Certificate"} />
+                  </a>
+                </Link>
+              </div>
             </div>
             {/* side navbar */}
 
@@ -155,7 +147,7 @@ export default function Learn() {
                         {
                           material.material_type === "quiz" ? (
                             <div className="flex items-center justify-center w-full text-center align-top">
-                              <iframe src={material.material_url} height={2503} frameBorder="0" marginHeight="0" marginWidth="0">Memuat…</iframe>
+                              <iframe src={material.material_url} width={900} height={2503} frameBorder="0" marginHeight="0" marginWidth="0">Memuat…</iframe>
                             </div>
                           ) : (
                             <div className="border-2 rounded-md">

@@ -6,6 +6,8 @@ import axios from 'axios';
 import Admin from "../../../layouts/Admin.js";
 import CardSectionDetail from '../../../components/admin/Cards/CardSectionDetail.js';
 
+import { BASE_URL } from '../../../config/API.js';
+
 const SectionDetail = () => {
 
    let api;
@@ -33,7 +35,7 @@ const SectionDetail = () => {
 
    const getDetailSection = () => {
       axios
-         .get(`https://edutiv-springboot.herokuapp.com/course/${courseId}/section/`)
+         .get(`${BASE_URL}/course/${courseId}/section/`)
          .then((response) => {
             const sectionId = query.detailSection;
             console.log(response.data.data);
@@ -46,7 +48,7 @@ const SectionDetail = () => {
 
    useEffect(() => {
       axios
-         .get(`https://edutiv-springboot.herokuapp.com/course/${courseId}/section`)
+         .get(`${BASE_URL}/course/${courseId}/section`)
          .then((response) => {
             const sectionId = query.detailSection;
             console.log(response.data.data);

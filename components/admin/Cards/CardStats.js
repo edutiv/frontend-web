@@ -39,7 +39,7 @@ export default function CardStats({
 
 CardStats.defaultProps = {
   statSubtitle: "Traffic",
-  statTitle: "350,897",
+  statTitle: "0",
   statIconName: "far fa-chart-bar",
   statIconColor: "bg-red-500",
 };

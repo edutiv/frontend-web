@@ -12,8 +12,8 @@ import Navbar from "../../components/Navbar";
 import vscLogo from "../../public/assets/img/vscode.png";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Link from 'next/link';
-
+import Link from "next/link";
+import { BASE_URL } from "../../config/API";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -25,29 +25,26 @@ export default function Detail() {
   const [dataCourse, setDataCourse] = useState([]);
   const [video, setVideo] = useState();
   const [enrolled, setEnrolled] = useState(false);
-  
 
   const getEdutivData = () => {
-
     let idCourse = query.detailId;
-    let endpoints = [
-      `https://edutiv-springboot.herokuapp.com/course/${idCourse}`
-    ]
+    let endpoints = [`${BASE_URL}/course/${idCourse}`];
 
-    if(idCourse) {
-      Promise.all(endpoints.map(  (endpoint) => axios.get(endpoint))).then(([{ data: course }]) => {
-        setDataCourse(course.data)
-        setVideo(course.data?.sections[0]?.materials[0]?.material_url)
-        console.log(course.data)
-      });
+    if (idCourse) {
+      Promise.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
+        ([{ data: course }]) => {
+          setDataCourse(course.data);
+          setVideo(course.data?.sections[0]?.materials[0]?.material_url);
+          console.log(course.data);
+        }
+      );
     }
-  }
+  };
 
   useEffect(() => {
     getEdutivData();
   }, []);
 
-  
   return (
     <div>
       <Navbar />
@@ -58,26 +55,18 @@ export default function Detail() {
         <div className=" flex justify-center mt-6">
           <div className="flex-col justify-center text-center">
             <h1 className="flex justify-center">Member</h1>
-            <p>{dataCourse?.enrolled_courses?.length}</p>
+            <p>{`${dataCourse?.enrolled_courses?.length} enrolled`}</p>
           </div>
           <div className=" mx-12 flex-col justify-center">
             <h1>Serifikat</h1>
             <i className="flex justify-center">
-              {checked ? (
-                <CheckCircleIcon className=" w-4" />
-              ) : (
-                <div></div>
-              )}
+              {checked ? <CheckCircleIcon className=" w-4" /> : <div></div>}
             </i>
           </div>
           <div>
             <h1>Quiz</h1>
             <i className="flex justify-center">
-              {checked ? (
-                <CheckCircleIcon className=" w-4" />
-              ) : (
-                <div></div>
-              )}
+              {checked ? <CheckCircleIcon className=" w-4" /> : <div></div>}
             </i>
           </div>
         </div>
@@ -99,7 +88,15 @@ export default function Detail() {
               {`${dataCourse?.sections?.length} Video Lesson (${dataCourse?.total_times})`}
             </h1>
             <div className=" flex-col">
-              {dataCourse?.sections?.slice(0, 5).map((item) => (
+              {dataCourse?.sections?.slice(0, 1).map((item) => (
+                <ButtonLearnNav
+                  key={item.id}
+                  className="mb-4"
+                  icon={"video"}
+                  title={item.section_name}
+                />
+              ))}
+              {dataCourse?.sections?.slice(1, 5).map((item) => (
                 <ButtonLearnNav
                   key={item.id}
                   className="mb-4"
@@ -139,7 +136,7 @@ export default function Detail() {
                         classNames(
                           "py-2.5 text-sm font-medium w-[71px]",
                           selected
-                            ? " border-b-2 border-black focus-visible:outline-none"
+                            ? " border-b-2 border-black focus-visible:outline-none focus:outline-0"
                             : ""
                         )
                       }
@@ -153,7 +150,7 @@ export default function Detail() {
                         classNames(
                           "py-2.5 text-sm font-medium w-[71px]",
                           selected
-                            ? " border-b-2 border-black focus-visible:outline-none"
+                            ? " border-b-2 border-black focus-visible:outline-none focus:outline-0"
                             : ""
                         )
                       }
@@ -167,7 +164,7 @@ export default function Detail() {
                         classNames(
                           "py-2.5 text-sm font-medium w-[71px]",
                           selected
-                            ? " border-b-2 border-black focus-visible:outline-none"
+                            ? " border-b-2 border-black focus-visible:outline-none focus:outline-0"
                             : ""
                         )
                       }
@@ -181,7 +178,7 @@ export default function Detail() {
                         classNames(
                           "py-2.5 text-sm font-medium  w-[71px]",
                           selected
-                            ? " border-b-2 border-black focus-visible:outline-none"
+                            ? " border-b-2 border-black focus-visible:outline-none focus:outline-0"
                             : ""
                         )
                       }
@@ -201,27 +198,41 @@ export default function Detail() {
                       <div className=" mb-12">
                         <h1>Learning Objective</h1>
                         <ul>
-                          {/* {dataCourse?.map(
-                            (data, index) => (
-                              
-                              <li key={index} className="flex">
-                                <CheckCircleIcon className=" w-4 mr-2 hidden md:block " /> {data}{" "}
-                              </li>
-                            )
-                          )} */}
+                          <li className="flex mt-3">
+                            <CheckCircleIcon className=" w-4 mr-2 hidden md:block " />{" "}
+                            Learn & Understand Basic Programming
+                          </li>
+                          <li className="flex mt-3">
+                            <CheckCircleIcon className=" w-4 mr-2 hidden md:block " />{" "}
+                            Studying & Understanding Data Structure
+                          </li>
+                          <li className="flex mt-3">
+                            <CheckCircleIcon className=" w-4 mr-2 hidden md:block " />{" "}
+                            Learn & Understand String, Advance Function, Pointer, Struct, Method, Interface, Package, & Error Handling
+                          </li>
                         </ul>
                       </div>
 
                       <div className=" mb-12">
                         <h1>Advantages of using Golang</h1>
                         <ul>
-                          {/* {dataCourse?.map((data, index) => (
-                            <li key={index}>
-                              <div className="flex">
-                                <CheckCircleIcon className=" w-4 mr-2 hidden md:block" /> {data}{" "}
+                          
+                            <li>
+                              <div className="flex mt-3">
+                                <CheckCircleIcon className=" w-4 mr-2 hidden md:block" /> produces applications with high performance, but the structure is quite simple.
                               </div>
                             </li>
-                          ))} */}
+                            <li>
+                              <div className="flex mt-3">
+                                <CheckCircleIcon className=" w-4 mr-2 hidden md:block" /> used by large companies, both in Indonesia and abroad.
+                              </div>
+                            </li>
+                            <li>
+                              <div className="flex mt-3">
+                                <CheckCircleIcon className=" w-4 mr-2 hidden md:block" /> equipped with a number of advanced functions that can solve problems in other programming languages.
+                              </div>
+                            </li>
+                         
                         </ul>
                       </div>
                     </div>
@@ -234,21 +245,23 @@ export default function Detail() {
                         return (
                           <div key={data.id}>
                             <h1 className=" mb-3">{data?.section_name}</h1>
-                            {data?.materials.map((data) => (
-                              enrolled ? 
-                              <ButtonLearnNav
-                                key={data.id}
-                                icon={"video"}
-                                title={data.material_name}
-                                time={"11 min"}
-                              /> :
-                              <ButtonLearnNav
-                                key={data.id}
-                                icon={"video"}
-                                title={data.material_name}
-                                disabled={true}
-                              />
-                            ))}
+                            {data?.materials.map((data) =>
+                              enrolled ? (
+                                <ButtonLearnNav
+                                  key={data.id}
+                                  icon={"video"}
+                                  title={data.material_name}
+                                  time={"11 min"}
+                                />
+                              ) : (
+                                <ButtonLearnNav
+                                  key={data.id}
+                                  icon={"video"}
+                                  title={data.material_name}
+                                  disabled={true}
+                                />
+                              )
+                            )}
                           </div>
                         );
                       })}
@@ -280,8 +293,9 @@ export default function Detail() {
                           <div className="flex-col">
                             <h1 className=" text-sm">{data.tool_name}</h1>
                             <p className="flex justify-center text-xs">
-                              {" "}
-                              <DownloadIcon className=" w-3" /> <a>Download</a>{" "}
+                              <a href={data.tool_url} className="flex mt-2">
+                                <DownloadIcon className=" w-3" /> Download
+                              </a>
                             </p>
                           </div>
                         </div>
@@ -292,11 +306,14 @@ export default function Detail() {
                   {/* =================  tab Reviews =================*/}
                   <Tab.Panel>
                     <div className=" md:h-80 grid md:grid-cols-4 w-full gap-4">
-                      {
-                        dataCourse?.reviews?.map( data => (
-                          <ReviewCard key={data.id} name={data.user.firstname} rating={data.rating} comment={data.review} />
-                        ))
-                      }
+                      {dataCourse?.reviews?.map((data) => (
+                        <ReviewCard
+                          key={data.id}
+                          rating={data.rating}
+                          comment={data.review}
+                          name={data.user.firstname}
+                        />
+                      ))}
                     </div>
                   </Tab.Panel>
                 </Tab.Panels>
@@ -318,9 +335,9 @@ export default function Detail() {
                 />
               </div>
               <div>
-                <p className=" text-sm my-1 ml-2 ">{dataCourse?.name}</p>
+                <p className=" text-sm my-1 ml-2 ">Bessie Cooper</p>
                 <p className=" text-xs text-slate-300 my-1 ml-2 ">
-                  {dataCourse?.skill}
+                  Full-Stack Developer
                 </p>
               </div>
             </div>

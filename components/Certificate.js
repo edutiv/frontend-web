@@ -3,12 +3,19 @@ import ReactToPrint from "react-to-print";
 
 export default function certificate({dataCourse}) {
     let componentRef;
-    let dataLearning = dataCourse?.sections?.reduce((a, b) => `${a} - ${b.section_name}`);
+
+    const handleTopic = () => {
+      let topic = [];
+      let data = dataCourse?.sections?.map((item) => topic.push(item.section_name))
+      let dataTopic = topic.reduce((a, b) => `${a} - ${b}`);
+      return dataTopic
+    }
+    
   return (
     <div>
     
       <div
-        className="certificate-container text-center"
+        className="certificate-container text-center overflow-x-scroll"
         ref={(el) => (componentRef = el)}
       >
         <div className="certificate">
@@ -29,12 +36,11 @@ export default function certificate({dataCourse}) {
                 <p></p>
               </div>
               <p className="topic-title">
-                The Topic consists of [hours] Continuity hours and includes the
-                following:
+                have completed the course with the following topics:
               </p>
               <div className="text-center mt-10">
                 <p className="topic-description text-muted">
-                 {dataLearning}
+                 {handleTopic()}
                 </p>
               </div>
             </div>

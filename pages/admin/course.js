@@ -9,6 +9,10 @@ import CardTable from "../../components/admin/Cards/CardTable.js";
 
 import Admin from "../../layouts/Admin.js";
 
+// API Base Url
+import { BASE_URL } from "../../config/API.js";
+
+
 export default function Course() {
   const [dataCourse, setDataCourse] = useState([]);
   // const [categories, setCategories] = useState([]);
@@ -18,14 +22,14 @@ export default function Course() {
 
   const getEdutivData = () => {
     let endpoints = [
-      'https://edutiv-springboot.herokuapp.com/course',
+      `${BASE_URL}/course`,
       // 'https://edutiv-springboot.herokuapp.com/category'
     ]
 
     Promise.all(endpoints.map((endpoint) => axios.get(endpoint))).then(([{ data: course }]) => {
       setDataCourse(course.data)
       // setCategories(categories.data)
-      console.log(dataCourse);
+      // console.log(dataCourse);
       // console.log(categories);
     });
   }

@@ -4,6 +4,7 @@ import CardCourse from "../../components/CardCourse";
 import Navbar from "../../components/Navbar";
 import axios from "axios";
 import mentorCourseBs from "../../public/assets/img/mentor.png";
+import { BASE_URL } from '../../config/API';
 
 export default function courseListPage() {
   // const [data, setData] = useState();
@@ -15,8 +16,8 @@ export default function courseListPage() {
 
   const getEdutivData = () => {
     let endpoints = [
-      "https://edutiv-springboot.herokuapp.com/course",
-      "https://edutiv-springboot.herokuapp.com/category",
+      `${BASE_URL}/course`,
+      `${BASE_URL}/category`,
     ];
 
     Promise.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
