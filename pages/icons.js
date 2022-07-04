@@ -1,4 +1,4 @@
-export const icons = [
+export default icons = [
    {
       width: 48,
       height: 48,

@@ -11,7 +11,7 @@ import codingCourse from "../public/assets/img/frontend-course.png";
 import titleImg from "../public/assets/img/head-title.svg";
 import courseBs from "../public/assets/img/bs5.png";
 import mentorCourseBs from "../public/assets/img/mentor.png";
-import { icons } from "./icons";
+import icons from "./icons";
 import { BASE_URL } from '../config/API';
 import Link from "next/link";
 
