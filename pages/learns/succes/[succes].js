@@ -38,6 +38,7 @@ export default function SuccesCourse() {
 
   useEffect(() => {
     getEdutivData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
