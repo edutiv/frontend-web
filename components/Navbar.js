@@ -74,15 +74,19 @@ export default function Navbar() {
                             />
                           </div>
                           <div className="col-span-4 ">
-                            <h1
-                              className={classNames(
-                                active ? " text-gray-400" : "text-gray-600/100",
-                                " text-base font-semibold"
-                              )}
-                            >
-                              All Course
-                            </h1>
-                            <p className="text-xs text-slate-300 "> Lots of interesting courses ready to learn </p>
+                            <Link href='/courses'>
+                              <a>
+                                <h1
+                                  className={classNames(
+                                    active ? " text-gray-400" : "text-gray-600/100",
+                                    " text-base font-semibold"
+                                  )}
+                                >
+                                  All Course
+                                </h1>
+                                <p className="text-xs text-slate-300 "> Lots of interesting courses ready to learn </p>
+                              </a>
+                            </Link>
                           </div>
                         </div>
                       </MyLink>

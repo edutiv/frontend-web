@@ -21,6 +21,7 @@ export default function Learn() {
   let api;
   const [data, setData] = useState();
   const { query } = useRouter();
+  const selectedCourseId = query.learn;
 
   useEffect(() => {
     axios
@@ -95,12 +96,6 @@ export default function Learn() {
               ) : ''
             }
             <div className={toggleShow ? 'absolute navbar bg-[#F5F5F5] p-6 rounded-md mb-8 h-fit max-h-[85vh] overflow-auto left-0 top-28 right-0 mr-auto ml-auto z-50 w-[66.6vw]' : 'navbar col-span-4 bg-[#F5F5F5] p-6 rounded-md mb-8 h-fit lg:block hidden'}>
-              {/* <div className='mb-8 prepatation'>
-                <h2 className=' text-[13px] mb-4'>Downloadable Material</h2>
-                <div>
-                  <ButtonLearnNav icon={"preparation"} title={"Download Slide Materi"} />
-                </div>
-              </div> */}
               <Tab.List>
                 {
                   toggleShow ? (
@@ -130,6 +125,14 @@ export default function Learn() {
                   ))
                 }
               </Tab.List>
+              <div className='mb-8 prepatation'>
+                <h2 className=' text-[13px] mb-4'>Certificate</h2>
+                <Link href={`/learns/succes/${selectedCourseId}`}>
+                  <a>
+                    <ButtonLearnNav icon={"preparation"} title={"Download Certificate"} />
+                  </a>
+                </Link>
+              </div>
             </div>
             {/* side navbar */}
 
@@ -144,7 +147,7 @@ export default function Learn() {
                         {
                           material.material_type === "quiz" ? (
                             <div className="flex items-center justify-center w-full text-center align-top">
-                              <iframe src={material.material_url} height={2503} frameBorder="0" marginHeight="0" marginWidth="0">Memuat…</iframe>
+                              <iframe src={material.material_url} width={900} height={2503} frameBorder="0" marginHeight="0" marginWidth="0">Memuat…</iframe>
                             </div>
                           ) : (
                             <div className="border-2 rounded-md">

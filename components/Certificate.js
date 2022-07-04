@@ -15,7 +15,7 @@ export default function certificate({dataCourse}) {
     <div>
     
       <div
-        className="certificate-container text-center"
+        className="certificate-container text-center overflow-x-scroll"
         ref={(el) => (componentRef = el)}
       >
         <div className="certificate">

@@ -13,6 +13,9 @@ import courseBs from "../public/assets/img/bs5.png";
 import mentorCourseBs from "../public/assets/img/mentor.png";
 import { icons } from "./icons";
 import { BASE_URL } from '../config/API';
+import Link from "next/link";
+
+import { ArrowSmRightIcon } from "@heroicons/react/solid";
 
 export default function Home() {
 
@@ -82,9 +85,11 @@ export default function Home() {
                 <button className="px-5 py-3 bg-[#126E64] rounded-md text-white text-[11px] hover:bg-[#09423c] hover:-translate-y-[0.15rem] hover:transition hover:duration-100 hover:ease-in-out hover:drop-shadow-md">
                   GET STARTED
                 </button>
-                <button className="bg-white px-5 py-3 text-[#126E64] rounded-md border-[1px] border-[#E0E0E0] text-[11px] hover:border-[#126E64] hover:-translate-y-[0.15rem] hover:transition hover:duration-100 hover:ease-in-out hover:drop-shadow-md">
-                  CATALOG COURSE
-                </button>
+                <Link href="/courses">
+                  <button className="bg-white px-5 py-3 text-[#126E64] rounded-md border-[1px] border-[#E0E0E0] text-[11px] hover:border-[#126E64] hover:-translate-y-[0.15rem] hover:transition hover:duration-100 hover:ease-in-out hover:drop-shadow-md">
+                    CATALOG COURSE
+                  </button>
+                </Link>
               </div>
             </div>
             {/* image */}
@@ -126,10 +131,15 @@ export default function Home() {
         <div className="mb-20 mx-8 md:mx-20">
           <div>
             <p className="text-base text-[#126E64]">Let’s learning today</p>
-            <h1 className=" mb-12 text-[30px] md:text-[2.5rem] w-full md:w-7/12">
-              Courses with categories that we
-              have prepared for you
-            </h1>
+            <div className="flex flex-col md:flex-row md:justify-between">
+              <h1 className="md:mb-12 mb-6 text-[30px] md:text-[2.5rem] w-full md:w-7/12">
+                Courses with categories that we
+                have prepared for you
+              </h1>
+              <Link href="/courses">
+                <button className="flex flex-row items-center gap-1 self-end md:self-auto mb-4 md:mb-0">See More <ArrowSmRightIcon className="h-6 w-6" /></button>
+              </Link>
+            </div>
             <div className="flex flex-col md:flex-row gap-3 justify-center md:justify-start w-full">
               {
                 categories?.map((category) => (
@@ -145,19 +155,24 @@ export default function Home() {
         {/* Course Card  */}
         <div className="pb-20 mx-8 md:mx-20">
           <p className="text-base text-[#126E64]">Top Course</p>
-          <h1 className="mb-12 text-[30px] md:text-[2.5rem]">Excellent Course For You</h1>
+          <div className="flex flex-col md:flex-row md:justify-between">
+            <h1 className="md:mb-12 mb-6 text-[30px] md:text-[2.5rem]">Excellent Course For You</h1>
+            <Link href="/courses">
+              <button className="flex flex-row items-center gap-1 self-end md:self-auto mb-4 md:mb-0">See More <ArrowSmRightIcon className="h-6 w-6" /></button>
+            </Link>
+          </div>
           <div className="grid gap-3 grid-cols-1 lg:grid-cols-4 md:grid-cols-2">
             {
               dataCourse?.slice(0, 4).map((item) => (
-                <CardCourse 
-                key={item.id} 
-                image={item.course_image} 
-                mentor={mentorCourseBs} 
-                mentorName={"bessie chopper"} 
-                title={item.course_name} 
-                courseId={item.id}
-                totaltimes={item.total_times}
-                totalvideo={item.total_video}
+                <CardCourse
+                  key={item.id}
+                  image={item.course_image}
+                  mentor={mentorCourseBs}
+                  mentorName={"bessie chopper"}
+                  title={item.course_name}
+                  courseId={item.id}
+                  totaltimes={item.total_times}
+                  totalvideo={item.total_video}
                 />
               ))
             }

@@ -43,9 +43,9 @@ export default function SuccesCourse() {
   return (
     <div>
       <Navbar />
-      <div className="grid w-full place-content-center">
+      <div className="grid w-full place-content-center px-10 md:px-0">
         <div className="flex justify-center mb-4">
-          <img className="h-[400px]" src="/assets/img/succes.png" />
+          <img className="md:h-[400px] h-fit" src="/assets/img/succes.png" />
         </div>
         {hidden ? (
           <h1 className="text-3xl text-center ">Excellent!</h1>
@@ -66,16 +66,16 @@ export default function SuccesCourse() {
         <div className="flex flex-col items-center justify-center mt-3 align-middle mb-6">
           {hidden ? (
             <Link href={`/learns/${dataCourse.id}`}>
-              <button className="w-80 py-3 bg-[#126E64] rounded-md text-white text-[11px] hover:bg-[#09423c] hover:-translate-y-[0.15rem] hover:transition hover:duration-100 hover:ease-in-out hover:drop-shadow-md">
+              <button className="md:w-80 w-full py-3 bg-[#126E64] rounded-md text-white text-[11px] hover:bg-[#09423c] hover:-translate-y-[0.15rem] hover:transition hover:duration-100 hover:ease-in-out hover:drop-shadow-md">
                 Back to Course
               </button>
             </Link>
           ) : (
-            <div>
-              <div className=" my-1 w-80 ">
+            <div className="w-full flex flex-col items-center">
+              <div className="my-1 md:w-80 w-full">
                 <ModalCertificate dataCourse={dataCourse} />
               </div>
-              <div className=" my-1 w-80">
+              <div className="my-1 md:w-80 w-full">
                 <ModalRating
                   dataCourse={dataCourse}
                   handleHidden={handleHidden}

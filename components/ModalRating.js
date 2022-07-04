@@ -64,9 +64,9 @@ export default function ModalRating({ dataCourse, handleHidden}) {
     <div>
       <button
         onClick={() => setIsOpen(true)}
-        className="bg-white w-full py-3 text-[#126E64] rounded-md border-[1px] border-[#E0E0E0] text-[11px] hover:border-[#126E64] hover:-translate-y-[0.15rem] hover:transition hover:duration-100 hover:ease-in-out hover:drop-shadow-md"
+        className="bg-white md:w-80 w-full py-3 text-[#126E64] rounded-md border-[1px] border-[#E0E0E0] text-[11px] hover:border-[#126E64] hover:-translate-y-[0.15rem] hover:transition hover:duration-100 hover:ease-in-out hover:drop-shadow-md"
       >
-        rating course
+        Rating Course
       </button>
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -83,7 +83,7 @@ export default function ModalRating({ dataCourse, handleHidden}) {
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto">
-            <div className="flex items-center justify-center min-h-full p-4 text-center">
+            <div className="flex items-center justify-center min-h-full md:p-3 p-0 text-center">
               <Transition.Child
                 as={Fragment}
                 enter="ease-out duration-300"
@@ -93,7 +93,7 @@ export default function ModalRating({ dataCourse, handleHidden}) {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-md p-6 overflow-hidden text-left transition-all transform bg-white shadow-xl rounded-2xl">
+                <Dialog.Panel className="w-full md:mx-0 mx-4 max-w-md p-6 overflow-hidden text-left transition-all transform bg-white shadow-xl rounded-2xl">
                   <p className="text-base text-[#126E64] mb-5">Rating Course</p>
                   <Dialog.Title
                     as="h3"
@@ -109,7 +109,6 @@ export default function ModalRating({ dataCourse, handleHidden}) {
                       size={50}
                       activeColor="#ffd700"
                     />
-                    ,
                   </div>
                   <div>
                     <form onSubmit={handleSubmit}>
@@ -117,15 +116,14 @@ export default function ModalRating({ dataCourse, handleHidden}) {
                         id="comments"
                         name="comments"
                         rows="4"
-                        cols="40"
-                        placeholder="review"
-                        className=" rounded-md bg-[#F5F5F5] border-none p-3"
+                        placeholder="Review Your Experience taking our Courses!"
+                        className=" rounded-md bg-[#F5F5F5] border-none p-3 w-full"
                         onChange={handleChange}
                         required
                       ></textarea>
 
                       <button className="px-5 py-3 bg-[#126E64] rounded-md text-white text-[11px] hover:bg-[#09423c] hover:-translate-y-[0.15rem] hover:transition hover:duration-100 hover:ease-in-out hover:drop-shadow-md">
-                        give rating
+                        Give Rating
                       </button>
                     </form>
                   </div>
