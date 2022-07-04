@@ -311,6 +311,7 @@ export default function Detail() {
                           key={data.id}
                           rating={data.rating}
                           comment={data.review}
+                          name={data.user.firstname}
                         />
                       ))}
                     </div>

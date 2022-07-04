@@ -4,6 +4,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import ReactStars from "react-rating-stars-component";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { BASE_URL } from "../config/API";
 
 export default function ModalRating({ dataCourse, handleHidden}) {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,9 +18,9 @@ export default function ModalRating({ dataCourse, handleHidden}) {
     if (idCourse) {
       axios
         .post(
-          `https://edutiv-springboot.herokuapp.com/course/${idCourse}/review`,
+          `${BASE_URL}/course/${idCourse}/review`,
           {
-            user_id: 1,
+            user_id: 2,
             rating: rating,
             review: comment,
           }
