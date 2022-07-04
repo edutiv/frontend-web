@@ -28,7 +28,6 @@ const tipeMaterial = [
   { name: "quiz" },
 ]
 
-
 export default function CardTable({ color, title, sidebutton, type, data, refresh }) {
 
   let [isOpenMember, setIsOpenMember] = useState(false);

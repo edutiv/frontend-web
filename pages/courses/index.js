@@ -6,7 +6,7 @@ import axios from "axios";
 import mentorCourseBs from "../../public/assets/img/mentor.png";
 import { BASE_URL } from '../../config/API';
 
-export default function courseListPage() {
+export default function CourseListPage() {
   // const [data, setData] = useState();
   const [dataCourse, setDataCourse] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -79,6 +79,7 @@ export default function courseListPage() {
       setDataFilterCourse(dataCourse);
     }
     
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [checked]);
 
   const handleSubmitSearch = (e) => {
