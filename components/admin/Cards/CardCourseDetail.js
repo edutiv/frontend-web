@@ -24,7 +24,7 @@ const CardCourseDetail = ({ color, title, sidebutton, type, data, refresh, cours
    function openModalSection() {
       setIsOpenSection(true)
    }
-
+   
    function closeModalUpdateSection() {
       setIsOpenUpdateSection(false)
    }
