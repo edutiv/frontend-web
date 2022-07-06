@@ -13,7 +13,7 @@ export default function Request() {
     <>
       <div className="flex flex-wrap mt-4">
         <div className="w-full px-4 mb-12">
-          <CardTable title={"Request Table"}/>
+          <CardTable title={"Request Table"} sidebutton={false} type={'request'} data={0}/>
         </div>
         {/* <div className="w-full px-4 mb-12">
           <CardTable color="dark" />

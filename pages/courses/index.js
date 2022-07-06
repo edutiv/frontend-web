@@ -4,8 +4,9 @@ import CardCourse from "../../components/CardCourse";
 import Navbar from "../../components/Navbar";
 import axios from "axios";
 import mentorCourseBs from "../../public/assets/img/mentor.png";
+import { BASE_URL } from '../../config/API';
 
-export default function courseListPage() {
+export default function CourseListPage() {
   // const [data, setData] = useState();
   const [dataCourse, setDataCourse] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -15,8 +16,8 @@ export default function courseListPage() {
 
   const getEdutivData = () => {
     let endpoints = [
-      "https://edutiv-springboot.herokuapp.com/course",
-      "https://edutiv-springboot.herokuapp.com/category",
+      `${BASE_URL}/course`,
+      `${BASE_URL}/category`,
     ];
 
     Promise.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
@@ -78,6 +79,7 @@ export default function courseListPage() {
       setDataFilterCourse(dataCourse);
     }
     
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [checked]);
 
   const handleSubmitSearch = (e) => {
@@ -101,48 +103,52 @@ export default function courseListPage() {
     <div>
       <header className="h-[324px] bg-[#F5F5F5] mb-7">
         <Navbar />
-        <div className="grid grid-cols-1 place-content-center h-full mx-20">
+        <div className="grid grid-cols-1 place-content-center h-full md:mx-20 mx-10">
           <div className=" text-center">
             <h1 className=" text-4xl mb-5">Course Learning</h1>
             <p>
               Improve your skills in technology to compete with your interests
               and expertise
             </p>
-            <form
-              className=" flex justify-center mt-10"
-              onSubmit={handleSubmitSearch}
-            >
-              <div className="rounded-lg border-2 w-fit flex shadow-md ">
-                <input
-                  className="w-[560px] h-[29px]  border-none rounded-lg"
-                  type="text"
-                  name="search"
-                  placeholder="Search Course..."
-                  onChange={handleChange}
-                />
-                <button className="mx-2">
-                  <SearchIcon className="w-5" />
-                </button>
-              </div>
-            </form>
+            <div className=" md:mx-20">
+              <form
+                className=" flex justify-center mt-10 w-auto"
+                onSubmit={handleSubmitSearch}
+              >
+                <div className="rounded-lg border-2 w-full flex shadow-md md:w-[574px] ">
+                  <input
+                    className="w-full h-[29px]  border-none rounded-lg"
+                    type="text"
+                    name="search"
+                    placeholder="Search Course..."
+                    onChange={handleChange}
+                  />
+                  <button className="mx-2">
+                    <SearchIcon className="w-5" />
+                  </button>
+                </div>
+              </form>
+            </div>
+            
           </div>
         </div>
       </header>
 
       <main>
-        <div className="mx-20 grid-cols-12 grid gap-3">
+        <div className="mx-20 md:grid-cols-12 grid gap-3">
           {/* card filter */}
-          <div className="col-span-3">
-            <div className="h-[370px] border-2 p-6 rounded-md">
+          <div className="md:col-span-3 w-full">
+            <div className="h-[370px] border-2 p-6 rounded-md w-full">
               <form>
                 <label>Sort</label>
                 <select
                   name="filterCourse"
-                  className=" w-full text-sm h-[36px] rounded-md"
+                  className=" w-full text-sm h-[36px] rounded-md px-3"
                 >
                   <option value="latest">Latest</option>
-                  <option value="pupuler">Populer</option>
-                  <option value="new">New</option>
+                  <option value="Longest">Longest</option>
+                  <option value="highest">Highest rating</option>
+                  <option value="lowest">Lowest rating</option>
                 </select>
 
                 <div className="my-5">
@@ -197,7 +203,7 @@ export default function courseListPage() {
           {/* card filter */}
 
           {/* list card course */}
-          <div className=" col-span-9 grid-cols-3 gap-3 grid">
+          <div className=" md:col-span-9 md:grid-cols-3 gap-3 grid">
             {datafilterCourse?.map((item) => (
               <CardCourse
                 key={item.id}
