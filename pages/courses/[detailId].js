@@ -14,6 +14,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { BASE_URL } from "../../config/API";
+import { data } from "autoprefixer";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -43,7 +44,7 @@ export default function Detail() {
 
   useEffect(() => {
     getEdutivData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -199,41 +200,28 @@ export default function Detail() {
                       <div className=" mb-12">
                         <h1>Learning Objective</h1>
                         <ul>
-                          <li className="flex mt-3">
-                            <CheckCircleIcon className=" w-4 mr-2 hidden md:block " />{" "}
-                            Learn & Understand Basic Programming
-                          </li>
-                          <li className="flex mt-3">
-                            <CheckCircleIcon className=" w-4 mr-2 hidden md:block " />{" "}
-                            Studying & Understanding Data Structure
-                          </li>
-                          <li className="flex mt-3">
-                            <CheckCircleIcon className=" w-4 mr-2 hidden md:block " />{" "}
-                            Learn & Understand String, Advance Function, Pointer, Struct, Method, Interface, Package, & Error Handling
-                          </li>
+                          {dataCourse?.learning_objectives?.map(
+                            (item, index) => (
+                              <li className="flex mt-3" key={index}>
+                                <CheckCircleIcon className=" w-4 mr-2 hidden md:block " />
+                                {item}
+                              </li>
+                            )
+                          )}
                         </ul>
                       </div>
 
                       <div className=" mb-12">
                         <h1>Advantages of using Golang</h1>
                         <ul>
-                          
-                            <li>
+                          {dataCourse?.advantages?.map((item, index) => (
+                            <li key={index}>
                               <div className="flex mt-3">
-                                <CheckCircleIcon className=" w-4 mr-2 hidden md:block" /> produces applications with high performance, but the structure is quite simple.
+                                <CheckCircleIcon className=" w-4 mr-2 hidden md:block" />
+                                {item}
                               </div>
                             </li>
-                            <li>
-                              <div className="flex mt-3">
-                                <CheckCircleIcon className=" w-4 mr-2 hidden md:block" /> used by large companies, both in Indonesia and abroad.
-                              </div>
-                            </li>
-                            <li>
-                              <div className="flex mt-3">
-                                <CheckCircleIcon className=" w-4 mr-2 hidden md:block" /> equipped with a number of advanced functions that can solve problems in other programming languages.
-                              </div>
-                            </li>
-                         
+                          ))}
                         </ul>
                       </div>
                     </div>
