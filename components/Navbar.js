@@ -16,6 +16,8 @@ import ProfileMenu from "./ProfileMenu";
 import jwtDecode from "jwt-decode";
 import axios from "axios";
 import { BASE_URL } from "../config/API";
+import Cookies from 'universal-cookie';
+import { Router } from "next/router";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -36,10 +38,12 @@ const MyLink = forwardRef((props, ref) => {
 export default function Navbar() {
   const [isLogin, setIslogin] = useState(false);
   const [dataUser, setDataUser] = useState();
+  const cookies = new Cookies();
+  
   
 
   const handleLogin = () => {
-    let token = localStorage.getItem("token");
+    let token = cookies.get("token")
 
     if(token){
       let userId = jwtDecode(token).jti;
@@ -286,7 +290,7 @@ export default function Navbar() {
         <div className="grid content-center md:block hidden py-5">
           <div className="grid content-center px-4 py-2 rounded-md text-white bg-[#126E64] hover:bg-[#09423c] hover:-translate-y-[0.1rem] hover:transition hover:duration-100 hover:ease-in-out hover:drop-shadow-md">
             <button className="text-sm">
-              <Link href="/login">
+              <Link href="/auth/login">
                 <a>LOGIN</a>
               </Link>
             </button>

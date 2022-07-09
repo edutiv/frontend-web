@@ -18,6 +18,7 @@ import Link from "next/link";
 import { ArrowSmRightIcon } from "@heroicons/react/solid";
 import Footer from "../components/Footer";
 import CardProgressCourse from "../components/CardProgressCourse";
+import Cookies from 'universal-cookie';
 
 export default function Home() {
   let api;
@@ -25,7 +26,7 @@ export default function Home() {
   const [dataCourse, setDataCourse] = useState([]);
   const [categories, setCategories] = useState([]);
   const [isLogin, setIsLogin] = useState(false);
-
+  const cookies = new Cookies();
   // 'https://edutiv-springboot.herokuapp.com//category'
   // 'https://62a0b46ea9866630f815f720.mockapi.io//category'
 
@@ -41,7 +42,7 @@ export default function Home() {
   };
 
   const handleLogin = () => {
-    let token = localStorage.getItem("token");
+    let token = cookies.get("token");
 
     if(token){
       // let userId = jwtDecode(token).jti;

@@ -1,11 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { forwardRef } from "react";
+import React, { forwardRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import mentor from "../public/assets/img/mentor.png";
+import Router from "next/router";
+import Cookies from "universal-cookie";
 
 // eslint-disable-next-line react/display-name
 const MyLink = forwardRef((props, ref) => {
@@ -21,6 +23,15 @@ const MyLink = forwardRef((props, ref) => {
   
 
 export default function ProfileMenu({ dataUser }) {
+  let cookies = new Cookies()
+  let token = cookies.get("token");
+  const handleLogout = () => {
+    cookies.remove('token')
+    setTimeout(()=>{
+      Router.push('/auth/login')
+    }, 2000)    
+  }
+
   return (
     <div className="hidden md:block">
         <div className=" grid content-center">
@@ -95,7 +106,7 @@ export default function ProfileMenu({ dataUser }) {
                     <Menu.Item>
                       {({ active }) => (
                         <MyLink href="/courses">
-                          <div className=" px-2 py-2 text-sm">
+                          <div className=" px-2 py-2 text-sm" onClick={handleLogout}>
                             <p>Logout</p>
                           </div>
                         </MyLink>

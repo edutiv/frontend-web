@@ -22,7 +22,8 @@
     "react-dom": "18.1.0",
     "react-rating-stars-component": "^2.2.0",
     "react-to-print": "^2.14.7",
-    "sweetalert2": "^11.4.19"
+    "sweetalert2": "^11.4.19",
+    "universal-cookie": "^4.0.4"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.7",

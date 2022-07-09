@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
-import Button from "../components/Button";
+import Button from "../../components/Button";
 import { MailIcon } from "@heroicons/react/solid";
 
 function ForgetPwd() {
