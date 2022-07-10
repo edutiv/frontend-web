@@ -13,6 +13,7 @@ import TableDropdown from "../Dropdowns/TableDropdown.js";
 
 // API Base Url
 import { BASE_URL } from "../../../config/API.js";
+import Cookies from "universal-cookie";
 
 const specialist = [
   { name: 'Frontend Engineer' },
@@ -55,6 +56,10 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
   const [materialType, setMaterialType] = useState(tipeMaterial[0]);
   const [materialName, setMaterialName] = useState("");
   const [materialUrl, setMaterialUrl] = useState("");
+
+  const cookies = new Cookies();
+  let token = cookies.get("token");
+  console.log(token);
 
   // console.log(data);
   // console.log('category selected', categorySelected);
@@ -117,6 +122,8 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
       description: courseDesc,
       total_video: courseTotalVideo,
       total_times: courseTotalTimes
+    }, { 
+      headers: { "Authorization": `Bearer ${token}` } 
     })
       .then(function (response) {
         console.log(response);
@@ -139,6 +146,8 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
     e.preventDefault();
     axios.post(`${BASE_URL}/course/${uploadedCourseId}/section`, {
       section_name: sectionName,
+    }, { 
+      headers: { "Authorization": `Bearer ${token}` } 
     })
       .then(function (response) {
         console.log(response);
@@ -158,6 +167,8 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
       material_type: materialType.name,
       material_name: materialName,
       material_url: materialUrl
+    }, { 
+      headers: { "Authorization": `Bearer ${token}` } 
     })
       .then(function (response) {
         console.log(response);
@@ -188,7 +199,9 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`${BASE_URL}/course/${id}`)
+        axios.delete(`${BASE_URL}/course/${id}`, {
+          headers: { "Authorization": `Bearer ${token}` } 
+        })
           .then(function (response) {
             console.log(response);
             refresh();
@@ -239,6 +252,8 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
       description: courseDesc,
       total_video: courseTotalVideo,
       total_times: courseTotalTimes
+    }, { 
+      headers: { "Authorization": `Bearer ${token}` } 
     })
       .then(function (response) {
         console.log(response);
@@ -950,7 +965,7 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
                     </Dialog.Title>
 
                     <form className="rounded-b-2xl" onSubmit={handleSubmitCourse}>
-                      <div className="mb-6 form-group px-6">
+                      <div className="px-6 mb-6 form-group">
                         <label htmlFor="courseNameInput">Course Name</label>
                         <input
                           type="text"
@@ -962,7 +977,7 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
                           onChange={(e) => setCourseName(e.target.value)}
                         />
                       </div>
-                      <div className="mb-6 form-group px-6">
+                      <div className="px-6 mb-6 form-group">
                         <label htmlFor="courseImgUrlInput">Course URL Image</label>
                         <input
                           type="text"
@@ -1137,7 +1152,7 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
                     </Dialog.Title>
 
                     <form className="rounded-b-2xl" onSubmit={handleSubmitSection}>
-                      <div className="mb-6 form-group px-6">
+                      <div className="px-6 mb-6 form-group">
                         <label htmlFor="sectionNameInput">Section Name</label>
                         <input
                           type="text"
@@ -1255,7 +1270,7 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
                           </Transition>
                         </div>
                       </Listbox>
-                      <div className="mb-6 form-group px-6">
+                      <div className="px-6 mb-6 form-group">
                         <label htmlFor="materialNameInput">Material Name</label>
                         <input
                           type="text"
@@ -1267,7 +1282,7 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
                           onChange={(e) => setMaterialName(e.target.value)}
                         />
                       </div>
-                      <div className="mb-6 form-group px-6">
+                      <div className="px-6 mb-6 form-group">
                         <label htmlFor="materialUrlInput">Material URL</label>
                         <input
                           type="text"
@@ -1336,7 +1351,7 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
                     </Dialog.Title>
 
                     <form className="rounded-b-2xl">
-                      <div className="mb-6 form-group px-6">
+                      <div className="px-6 mb-6 form-group">
                         <label htmlFor="courseNameInput">Course Name</label>
                         <input
                           type="text"
@@ -1348,7 +1363,7 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
                           onChange={(e) => setCourseName(e.target.value)}
                         />
                       </div>
-                      <div className="mb-6 form-group px-6">
+                      <div className="px-6 mb-6 form-group">
                         <label htmlFor="courseImgUrlInput">Course URL Image</label>
                         <input
                           type="text"

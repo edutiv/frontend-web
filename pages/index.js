@@ -63,6 +63,7 @@ export default function Home() {
   useEffect(() => {
     getEdutivData();
     handleLogin();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // get api
@@ -86,20 +87,20 @@ export default function Home() {
       <main>
         {/* get started */}
         {isLogin ? (
-          <div className="px-8 md:px-20 mt-6 md:mt-16 ">
+          <div className="px-8 mt-6 md:px-20 md:mt-16 ">
             <p className="text-base text-[#126E64]">Learning Progress</p>
             <div className="flex flex-col md:flex-row md:justify-between">
               <h1 className="md:mb-12 mb-6 text-[30px] md:text-[2.5rem] w-full md:w-7/12">
-                Let's continue to improve your skills
+                Let&apos;s continue to improve your skills
               </h1>
             </div>
-            <div className="grid md:grid-cols-2 gap-3 grid-cols-1">
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
               <CardProgressCourse />
               <CardProgressCourse />
             </div>
           </div>
         ) : (
-          <div className="px-8 md:px-20 grid content-center mt-6 md:mt-16">
+          <div className="grid content-center px-8 mt-6 md:px-20 md:mt-16">
             <div className="grid content-center grid-cols-1 gap-6 md:grid-cols-2">
               {/* title */}
               <div className="grid content-center">
@@ -143,7 +144,7 @@ export default function Home() {
         {/* features icon */}
 
         <div className="px-20 py-6 md:py-24">
-          <div className="hidden md:flex justify-center md:justify-around flex-col md:flex-row gap-3 md:gap-10">
+          <div className="flex-col justify-center hidden gap-3 md:flex md:justify-around md:flex-row md:gap-10">
             {icons.icons.map((icon) => (
               <div className="flex items-center" key={icon.src}>
                 <div
@@ -168,7 +169,7 @@ export default function Home() {
 
         {/* Course Category */}
 
-        <div className="mb-20 mx-8 md:mx-20">
+        <div className="mx-8 mb-20 md:mx-20">
           <div>
             <p className="text-base text-[#126E64]">Let’s learning today</p>
             <div className="flex flex-col md:flex-row md:justify-between">
@@ -176,12 +177,12 @@ export default function Home() {
                 Courses with categories that we have prepared for you
               </h1>
               <Link href="/courses">
-                <button className="flex flex-row items-center gap-1 self-end md:self-auto mb-4 md:mb-0">
-                  See More <ArrowSmRightIcon className="h-6 w-6" />
+                <button className="flex flex-row items-center self-end gap-1 mb-4 md:self-auto md:mb-0">
+                  See More <ArrowSmRightIcon className="w-6 h-6" />
                 </button>
               </Link>
             </div>
-            <div className="flex flex-col md:flex-row gap-3 justify-center md:justify-start w-full">
+            <div className="flex flex-col justify-center w-full gap-3 md:flex-row md:justify-start">
               {categories?.map((category) => (
                 <CardCategory
                   key={category.id}
@@ -204,12 +205,12 @@ export default function Home() {
               Excellent Course For You
             </h1>
             <Link href="/courses">
-              <button className="flex flex-row items-center gap-1 self-end md:self-auto mb-4 md:mb-0">
-                See More <ArrowSmRightIcon className="h-6 w-6" />
+              <button className="flex flex-row items-center self-end gap-1 mb-4 md:self-auto md:mb-0">
+                See More <ArrowSmRightIcon className="w-6 h-6" />
               </button>
             </Link>
           </div>
-          <div className="grid gap-3 grid-cols-1 lg:grid-cols-4 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-3 lg:grid-cols-4 md:grid-cols-2">
             {dataCourse?.slice(0, 4).map((item) => (
               <CardCourse
                 key={item.id}

@@ -9,10 +9,12 @@ import axios from "axios";
 import { BASE_URL } from "../../config/API";
 import Cookies from 'universal-cookie';
 import Router from "next/router";
+import jwtDecode from "jwt-decode";
 
 function Login(req) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [userDetail, setUserDetail] = useState();
   const cookies = new Cookies();
 
   const handleChange = (e) => {
@@ -30,7 +32,7 @@ function Login(req) {
   const handleSubmitLogin = (e) => {
     e.preventDefault();
     console.log(email, password);
-	
+
     axios
       .post(`${BASE_URL}/user/login`, {
         email: email,
@@ -38,7 +40,16 @@ function Login(req) {
       })
       .then((res) => {
         cookies.set('token', res.data.token, { path: '/' });
-		Router.push('/')
+        let userId = jwtDecode(res.data.token).jti;
+        axios.get(`${BASE_URL}/user/${userId}`, { headers: { "Authorization": `Bearer ${res.data.token}` } }).then((result) => {
+          setUserDetail(result.data.data);
+          let userinfo = result.data.data;
+          if (userinfo.roles[0].name === "ROLE_ADMIN") {
+            Router.push('/admin/dashboard')
+          } else {
+            Router.push('/')
+          }
+        });
       })
       .catch((error) => {
         alert("user tidak di temukan");
@@ -51,17 +62,17 @@ function Login(req) {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
 
-      <div className="h-screen flex">
+      <div className="flex h-screen">
         {/* Left Side Picture */}
-        <div className="hidden lg:flex w-full lg:w-1/2">
+        <div className="hidden w-full lg:flex lg:w-1/2">
           <Image
-            className="w-full h-screen object-cover"
+            className="object-cover w-full h-screen"
             src={bgLogin}
             alt="bg-Login"
           />
         </div>
         {/* Right Side */}
-        <div className="flex w-full lg:w-1/2 justify-center items-center bg-white space-y-8">
+        <div className="flex items-center justify-center w-full space-y-8 bg-white lg:w-1/2">
           <div className="items-center justify-center mx-6">
             <span className="logo">
               <h1>Edutiv.</h1>
