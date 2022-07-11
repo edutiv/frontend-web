@@ -10,7 +10,7 @@ import backendCourse from "../public/assets/img/backend-course.png";
 import frontendCourse from "../public/assets/img/frontend-course.png";
 import mobileCourse from "../public/assets/img/mobile-course.png";
 import uiuxCourse from "../public/assets/img/ui-ux-course.png";
-import HamburgerMenu from "./hamburgerMenu";
+import HamburgerMenu from "./HamburgerMenu";
 import mentor from "../public/assets/img/mentor.png";
 import ProfileMenu from "./ProfileMenu";
 import jwtDecode from "jwt-decode";
@@ -61,6 +61,7 @@ export default function Navbar() {
 
   useEffect(() => {
     handleLogin();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
@@ -73,7 +74,7 @@ export default function Navbar() {
         </Link>
       </div>
 
-      <div className="md:block hidden p-5">
+      <div className="hidden p-5 md:block">
         <div className="grid content-center grid-cols-2 gap-5">
           {/* dropdown */}
           <div>
@@ -287,7 +288,7 @@ export default function Navbar() {
           <ProfileMenu dataUser={dataUser} />
         </div>
       ) : (
-        <div className="grid content-center md:block hidden py-5">
+        <div className="grid content-center hidden py-5 md:block">
           <div className="grid content-center px-4 py-2 rounded-md text-white bg-[#126E64] hover:bg-[#09423c] hover:-translate-y-[0.1rem] hover:transition hover:duration-100 hover:ease-in-out hover:drop-shadow-md">
             <button className="text-sm">
               <Link href="/auth/login">
@@ -299,7 +300,7 @@ export default function Navbar() {
       )}
 
       {/* navbar mobile */}
-      <div className=" md:hidden block py-5">
+      <div className="block py-5 md:hidden">
         <Menu as="div" className="relative inline-block text-left">
           <div>
             <Menu.Button className="focus:outline-0  inline-flex justify-center w-full bg-white font-medium px-2 py-[0.5rem] rounded text-gray-700 hover:bg-gray-50">
@@ -317,7 +318,7 @@ export default function Navbar() {
             leaveFrom="transform opacity-100 scale-100"
             leaveTo="transform opacity-0 scale-95"
           >
-            <Menu.Items className="absolute right-0 mt-2 w-80 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <Menu.Items className="absolute right-0 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg w-80 ring-1 ring-black ring-opacity-5 focus:outline-none">
               <div className="mx-4 ">
                 <Menu.Item>
                   <div className=" mt-5 mb-1 grid content-center px-4 py-2 rounded-md text-white bg-[#126E64] hover:bg-[#09423c] hover:-translate-y-[0.1rem] hover:transition hover:duration-100 hover:ease-in-out hover:drop-shadow-md">
