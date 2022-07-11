@@ -1,6 +1,6 @@
-import CardProfile from "../components/CardProfile";
+import CardProfile from "../../components/CardProfile";
 import Head from "next/head";
-import NavbarProfile from "../components/NavbarProfile";
+import NavbarProfile from "../../components/NavbarProfile";
 
 function ChangePassword() {
 	return (

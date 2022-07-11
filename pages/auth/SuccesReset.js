@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
-import Button from "../components/Button";
+import Button from "../../components/Button";
 import { CheckIcon } from "@heroicons/react/solid";
 
 function SuccesReset() {
@@ -12,10 +12,10 @@ function SuccesReset() {
 			</Head>
 			<main className="bgMain">
 				<div className="logo">
-					<h1>Eductiv.</h1>
+					<h1>Edutiv.</h1>
 				</div>
 
-				<div className="flex item-center justify-center mt-40 flex-col align-middle items-center">
+				<div className="flex item-center justify-center mt-40 mx-6 sm:mx-0 flex-col align-middle items-center">
 					<div className="rounded-full bg-[#D4E4E4] p-4 max-w-xs m-6">
 						<CheckIcon
 							className="rounded-full w-6 text-[#126E64]"
@@ -31,11 +31,9 @@ function SuccesReset() {
 						</p>
 					</div>
 					<Link href="/login">
-						<a>
-							<div className="mb-5 items-center justify-center w-[390px] mt-7">
-								<Button>CONTINUE</Button>
-							</div>
-						</a>
+						<div className="mb-5 items-center justify-center w-full sm:w-[390px] mt-7">
+							<Button>CONTINUE</Button>
+						</div>
 					</Link>
 				</div>
 			</main>

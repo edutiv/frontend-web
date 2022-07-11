@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
-import Button from "../components/Button";
+import Button from "../../components/Button";
 import { KeyIcon } from "@heroicons/react/solid";
 
 function NewPassword() {
@@ -12,10 +12,10 @@ function NewPassword() {
 			</Head>
 			<main className="bgMain">
 				<div className="logo">
-					<h1>Eductiv.</h1>
+					<h1>Edutiv.</h1>
 				</div>
 
-				<div className="flex item-center justify-center mt-24 flex-col align-middle items-center">
+				<div className="flex item-center justify-center mt-24 mx-6 sm:mx-0 flex-col align-middle items-center">
 					<div className="rounded-full bg-[#D4E4E4] p-4 max-w-xs m-6">
 						<KeyIcon
 							className="rounded-full w-6 text-[#126E64]"
@@ -29,7 +29,7 @@ function NewPassword() {
 							Your new password must be different to <br></br>previously used password
 						</p>
 					</div>
-					<form className="items-center w-[420px] justify-center mt-10" >
+					<form className="items-center w-full sm:w-[420px] justify-center mt-10" >
 						<div className="mb-5 w-full items-center justify-center">
 							<label
 								htmlFor="password"
@@ -62,13 +62,11 @@ function NewPassword() {
 						</div>
 					</form>
 					<Link href="/SuccesReset">
-						<a>
-							<div className="mb-5 items-center justify-center w-[420px] mt-4">
-								<Button>
-									RESET PASSWORD
-								</Button>
-							</div>
-						</a>
+						<div className="mb-5 items-center justify-center w-full sm:w-[420px] mt-4">
+							<Button>
+								RESET PASSWORD
+							</Button>
+						</div>
 					</Link>
 				</div>
 			</main>

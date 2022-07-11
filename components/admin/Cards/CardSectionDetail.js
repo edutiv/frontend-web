@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Link from "next/link";
 import moment from "moment";
 import axios from "axios";
+import Cookies from 'universal-cookie';
 
 import { Dialog, Listbox, Transition } from "@headlessui/react";
 
@@ -24,6 +25,8 @@ const CardSectionDetail = ({ color, title, sidebutton, type, data, refresh, cour
    const [materialName, setMaterialName] = useState("");
    const [materialUrl, setMaterialUrl] = useState("");
    const [detailMaterial, setDetailMaterial] = useState(0);
+   const cookies = new Cookies();
+   let token = cookies.get("token");
 
    let [isOpenMaterial, setIsOpenMaterial] = useState(false);
    let [isOpenUpdateMaterial, setIsOpenUpdateMaterial] = useState(false);
@@ -50,6 +53,8 @@ const CardSectionDetail = ({ color, title, sidebutton, type, data, refresh, cour
          material_type: materialType.name,
          material_name: materialName,
          material_url: materialUrl
+      }, {
+         headers: { "Authorization": `Bearer ${token}` }
       })
          .then(function (response) {
             console.log(response);
@@ -62,7 +67,9 @@ const CardSectionDetail = ({ color, title, sidebutton, type, data, refresh, cour
    }
 
    const handleDeleteMaterial = (id) => {
-      axios.delete(`${BASE_URL}/course/${courseId}/section/${sectionId}/material/${id}`)
+      axios.delete(`${BASE_URL}/course/${courseId}/section/${sectionId}/material/${id}`, {
+         headers: { "Authorization": `Bearer ${token}` }
+      })
          .then(function (response) {
             console.log(response);
             refresh();
@@ -73,7 +80,9 @@ const CardSectionDetail = ({ color, title, sidebutton, type, data, refresh, cour
    }
 
    const handleDetailMaterial = (id) => {
-      axios.get(`${BASE_URL}/course/${courseId}/section/${sectionId}/material/${id}`)
+      axios.get(`${BASE_URL}/course/${courseId}/section/${sectionId}/material/${id}`, {
+         headers: { "Authorization": `Bearer ${token}` }
+      })
       .then (function (response) {
          console.log(response);
          setDetailMaterial(id);
@@ -92,6 +101,8 @@ const CardSectionDetail = ({ color, title, sidebutton, type, data, refresh, cour
          material_type: materialType.name,
          material_name: materialName,
          material_url: materialUrl
+      }, {
+         headers: { "Authorization": `Bearer ${token}` }
       })
       .then(function (response) {
          console.log(response);
@@ -332,7 +343,7 @@ const CardSectionDetail = ({ color, title, sidebutton, type, data, refresh, cour
                                        </Transition>
                                     </div>
                                  </Listbox>
-                                 <div className="mb-6 form-group px-6">
+                                 <div className="px-6 mb-6 form-group">
                                     <label htmlFor="materialNameInput">Material Name</label>
                                     <input
                                        type="text"
@@ -344,7 +355,7 @@ const CardSectionDetail = ({ color, title, sidebutton, type, data, refresh, cour
                                        onChange={(e) => setMaterialName(e.target.value)}
                                     />
                                  </div>
-                                 <div className="mb-6 form-group px-6">
+                                 <div className="px-6 mb-6 form-group">
                                     <label htmlFor="materialUrlInput">Material URL</label>
                                     <input
                                        type="text"
@@ -462,7 +473,7 @@ const CardSectionDetail = ({ color, title, sidebutton, type, data, refresh, cour
                                        </Transition>
                                     </div>
                                  </Listbox>
-                                 <div className="mb-6 form-group px-6">
+                                 <div className="px-6 mb-6 form-group">
                                     <label htmlFor="materialNameInput">Material Name</label>
                                     <input
                                        type="text"
@@ -474,7 +485,7 @@ const CardSectionDetail = ({ color, title, sidebutton, type, data, refresh, cour
                                        onChange={(e) => setMaterialName(e.target.value)}
                                     />
                                  </div>
-                                 <div className="mb-6 form-group px-6">
+                                 <div className="px-6 mb-6 form-group">
                                     <label htmlFor="materialUrlInput">Material URL</label>
                                     <input
                                        type="text"
