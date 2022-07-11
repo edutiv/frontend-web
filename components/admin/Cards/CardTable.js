@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Link from "next/link";
 import moment from "moment";
@@ -12,6 +12,7 @@ import { PencilIcon, TrashIcon, SelectorIcon, CheckIcon, InformationCircleIcon }
 import TableDropdown from "../Dropdowns/TableDropdown.js";
 
 // API Base Url
+import { CounterContext } from "../../../layouts/Admin.js";
 import { BASE_URL } from "../../../config/API.js";
 import Cookies from "universal-cookie";
 
@@ -66,6 +67,8 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
 
   const cookies = new Cookies();
   let token = cookies.get("token");
+
+  const counterValue = useContext(CounterContext);
   // console.log(categorySelected.id);
   // console.log(token);
 
@@ -197,6 +200,7 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
           'Now Add More Sections and Material!',
           'success'
         )
+        counterValue.refreshCourse();
         refresh();
       })
       .catch(function (error) {
@@ -229,6 +233,7 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
             '',
             'success'
           )
+          counterValue.refreshMember();
           refresh();
           closeModalMember();
         })
@@ -256,6 +261,7 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
         })
           .then(function (response) {
             console.log(response);
+            counterValue.refreshMember();
             refresh();
           })
           .catch(function (error) {
@@ -344,6 +350,7 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
         })
           .then(function (response) {
             console.log(response);
+            counterValue.refreshCourse();
             refresh();
           })
           .catch(function (error) {

@@ -39,7 +39,7 @@ function Login(req) {
         password: password,
       })
       .then((res) => {
-        cookies.set('token', res.data.token, { path: '/' });
+        cookies.set('token', res.data.token, { path: '/', maxAge: 10800 });
         let userId = jwtDecode(res.data.token).jti;
         axios.get(`${BASE_URL}/user/${userId}`, { headers: { "Authorization": `Bearer ${res.data.token}` } }).then((result) => {
           setUserDetail(result.data.data);

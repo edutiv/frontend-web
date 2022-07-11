@@ -36,6 +36,7 @@ export default function Tables() {
 
   useEffect(() => {
     getEdutivData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

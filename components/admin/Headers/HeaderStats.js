@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
+import { CounterContext } from "../../../layouts/Admin.js";
 
 // components
 
 import CardStats from "../Cards/CardStats.js";
 
-export default function HeaderStats({ course, material }) {
+export default function HeaderStats() {
+
+  const counterValue = useContext(CounterContext);
+  const course = counterValue?.course;
+  const material = counterValue?.material;
+  const member = counterValue?.member;
+  // console.log(member);
 
   return (
     <>
@@ -17,7 +24,8 @@ export default function HeaderStats({ course, material }) {
             <div className="w-full px-4 lg:w-6/12 xl:w-3/12">
                 <CardStats
                   statSubtitle="Total Members"
-                  statTitle="100"
+                  statTitle={member?.toString()}
+                  // statTitle="100"
                   statIconName="fas fa-users"
                   statIconColor="bg-pink-500"
                 />
@@ -25,7 +33,8 @@ export default function HeaderStats({ course, material }) {
               <div className="w-full px-4 lg:w-6/12 xl:w-3/12">
                 <CardStats
                   statSubtitle="Total Course"
-                  statTitle={course.toString()}
+                  statTitle={course?.toString()}
+                  // statTitle="1"
                   statIconName="fas fa-book-open"
                   statIconColor="bg-red-500"
                 />
@@ -33,7 +42,8 @@ export default function HeaderStats({ course, material }) {
               <div className="w-full px-4 lg:w-6/12 xl:w-3/12">
                 <CardStats
                   statSubtitle="Total Materials"
-                  statTitle={material.toString()}
+                  statTitle={material?.toString()}
+                  // statTitle="1"
                   statIconName="fas fa-book-open"
                   statIconColor="bg-red-500"
                 />
