@@ -16,11 +16,10 @@ import { BASE_URL } from "../../../config/API.js";
 import Cookies from "universal-cookie";
 
 const specialist = [
-  { name: 'Frontend Engineer' },
-  { name: 'Mobile Engineer' },
-  { name: 'UI/UX Engineer' },
-  { name: 'Backend Engineer' },
-  { name: 'Quality Engineer' },
+  { id: 1, name: 'Backend Engineer' },
+  { id: 2, name: 'Frontend Engineer' },
+  { id: 3, name: 'Mobile Engineer' },
+  { id: 4, name: 'UI/UX Engineer' },
 ]
 
 const tipeMaterial = [
@@ -37,6 +36,7 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
   let [isOpenSection, setIsOpenSection] = useState(false);
   let [isOpenMaterial, setIsOpenMaterial] = useState(false);
   let [isOpenUpdateCourse, setIsOpenUpdateCourse] = useState(false);
+  let [isOpenUpdateMember, setIsOpenUpdateMember] = useState(false);
 
   const [selected, setSelected] = useState(specialist[0])
   const [categorySelected, setCategorySelected] = useState();
@@ -57,9 +57,17 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
   const [materialName, setMaterialName] = useState("");
   const [materialUrl, setMaterialUrl] = useState("");
 
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPass, setConfirmPass] = useState("");
+  const [detailMember, setDetailMember] = useState(0);
+
   const cookies = new Cookies();
   let token = cookies.get("token");
-  console.log(token);
+  // console.log(categorySelected.id);
+  // console.log(token);
 
   // console.log(data);
   // console.log('category selected', categorySelected);
@@ -79,6 +87,14 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
 
   function openModalMember() {
     setIsOpenMember(true)
+  }
+
+  function closeModalUpdateMember() {
+    setIsOpenUpdateMember(false)
+  }
+
+  function openModalUpdateMember() {
+    setIsOpenUpdateMember(true)
   }
 
   function closeModalCourse() {
@@ -122,8 +138,8 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
       description: courseDesc,
       total_video: courseTotalVideo,
       total_times: courseTotalTimes
-    }, { 
-      headers: { "Authorization": `Bearer ${token}` } 
+    }, {
+      headers: { "Authorization": `Bearer ${token}` }
     })
       .then(function (response) {
         console.log(response);
@@ -146,8 +162,8 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
     e.preventDefault();
     axios.post(`${BASE_URL}/course/${uploadedCourseId}/section`, {
       section_name: sectionName,
-    }, { 
-      headers: { "Authorization": `Bearer ${token}` } 
+    }, {
+      headers: { "Authorization": `Bearer ${token}` }
     })
       .then(function (response) {
         console.log(response);
@@ -167,8 +183,8 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
       material_type: materialType.name,
       material_name: materialName,
       material_url: materialUrl
-    }, { 
-      headers: { "Authorization": `Bearer ${token}` } 
+    }, {
+      headers: { "Authorization": `Bearer ${token}` }
     })
       .then(function (response) {
         console.log(response);
@@ -188,6 +204,130 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
       })
   }
 
+  const handleAddMember = (e) => {
+    e.preventDefault();
+    if (password === confirmPass) {
+      axios.post(`${BASE_URL}/user/register`, {
+        firstname: firstName,
+        lastname: lastName,
+        email: email,
+        password: password,
+        specialization_id: categorySelected.id,
+      }, {
+        headers: { "Authorization": `Bearer ${token}` }
+      })
+        .then(function (res) {
+          console.log(res);
+          setFirstName("");
+          setLastName("");
+          setEmail("");
+          setPassword("");
+          setConfirmPass("");
+          getCategoryData();
+          Swal.fire(
+            'New Member Added!',
+            '',
+            'success'
+          )
+          refresh();
+          closeModalMember();
+        })
+        .catch(function (error) {
+          console.log(error)
+        });
+    } else {
+      alert("Kedua password tidak cocok")
+    }
+  }
+
+  const handleDeleteMember = (id) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.delete(`${BASE_URL}/user/${id}`, {
+          headers: { "Authorization": `Bearer ${token}` }
+        })
+          .then(function (response) {
+            console.log(response);
+            refresh();
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
+        Swal.fire(
+          'Deleted!',
+          'member has been deleted.',
+          'success'
+        )
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        Swal.fire(
+          'Cancelled',
+          'Delete Member Canceled',
+          'error'
+        )
+      }
+    })
+  }
+
+  const handleDetailMember = (id) => {
+    axios.get(`${BASE_URL}/user/${id}`, {
+      headers: { "Authorization": `Bearer ${token}` }
+    })
+      .then(function (res) {
+        console.log(res);
+        setDetailMember(id);
+        console.log('detailmember', detailMember);
+        setFirstName(res.data.data.firstname);
+        setLastName(res.data.data.lastname);
+        setEmail(res.data.data.username);
+        openModalUpdateMember();
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+  }
+
+  const handleUpdateMember = (id) => {
+    axios.put(`${BASE_URL}/user/edit-admin/${id}`, {
+      firstname: firstName,
+      lastname: lastName,
+      email: email,
+      specialization_id: categorySelected.id,
+    }, {
+      headers: { "Authorization": `Bearer ${token}` }
+    })
+      .then(function (res) {
+        console.log(res);
+        console.log('detailmember put', detailMember);
+        setFirstName("");
+        setLastName("");
+        setEmail("");
+        setPassword("");
+        setConfirmPass("");
+        getCategoryData();
+        Swal.fire(
+          'Member Updated!',
+          'Successfully change member details',
+          'success'
+        )
+        refresh();
+        closeModalUpdateMember();
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+  }
+
   const handleDeleteCourse = (id) => {
     Swal.fire({
       title: 'Are you sure?',
@@ -200,7 +340,7 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
     }).then((result) => {
       if (result.isConfirmed) {
         axios.delete(`${BASE_URL}/course/${id}`, {
-          headers: { "Authorization": `Bearer ${token}` } 
+          headers: { "Authorization": `Bearer ${token}` }
         })
           .then(function (response) {
             console.log(response);
@@ -252,8 +392,8 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
       description: courseDesc,
       total_video: courseTotalVideo,
       total_times: courseTotalTimes
-    }, { 
-      headers: { "Authorization": `Bearer ${token}` } 
+    }, {
+      headers: { "Authorization": `Bearer ${token}` }
     })
       .then(function (response) {
         console.log(response);
@@ -429,6 +569,16 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
                           : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
                       }
                     >
+                      User Name
+                    </th>
+                    <th
+                      className={
+                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                        (color === "light"
+                          ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                          : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
+                      }
+                    >
                       First Name
                     </th>
                     <th
@@ -440,16 +590,6 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
                       }
                     >
                       Last Name
-                    </th>
-                    <th
-                      className={
-                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                        (color === "light"
-                          ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                          : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                      }
-                    >
-                      Categories
                     </th>
                     <th
                       className={
@@ -515,8 +655,9 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
                     </td>
                   </tr>
                 </tbody>
-              )) : type === 'member' & data.length !== 0 ? (
-                <tbody>
+              )) : type === 'member' & data.length !== 0 ? data?.map((items) =>
+              (
+                <tbody key={items.id}>
                   <tr>
                     <td className="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
                       <p
@@ -525,238 +666,36 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
                           + (color === "light" ? "text-blueGray-600" : "text-white")
                         }
                       >
-                        jacobjones@gmail.com
+                        {items.username}
                       </p>
                     </td>
                     <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      Jacob
+                      {items.firstname}
                     </td>
                     <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      Jones
+                      {items.lastname}
                     </td>
                     <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      Mobile Engineer
+                      {
+                        items.category !== null ? items.category.category_name : 'Unregistered'
+                      }
                     </td>
                     <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      24/05/2021
-                    </td>
-                    <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      <div className="flex flex-row gap-3">
-                        <button>
-                          <PencilIcon className="w-4 h-4"></PencilIcon>
-                        </button>
-                        <button>
-                          <TrashIcon className="w-4 h-4"></TrashIcon>
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      <p
-                        className={
-                          "font-bold "
-                          + (color === "light" ? "text-blueGray-600" : "text-white")
-                        }
-                      >
-                        jacobjones@gmail.com
-                      </p>
-                    </td>
-                    <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      Jacob
-                    </td>
-                    <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      Jones
-                    </td>
-                    <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      Mobile Engineer
-                    </td>
-                    <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      24/05/2021
+                      {moment(items.created_at).format('LLL')}
                     </td>
                     <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
                       <div className="flex flex-row gap-3">
-                        <button>
+                        <button onClick={() => handleDetailMember(items.id)} className="focus:outline-none">
                           <PencilIcon className="w-4 h-4"></PencilIcon>
                         </button>
-                        <button>
-                          <TrashIcon className="w-4 h-4"></TrashIcon>
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      <p
-                        className={
-                          "font-bold "
-                          + (color === "light" ? "text-blueGray-600" : "text-white")
-                        }
-                      >
-                        jacobjones@gmail.com
-                      </p>
-                    </td>
-                    <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      Jacob
-                    </td>
-                    <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      Jones
-                    </td>
-                    <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      Mobile Engineer
-                    </td>
-                    <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      24/05/2021
-                    </td>
-                    <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      <div className="flex flex-row gap-3">
-                        <button>
-                          <PencilIcon className="w-4 h-4"></PencilIcon>
-                        </button>
-                        <button>
-                          <TrashIcon className="w-4 h-4"></TrashIcon>
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      <p
-                        className={
-                          "font-bold "
-                          + (color === "light" ? "text-blueGray-600" : "text-white")
-                        }
-                      >
-                        jacobjones@gmail.com
-                      </p>
-                    </td>
-                    <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      Jacob
-                    </td>
-                    <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      Jones
-                    </td>
-                    <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      Mobile Engineer
-                    </td>
-                    <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      24/05/2021
-                    </td>
-                    <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      <div className="flex flex-row gap-3">
-                        <button>
-                          <PencilIcon className="w-4 h-4"></PencilIcon>
-                        </button>
-                        <button>
-                          <TrashIcon className="w-4 h-4"></TrashIcon>
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      <p
-                        className={
-                          "font-bold "
-                          + (color === "light" ? "text-blueGray-600" : "text-white")
-                        }
-                      >
-                        jacobjones@gmail.com
-                      </p>
-                    </td>
-                    <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      Jacob
-                    </td>
-                    <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      Jones
-                    </td>
-                    <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      Mobile Engineer
-                    </td>
-                    <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      24/05/2021
-                    </td>
-                    <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      <div className="flex flex-row gap-3">
-                        <button>
-                          <PencilIcon className="w-4 h-4"></PencilIcon>
-                        </button>
-                        <button>
-                          <TrashIcon className="w-4 h-4"></TrashIcon>
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      <p
-                        className={
-                          "font-bold "
-                          + (color === "light" ? "text-blueGray-600" : "text-white")
-                        }
-                      >
-                        jacobjones@gmail.com
-                      </p>
-                    </td>
-                    <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      Jacob
-                    </td>
-                    <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      Jones
-                    </td>
-                    <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      Mobile Engineer
-                    </td>
-                    <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      24/05/2021
-                    </td>
-                    <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      <div className="flex flex-row gap-3">
-                        <button>
-                          <PencilIcon className="w-4 h-4"></PencilIcon>
-                        </button>
-                        <button>
-                          <TrashIcon className="w-4 h-4"></TrashIcon>
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      <p
-                        className={
-                          "font-bold "
-                          + (color === "light" ? "text-blueGray-600" : "text-white")
-                        }
-                      >
-                        jacobjones@gmail.com
-                      </p>
-                    </td>
-                    <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      Jacob
-                    </td>
-                    <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      Jones
-                    </td>
-                    <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      Mobile Engineer
-                    </td>
-                    <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      24/05/2021
-                    </td>
-                    <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-                      <div className="flex flex-row gap-3">
-                        <button>
-                          <PencilIcon className="w-4 h-4"></PencilIcon>
-                        </button>
-                        <button>
+                        <button onClick={() => handleDeleteMember(items.id)} className="focus:outline-none">
                           <TrashIcon className="w-4 h-4"></TrashIcon>
                         </button>
                       </div>
                     </td>
                   </tr>
                 </tbody>
-              ) : ('')
+              )) : ('')
             }
           </table>
         </div>
@@ -790,80 +729,70 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
                       as="h3"
                       className="px-6 pt-6 mb-6 text-lg font-medium leading-6 text-gray-900"
                     >
-                      Add Member Course
+                      Add Member
                     </Dialog.Title>
 
                     <form className="rounded-b-2xl">
                       <div className="grid grid-cols-2 gap-4 px-6">
                         <div className="mb-6 form-group">
-                          <label htmlFor="">First Name</label>
-                          <input type="text" className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput123" aria-describedby="emailHelp123" placeholder="First name" />
+                          <label htmlFor="firstname">First Name</label>
+                          <input
+                            type="text"
+                            className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                            id="firstname"
+                            aria-describedby="firstName"
+                            placeholder="First name"
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
+                          />
                         </div>
                         <div className="mb-6 form-group">
-                          <label htmlFor="">Last Name</label>
-                          <input type="text" className="form-control
-                              block
-                              w-full
-                              px-3
-                              py-1.5
-                              text-base
-                              font-normal
-                              text-gray-700
-                              bg-white bg-clip-padding
-                              border border-solid border-gray-300
-                              rounded
-                              transition
-                              ease-in-out
-                              m-0
-                              focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput124"
-                            aria-describedby="emailHelp124" placeholder="Last name" />
+                          <label htmlFor="lastname">Last Name</label>
+                          <input type="text"
+                            className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                            id="lastname"
+                            aria-describedby="lastName"
+                            placeholder="Last name"
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
+                          />
                         </div>
                       </div>
                       <div className="px-6 mb-6 form-group">
-                        <label htmlFor="">Email Password</label>
-                        <input type="email" className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput125" placeholder="Email address" />
+                        <label htmlFor="email">Email</label>
+                        <input type="email"
+                          className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                          id="email"
+                          placeholder="Email address"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                        />
                       </div>
                       <div className="px-6 mb-6 form-group">
-                        <label htmlFor="">Password</label>
-                        <input type="password" className="form-control block
-                              w-full
-                              px-3
-                              py-1.5
-                              text-base
-                              font-normal
-                              text-gray-700
-                              bg-white bg-clip-padding
-                              border border-solid border-gray-300
-                              rounded
-                              transition
-                              ease-in-out
-                              m-0
-                              focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput126"
-                          placeholder="Password" />
+                        <label htmlFor="password">Password</label>
+                        <input type="password"
+                          className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                          id="password"
+                          placeholder="Password"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                        />
                       </div>
                       <div className="px-6 mb-6 form-group">
-                        <label htmlFor="">Confirm Password</label>
-                        <input type="password" className="form-control block
-                              w-full
-                              px-3
-                              py-1.5
-                              text-base
-                              font-normal
-                              text-gray-700
-                              bg-white bg-clip-padding
-                              border border-solid border-gray-300
-                              rounded
-                              transition
-                              ease-in-out
-                              m-0
-                              focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput126"
-                          placeholder="Password" />
+                        <label htmlFor="confirmpass">Confirm Password</label>
+                        <input type="password"
+                          className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                          id="confirmpass"
+                          placeholder="Confirm Password"
+                          value={confirmPass}
+                          onChange={(e) => setConfirmPass(e.target.value)}
+                        />
                       </div>
-                      <Listbox value={selected} onChange={setSelected}>
+                      <Listbox value={categorySelected} onChange={setCategorySelected}>
                         <label htmlFor="" className="px-6">Specialist</label>
                         <div className="relative px-6 mt-1">
                           <Listbox.Button className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none">
-                            <span className="block truncate">{selected.name}</span>
+                            <span className="block truncate">{categorySelected?.category_name}</span>
                             <span className="absolute inset-y-0 flex items-center pr-2 pointer-events-none right-6">
                               <SelectorIcon
                                 className="w-5 h-5 text-gray-400"
@@ -878,14 +807,14 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
                             leaveTo="opacity-0"
                           >
                             <Listbox.Options className="max-w-[400px] absolute w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                              {specialist.map((specialist, specialistIdx) => (
+                              {categories?.map((category, categoryIdx) => (
                                 <Listbox.Option
-                                  key={specialistIdx}
+                                  key={categoryIdx}
                                   className={({ active }) =>
                                     `relative cursor-default select-none py-2 pl-10 pr-4 ${active ? 'bg-amber-100 text-amber-900' : 'text-gray-900'
                                     }`
                                   }
-                                  value={specialist}
+                                  value={category}
                                 >
                                   {({ selected }) => (
                                     <>
@@ -893,7 +822,7 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
                                         className={`block truncate ${selected ? 'font-medium' : 'font-normal'
                                           }`}
                                       >
-                                        {specialist.name}
+                                        {category.category_name}
                                       </span>
                                       {selected ? (
                                         <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
@@ -912,7 +841,7 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
                         <button
                           type="button"
                           className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md bg-darkGreen focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                          onClick={closeModalMember}
+                          onClick={handleAddMember}
                         >
                           Add Member
                         </button>
@@ -931,6 +860,149 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
             </div>
           </Dialog>
         </Transition>
+
+        <Transition appear show={isOpenUpdateMember} as={Fragment}>
+          <Dialog as="div" className="relative z-10" onClose={closeModalUpdateMember}>
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0"
+              enterTo="opacity-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <div className="fixed inset-0 bg-opacity-75 bg-slate-800" />
+            </Transition.Child>
+
+            <div className="fixed inset-0 overflow-y-auto">
+              <div className="flex items-center justify-center min-h-full p-4 text-center">
+                <Transition.Child
+                  as={Fragment}
+                  enter="ease-out duration-300"
+                  enterFrom="opacity-0 scale-95"
+                  enterTo="opacity-100 scale-100"
+                  leave="ease-in duration-200"
+                  leaveFrom="opacity-100 scale-100"
+                  leaveTo="opacity-0 scale-95"
+                >
+                  <Dialog.Panel className="w-full max-w-md text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+                    <Dialog.Title
+                      as="h3"
+                      className="px-6 pt-6 mb-6 text-lg font-medium leading-6 text-gray-900"
+                    >
+                      Update Member
+                    </Dialog.Title>
+
+                    <form className="rounded-b-2xl">
+                      <div className="grid grid-cols-2 gap-4 px-6">
+                        <div className="mb-6 form-group">
+                          <label htmlFor="firstname">First Name</label>
+                          <input
+                            type="text"
+                            className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                            id="firstname"
+                            aria-describedby="firstName"
+                            placeholder="First name"
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
+                          />
+                        </div>
+                        <div className="mb-6 form-group">
+                          <label htmlFor="lastname">Last Name</label>
+                          <input type="text"
+                            className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                            id="lastname"
+                            aria-describedby="lastName"
+                            placeholder="Last name"
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
+                          />
+                        </div>
+                      </div>
+                      <div className="px-6 mb-6 form-group">
+                        <label htmlFor="email">Email</label>
+                        <input type="email"
+                          className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                          id="email"
+                          placeholder="Email address"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                        />
+                      </div>
+                      <Listbox value={categorySelected} onChange={setCategorySelected}>
+                        <label htmlFor="" className="px-6">Specialist</label>
+                        <div className="relative px-6 mt-1">
+                          <Listbox.Button className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none">
+                            <span className="block truncate">{categorySelected?.category_name}</span>
+                            <span className="absolute inset-y-0 flex items-center pr-2 pointer-events-none right-6">
+                              <SelectorIcon
+                                className="w-5 h-5 text-gray-400"
+                                aria-hidden="true"
+                              />
+                            </span>
+                          </Listbox.Button>
+                          <Transition
+                            as={Fragment}
+                            leave="transition ease-in duration-100"
+                            leaveFrom="opacity-100"
+                            leaveTo="opacity-0"
+                          >
+                            <Listbox.Options className="max-w-[400px] absolute w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                              {categories?.map((category, categoryIdx) => (
+                                <Listbox.Option
+                                  key={categoryIdx}
+                                  className={({ active }) =>
+                                    `relative cursor-default select-none py-2 pl-10 pr-4 ${active ? 'bg-amber-100 text-amber-900' : 'text-gray-900'
+                                    }`
+                                  }
+                                  value={category}
+                                >
+                                  {({ selected }) => (
+                                    <>
+                                      <span
+                                        className={`block truncate ${selected ? 'font-medium' : 'font-normal'
+                                          }`}
+                                      >
+                                        {category.category_name}
+                                      </span>
+                                      {selected ? (
+                                        <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
+                                          <CheckIcon className="w-5 h-5" aria-hidden="true" />
+                                        </span>
+                                      ) : null}
+                                    </>
+                                  )}
+                                </Listbox.Option>
+                              ))}
+                            </Listbox.Options>
+                          </Transition>
+                        </div>
+                      </Listbox>
+                      <div className="flex flex-row-reverse w-full gap-3 px-6 py-6 mt-5 bg-slate-200 rounded-b-2xl">
+                        <button
+                          type="button"
+                          className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md bg-darkGreen focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                          onClick={() => handleUpdateMember(detailMember)}
+                        >
+                          Update Member
+                        </button>
+                        <button
+                          type="button"
+                          className="inline-flex justify-center px-4 py-2 text-sm font-medium text-black border border-transparent border-green-800 rounded-md hover:bg-green-800 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                          onClick={closeModalUpdateMember}
+                        >
+                          Close
+                        </button>
+                      </div>
+                    </form>
+                  </Dialog.Panel>
+                </Transition.Child>
+              </div>
+            </div>
+          </Dialog>
+        </Transition>
+
         <Transition appear show={isOpenCourse} as={Fragment}>
           <Dialog as="div" className="relative z-10" onClose={closeModalCourse}>
             <Transition.Child
@@ -1118,6 +1190,7 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
             </div>
           </Dialog>
         </Transition>
+
         <Transition appear show={isOpenSection} as={Fragment}>
           <Dialog as="div" className="relative z-10" onClose={closeModalSection}>
             <Transition.Child
@@ -1187,6 +1260,7 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
             </div>
           </Dialog>
         </Transition>
+
         <Transition appear show={isOpenMaterial} as={Fragment}>
           <Dialog as="div" className="relative z-10" onClose={closeModalMaterial}>
             <Transition.Child
@@ -1317,6 +1391,7 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
             </div>
           </Dialog>
         </Transition>
+
         <Transition appear show={isOpenUpdateCourse} as={Fragment}>
           <Dialog as="div" className="relative z-10" onClose={closeModalUpdateCourse}>
             <Transition.Child
