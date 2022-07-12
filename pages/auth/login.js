@@ -37,7 +37,7 @@ function Login(req) {
         password: password,
       })
       .then((res) => {
-        cookies.set('token', res.data.token, { path: '/' });
+        cookies.set('token', res.data.token, { path: '/', expires: new Date(Date.now() + 2 * 3600 * 1000) });
 		Router.push('/')
       })
       .catch((error) => {

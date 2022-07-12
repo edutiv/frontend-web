@@ -19,6 +19,7 @@ import { ArrowSmRightIcon } from "@heroicons/react/solid";
 import Footer from "../components/Footer";
 import CardProgressCourse from "../components/CardProgressCourse";
 import Cookies from 'universal-cookie';
+import CardProgressContainer from "../components/CardProgressContainer";
 
 export default function Home() {
   let api;
@@ -87,16 +88,7 @@ export default function Home() {
         {/* get started */}
         {isLogin ? (
           <div className="px-8 md:px-20 mt-6 md:mt-16 ">
-            <p className="text-base text-[#126E64]">Learning Progress</p>
-            <div className="flex flex-col md:flex-row md:justify-between">
-              <h1 className="md:mb-12 mb-6 text-[30px] md:text-[2.5rem] w-full md:w-7/12">
-                Let's continue to improve your skills
-              </h1>
-            </div>
-            <div className="grid md:grid-cols-2 gap-3 grid-cols-1">
-              <CardProgressCourse />
-              <CardProgressCourse />
-            </div>
+            <CardProgressContainer />
           </div>
         ) : (
           <div className="px-8 md:px-20 grid content-center mt-6 md:mt-16">

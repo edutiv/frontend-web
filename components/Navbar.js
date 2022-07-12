@@ -41,21 +41,25 @@ export default function Navbar() {
   const cookies = new Cookies();
   
   
+  
 
   const handleLogin = () => {
-    let token = cookies.get("token")
+  
+  let token = cookies.get("token")
+  
 
     if(token){
       let userId = jwtDecode(token).jti;
       console.log(userId)
-      axios.get(`${BASE_URL}/user/${userId}`, { headers: {"Authorization" : `Bearer ${token}`} }).then((res) => {
-        console.log(res.data.data)
+      axios.get(`${BASE_URL}/user`, { headers: {"Authorization" : `Bearer ${token}`} }).then((res) => {
         setIslogin(true);
         setDataUser(res.data.data)
       }).catch((error) => {
         alert(error);
       })
     }
+
+    
 
   }
 
