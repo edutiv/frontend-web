@@ -281,7 +281,9 @@ export default function Navbar() {
           </div>
 
           <div className="inline-flex justify-center bg-white font-medium text-gray-700 px-2 py-[0.5rem]">
+           <Link href="/request">
             Request
+           </Link>
           </div>
         </div>
       </div>

@@ -31,6 +31,7 @@ export default function Detail() {
   const [dataUser, setDataUser] = useState();
   const cookies = new Cookies();
   const [isUserEnrolled, setIsUserEnrolled] = useState(false);
+  const [isUserLogin, setIsUserLogin] = useState(false);
 
   const handleLogin = () => {
     let token = cookies.get("token");
@@ -94,18 +95,18 @@ export default function Detail() {
             course_id: dataCourse.id,
           },
           { headers: { Authorization: `Bearer ${token}` } }
-          
         )
         .then((res) => {
           alert("succes to enroll user");
           setIsUserEnrolled(true);
+          setIsUserLogin(true);
         })
         .catch((err) => {
           alert(err);
         });
     }
 
-    console.log(dataUser.id, dataCourse.id);
+   
   };
 
   useEffect(() => {
@@ -194,13 +195,22 @@ export default function Detail() {
                   LEARNS NOW
                 </button>
               </Link>
-            ) : (
+            ) : isUserLogin ? (
               <button
                 onClick={handleEnrollUser}
                 className=" h-[41px] bg-[#126E64] rounded-md w-full place-self-end text-white"
               >
                 ENROLL NOW
               </button>
+            ) : (
+              <Link href="/auth/login">
+                <button
+                  onClick={handleEnrollUser}
+                  className=" h-[41px] bg-[#126E64] rounded-md w-full place-self-end text-white"
+                >
+                  ENROLL NOW
+                </button>
+              </Link>
             )}
           </div>
           {/* ennroll button */}
@@ -378,14 +388,18 @@ export default function Detail() {
                   {/* =================  tab Reviews =================*/}
                   <Tab.Panel>
                     <div className=" md:h-80 grid md:grid-cols-4 w-full gap-4">
-                      {dataEnrolled?.filter((data)=>{return data.review !== null}).map((data) => (
-                        <ReviewCard
-                          key={data.id}
-                          rating={data.rating}
-                          comment={data.review}
-                          name={data.user.firstname}
-                        />
-                      ))}
+                      {dataEnrolled
+                        ?.filter((data) => {
+                          return data.review !== null;
+                        })
+                        .map((data) => (
+                          <ReviewCard
+                            key={data.id}
+                            rating={data.rating}
+                            comment={data.review}
+                            name={data.user.firstname}
+                          />
+                        ))}
                     </div>
                   </Tab.Panel>
                 </Tab.Panels>
