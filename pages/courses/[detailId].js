@@ -15,6 +15,8 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { BASE_URL } from "../../config/API";
 import { data } from "autoprefixer";
+import Cookies from "universal-cookie";
+import jwtDecode from "jwt-decode";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -23,30 +25,103 @@ function classNames(...classes) {
 export default function Detail() {
   const [checked, setChecked] = useState(true);
   const { query } = useRouter();
-  const [dataCourse, setDataCourse] = useState([]);
+  const [dataCourse, setDataCourse] = useState();
   const [video, setVideo] = useState();
-  const [enrolled, setEnrolled] = useState(false);
+  const [dataEnrolled, setDataEnrolled] = useState();
+  const [dataUser, setDataUser] = useState();
+  const cookies = new Cookies();
+  const [isUserEnrolled, setIsUserEnrolled] = useState(false);
+  const [isUserLogin, setIsUserLogin] = useState(false);
+
+  const handleLogin = () => {
+    let token = cookies.get("token");
+
+    if (token) {
+      let userId = jwtDecode(token).jti;
+      axios
+        .get(`${BASE_URL}/user`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((res) => {
+          setDataUser(res.data.data);
+        })
+        .catch((error) => {
+          alert(error);
+        });
+    }
+  };
+
+  const checkUserEnrolled = () => {
+    // check if the user enrolled
+    let userLogin = dataUser?.firstname;
+    let userEnrolled = dataEnrolled?.filter((user) => {
+      return user.user.firstname == userLogin;
+      // Use the toLowerCase() method to make it case-insensitive
+    });
+
+    if (userEnrolled?.length > 0) {
+      setIsUserEnrolled(true);
+    }
+  };
 
   const getEdutivData = () => {
     let idCourse = query.detailId;
-    let endpoints = [`${BASE_URL}/course/${idCourse}`];
+    let endpoints = [
+      `${BASE_URL}/course/${idCourse}`,
+      `${BASE_URL}/enrolled/courses/${idCourse}`,
+    ];
 
     if (idCourse) {
       Promise.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
-        ([{ data: course }]) => {
+        ([{ data: course }, { data: dataEnrolled }]) => {
           setDataCourse(course.data);
           setVideo(course.data?.sections[0]?.materials[0]?.material_url);
+          setDataEnrolled(dataEnrolled.data);
           console.log(course.data);
         }
       );
     }
   };
 
+  const handleEnrollUser = () => {
+    let token = cookies.get("token");
+
+    if (token) {
+      axios
+        .post(
+          `${BASE_URL}/enrolled`,
+          {
+            user_id: dataUser.id,
+            course_id: dataCourse.id,
+          },
+          { headers: { Authorization: `Bearer ${token}` } }
+        )
+        .then((res) => {
+          alert("succes to enroll user");
+          setIsUserEnrolled(true);
+          setIsUserLogin(true);
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    }
+
+   
+  };
+
   useEffect(() => {
     getEdutivData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
+    handleLogin();
   }, []);
 
+  useEffect(() => {
+    checkUserEnrolled();
+  });
+
+  if (!dataCourse) {
+    return <div>loading ...</div>;
+  }
   return (
     <div>
       <Navbar />
@@ -57,7 +132,7 @@ export default function Detail() {
         <div className=" flex justify-center mt-6">
           <div className="flex-col justify-center text-center">
             <h1 className="flex justify-center">Member</h1>
-            <p>{`${dataCourse?.enrolled_courses?.length} enrolled`}</p>
+            <p>{`${dataEnrolled?.length} enrolled`}</p>
           </div>
           <div className=" mx-12 flex-col justify-center">
             <h1>Serifikat</h1>
@@ -104,21 +179,39 @@ export default function Detail() {
                   className="mb-4"
                   icon={"video"}
                   title={item.section_name}
-                  disabled={true}
+                  disabled={!isUserEnrolled}
                 />
               ))}
               <ButtonLearnNav
                 className="mb-4"
                 icon={"video"}
                 title={"more video"}
-                disabled={true}
+                disabled={!isUserEnrolled}
               />
             </div>
-            <Link href={`/learns/${query.detailId}`}>
-              <button className=" h-[41px] bg-[#126E64] rounded-md w-full place-self-end text-white">
+            {isUserEnrolled ? (
+              <Link href={`/learns/${query.detailId}`}>
+                <button className=" h-[41px] bg-[#126E64] rounded-md w-full place-self-end text-white">
+                  LEARNS NOW
+                </button>
+              </Link>
+            ) : isUserLogin ? (
+              <button
+                onClick={handleEnrollUser}
+                className=" h-[41px] bg-[#126E64] rounded-md w-full place-self-end text-white"
+              >
                 ENROLL NOW
               </button>
-            </Link>
+            ) : (
+              <Link href="/auth/login">
+                <button
+                  onClick={handleEnrollUser}
+                  className=" h-[41px] bg-[#126E64] rounded-md w-full place-self-end text-white"
+                >
+                  ENROLL NOW
+                </button>
+              </Link>
+            )}
           </div>
           {/* ennroll button */}
         </div>
@@ -235,7 +328,7 @@ export default function Detail() {
                           <div key={data.id}>
                             <h1 className=" mb-3">{data?.section_name}</h1>
                             {data?.materials.map((data) =>
-                              enrolled ? (
+                              isUserEnrolled ? (
                                 <ButtonLearnNav
                                   key={data.id}
                                   icon={"video"}
@@ -295,14 +388,18 @@ export default function Detail() {
                   {/* =================  tab Reviews =================*/}
                   <Tab.Panel>
                     <div className=" md:h-80 grid md:grid-cols-4 w-full gap-4">
-                      {dataCourse?.reviews?.map((data) => (
-                        <ReviewCard
-                          key={data.id}
-                          rating={data.rating}
-                          comment={data.review}
-                          name={data.user.firstname}
-                        />
-                      ))}
+                      {dataEnrolled
+                        ?.filter((data) => {
+                          return data.review !== null;
+                        })
+                        .map((data) => (
+                          <ReviewCard
+                            key={data.id}
+                            rating={data.rating}
+                            comment={data.review}
+                            name={data.user.firstname}
+                          />
+                        ))}
                     </div>
                   </Tab.Panel>
                 </Tab.Panels>

@@ -19,6 +19,7 @@ import { ArrowSmRightIcon } from "@heroicons/react/solid";
 import Footer from "../components/Footer";
 import CardProgressCourse from "../components/CardProgressCourse";
 import Cookies from 'universal-cookie';
+import CardProgressContainer from "../components/CardProgressContainer";
 
 export default function Home() {
   let api;
@@ -87,17 +88,9 @@ export default function Home() {
       <main>
         {/* get started */}
         {isLogin ? (
-          <div className="px-8 mt-6 md:px-20 md:mt-16 ">
-            <p className="text-base text-[#126E64]">Learning Progress</p>
-            <div className="flex flex-col md:flex-row md:justify-between">
-              <h1 className="md:mb-12 mb-6 text-[30px] md:text-[2.5rem] w-full md:w-7/12">
-                Let&apos;s continue to improve your skills
-              </h1>
-            </div>
-            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-              <CardProgressCourse />
-              <CardProgressCourse />
-            </div>
+          <div className="px-8 md:px-20 mt-6 md:mt-16 ">
+            <CardProgressContainer />
+
           </div>
         ) : (
           <div className="grid content-center px-8 mt-6 md:px-20 md:mt-16">
@@ -177,8 +170,10 @@ export default function Home() {
                 Courses with categories that we have prepared for you
               </h1>
               <Link href="/courses">
-                <button className="flex flex-row items-center self-end gap-1 mb-4 md:self-auto md:mb-0">
-                  See More <ArrowSmRightIcon className="w-6 h-6" />
+
+                <button className="flex flex-row items-center gap-1 self-end md:self-auto mb-4 md:mb-0 focus:outline-0">
+                  See More <ArrowSmRightIcon className="h-6 w-6" />
+
                 </button>
               </Link>
             </div>
@@ -205,8 +200,10 @@ export default function Home() {
               Excellent Course For You
             </h1>
             <Link href="/courses">
-              <button className="flex flex-row items-center self-end gap-1 mb-4 md:self-auto md:mb-0">
-                See More <ArrowSmRightIcon className="w-6 h-6" />
+
+              <button className="flex flex-row items-center gap-1 self-end md:self-auto mb-4 md:mb-0 focus:outline-0">
+                See More <ArrowSmRightIcon className="h-6 w-6" />
+
               </button>
             </Link>
           </div>
@@ -221,6 +218,7 @@ export default function Home() {
                 courseId={item.id}
                 totaltimes={item.total_times}
                 totalvideo={item.total_video}
+                totalRating={item.total_rating}
               />
             ))}
           </div>
