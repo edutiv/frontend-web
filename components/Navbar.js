@@ -289,7 +289,7 @@ export default function Navbar() {
       </div>
 
       {isLogin ? (
-        <div className="grid content-center">
+        <div className="grid content-center hidden md:block py-5">
           <ProfileMenu dataUser={dataUser} />
         </div>
       ) : (
@@ -305,8 +305,11 @@ export default function Navbar() {
       )}
 
       {/* navbar mobile */}
-      <div className=" md:hidden block py-5">
-        <Menu as="div" className="relative inline-block text-left">
+      <div className=" md:hidden block py-5 grid grid-cols-12 pl-20 content-right">
+        <div className="grid col-span-10 w-fit ml-14">
+          <ProfileMenu dataUser={dataUser} />
+        </div>
+        <Menu as="div" className="relative inline-block text-left col-span-2">
           <div>
             <Menu.Button className="focus:outline-0  inline-flex justify-center w-full bg-white font-medium px-2 py-[0.5rem] rounded text-gray-700 hover:bg-gray-50">
               <div className="text-xl leading-none text-black bg-transparent border border-transparent border-solid rounded opacity-50 cursor-pointer md:hidden">

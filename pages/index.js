@@ -168,7 +168,7 @@ export default function Home() {
                 Courses with categories that we have prepared for you
               </h1>
               <Link href="/courses">
-                <button className="flex flex-row items-center gap-1 self-end md:self-auto mb-4 md:mb-0">
+                <button className="flex flex-row items-center gap-1 self-end md:self-auto mb-4 md:mb-0 focus:outline-0">
                   See More <ArrowSmRightIcon className="h-6 w-6" />
                 </button>
               </Link>
@@ -196,7 +196,7 @@ export default function Home() {
               Excellent Course For You
             </h1>
             <Link href="/courses">
-              <button className="flex flex-row items-center gap-1 self-end md:self-auto mb-4 md:mb-0">
+              <button className="flex flex-row items-center gap-1 self-end md:self-auto mb-4 md:mb-0 focus:outline-0">
                 See More <ArrowSmRightIcon className="h-6 w-6" />
               </button>
             </Link>
@@ -212,6 +212,7 @@ export default function Home() {
                 courseId={item.id}
                 totaltimes={item.total_times}
                 totalvideo={item.total_video}
+                totalRating={item.total_rating}
               />
             ))}
           </div>

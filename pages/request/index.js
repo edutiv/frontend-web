@@ -2,6 +2,7 @@ import { CheckCircleIcon } from "@heroicons/react/solid";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Cookies from "universal-cookie";
+import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import { BASE_URL } from "../../config/API";
 
@@ -94,8 +95,8 @@ export default function Request() {
       <header>
         <Navbar />
       </header>
-      <main className=" mx-20 h-full ">
-        <div className="grid grid-cols-12 h-full ">
+      <main className=" mx-20 h-full md:mb-0 mb-20 ">
+        <div className="grid md:grid-cols-12 h-full grid-cols-1 ">
           {/* title request */}
           <div className=" col-span-5 grid grid-cols-1 place-content-center h-full">
             <h1 className=" text-[39px]">
@@ -124,7 +125,7 @@ export default function Request() {
           </div>
 
           {/* request form */}
-          <div className=" col-span-7 px-19 w-full h-full grid place-content-center">
+          <div className=" col-span-7 px-19 w-full h-full grid place-content-center md:mt-0 mt-5">
             <div>
               <form className=" w-full h-fit" onSubmit={handleSubmit}>
                 <div className=" mb-5">
@@ -215,6 +216,7 @@ export default function Request() {
           </div>
         </div>
       </main>
+      <Footer/>
     </div>
   );
 }

@@ -33,15 +33,15 @@ export default function ProfileMenu({ dataUser }) {
   }
 
   return (
-    <div className="hidden md:block">
+    <div className=" md:block">
         <div className=" grid content-center">
         <div className="flex w-fit h-fit">
           <div className="py-2 mr-2">
-            <p className=" text-sm my-1 ml-2 ">hi, {dataUser.firstname}</p>
+            <p className=" text-sm my-1 ml-2 ">hi, {dataUser?.firstname}</p>
           </div>
           <div className=" w-10 rounded-full">
             <img
-              src={dataUser.profile_image}
+              src={dataUser?.profile_image}
               alt="Course1"
               className="object-cover rounded-full"
             />

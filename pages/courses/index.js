@@ -5,6 +5,7 @@ import Navbar from "../../components/Navbar";
 import axios from "axios";
 import mentorCourseBs from "../../public/assets/img/mentor.png";
 import { BASE_URL } from '../../config/API';
+import Footer from "../../components/Footer"
 
 export default function CourseListPage() {
   // const [data, setData] = useState();
@@ -224,6 +225,7 @@ export default function CourseListPage() {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   );
 }

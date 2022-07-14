@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Cookies from "universal-cookie";
 import { BASE_URL } from "../config/API";
 import CardProgressCourse from "./CardProgressCourse";
+import Link from "next/link";
 
 export default function CardProgressContainer() {
   let cookies = new Cookies();
@@ -39,12 +40,17 @@ export default function CardProgressContainer() {
       </div>
       <div className="grid md:grid-cols-2 gap-3 grid-cols-1">
         {historyCourse?.map((item) => (
-          <CardProgressCourse
-            key={item.id}
-            title={item.course.course_name}
-            category={item.course.category.category_name}
-            image={item.course.course_image}
-          />
+          <Link key={item.id} href={`/learns/${item.course.id}`}>
+            <a>
+
+            <CardProgressCourse
+              title={item.course.course_name}
+              category={item.course.category.category_name}
+              image={item.course.course_image}
+              progress={item.progress}
+              />
+              </a>
+          </Link>
         ))}
       </div>
     </div>
