@@ -24,22 +24,20 @@ const MyLink = forwardRef((props, ref) => {
 
 export default function ProfileMenu({ dataUser }) {
   let cookies = new Cookies()
-  let token = cookies.get("token");
   const handleLogout = () => {
-    cookies.remove('token')
-    setTimeout(()=>{
-      Router.push('/auth/login')
-    }, 2000)    
+    cookies.remove('token', { path: '/'});   
   }
 
   return (
+
     <div className=" md:block">
         <div className=" grid content-center">
         <div className="flex w-fit h-fit">
           <div className="py-2 mr-2">
             <p className=" text-sm my-1 ml-2 ">hi, {dataUser?.firstname}</p>
+
           </div>
-          <div className=" w-10 rounded-full">
+          <div className="w-10 rounded-full ">
             <img
               src={dataUser?.profile_image}
               alt="Course1"
@@ -65,12 +63,12 @@ export default function ProfileMenu({ dataUser }) {
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
               >
-                <Menu.Items className="absolute right-0 mt-2 w-40 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <Menu.Items className="absolute right-0 w-40 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                   <div className="mx-4 ">
                     <Menu.Item>
                       {({ active }) => (
                         <MyLink href="/courses">
-                          <div className=" px-2 py-2 text-sm w-full">
+                          <div className="w-full px-2 py-2 text-sm ">
                             <p>Edit Profile</p>
                           </div>
                         </MyLink>
@@ -79,7 +77,7 @@ export default function ProfileMenu({ dataUser }) {
                     <Menu.Item>
                       {({ active }) => (
                         <MyLink href="/courses">
-                          <div className=" px-2 py-2 text-sm">
+                          <div className="px-2 py-2 text-sm ">
                             <p>My Course</p>
                           </div>
                         </MyLink>
@@ -88,7 +86,7 @@ export default function ProfileMenu({ dataUser }) {
                     <Menu.Item>
                       {({ active }) => (
                         <MyLink href="/courses">
-                          <div className=" px-2 py-2 text-sm">
+                          <div className="px-2 py-2 text-sm ">
                             <p>Certificate</p>
                           </div>
                         </MyLink>
@@ -97,7 +95,7 @@ export default function ProfileMenu({ dataUser }) {
                     <Menu.Item>
                       {({ active }) => (
                         <MyLink href="/courses">
-                          <div className=" px-2 py-2 text-sm">
+                          <div className="px-2 py-2 text-sm ">
                             <p>Progress Course</p>
                           </div>
                         </MyLink>
@@ -105,8 +103,8 @@ export default function ProfileMenu({ dataUser }) {
                     </Menu.Item>
                     <Menu.Item>
                       {({ active }) => (
-                        <MyLink href="/courses">
-                          <div className=" px-2 py-2 text-sm" onClick={handleLogout}>
+                        <MyLink href="/">
+                          <div className="px-2 py-2 text-sm " onClick={handleLogout}>
                             <p>Logout</p>
                           </div>
                         </MyLink>

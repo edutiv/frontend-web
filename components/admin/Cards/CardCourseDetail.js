@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Link from "next/link";
 import moment from "moment";
 import axios from "axios";
+import Cookies from 'universal-cookie';
 
 import { Dialog, Transition } from "@headlessui/react";
 import { PencilIcon, TrashIcon, InformationCircleIcon } from "@heroicons/react/solid";
@@ -16,7 +17,9 @@ const CardCourseDetail = ({ color, title, sidebutton, type, data, refresh, cours
    const [sectionName, setSectionName] = useState("");
    const [detailSection, setDetailSection] = useState(0);
    const selectedCourseId = courseId;
-   
+   const cookies = new Cookies();
+   let token = cookies.get("token");
+
    function closeModalSection() {
       setIsOpenSection(false)
    }
@@ -24,7 +27,7 @@ const CardCourseDetail = ({ color, title, sidebutton, type, data, refresh, cours
    function openModalSection() {
       setIsOpenSection(true)
    }
-   
+
    function closeModalUpdateSection() {
       setIsOpenUpdateSection(false)
    }
@@ -37,6 +40,8 @@ const CardCourseDetail = ({ color, title, sidebutton, type, data, refresh, cours
       e.preventDefault();
       axios.post(`${BASE_URL}/course/${courseId}/section`, {
          section_name: sectionName,
+      }, {
+         headers: { "Authorization": `Bearer ${token}` }
       })
          .then(function (response) {
             console.log(response);
@@ -50,7 +55,9 @@ const CardCourseDetail = ({ color, title, sidebutton, type, data, refresh, cours
 
    const handleDeleteSection = (id) => {
       axios
-         .delete(`${BASE_URL}/course/${courseId}/section/${id}`)
+         .delete(`${BASE_URL}/course/${courseId}/section/${id}`, {
+            headers: { "Authorization": `Bearer ${token}` }
+         })
          .then(function (response) {
             console.log(response);
             refresh();
@@ -61,32 +68,36 @@ const CardCourseDetail = ({ color, title, sidebutton, type, data, refresh, cours
    }
 
    const handleDetailSection = (id) => {
-      axios.get(`${BASE_URL}/course/${courseId}/section/${id}`)
-      .then(function (response) {
-         console.log(response);
-         setDetailSection(id);
-         setSectionName(response.data.data.section_name);
-         openModalUpdateSection();
+      axios.get(`${BASE_URL}/course/${courseId}/section/${id}`, {
+         headers: { "Authorization": `Bearer ${token}` }
       })
-      .catch(function (error) {
-         console.log(error);
-      })
+         .then(function (response) {
+            console.log(response);
+            setDetailSection(id);
+            setSectionName(response.data.data.section_name);
+            openModalUpdateSection();
+         })
+         .catch(function (error) {
+            console.log(error);
+         })
    }
 
    const handleUpdateSection = (id) => {
       axios
-      .put(`${BASE_URL}/course/${courseId}/section/${id}`, {
-         section_name: sectionName
-      })
-      .then(function (response) {
-         console.log(response);
-         setSectionName("");
-         closeModalUpdateSection();
-         refresh();
-      })
-      .catch(function (error) {
-         console.log(error);
-      })
+         .put(`${BASE_URL}/course/${courseId}/section/${id}`, {
+            section_name: sectionName
+         }, {
+            headers: { "Authorization": `Bearer ${token}` }
+         })
+         .then(function (response) {
+            console.log(response);
+            setSectionName("");
+            closeModalUpdateSection();
+            refresh();
+         })
+         .catch(function (error) {
+            console.log(error);
+         })
    }
 
    useEffect(() => {
@@ -252,7 +263,7 @@ const CardCourseDetail = ({ color, title, sidebutton, type, data, refresh, cours
                               </Dialog.Title>
 
                               <form className="rounded-b-2xl" onSubmit={handleSubmitSection}>
-                                 <div className="mb-6 form-group px-6">
+                                 <div className="px-6 mb-6 form-group">
                                     <label htmlFor="sectionNameInput">Section Name</label>
                                     <input
                                        type="text"
@@ -322,7 +333,7 @@ const CardCourseDetail = ({ color, title, sidebutton, type, data, refresh, cours
                               </Dialog.Title>
 
                               <form className="rounded-b-2xl">
-                                 <div className="mb-6 form-group px-6">
+                                 <div className="px-6 mb-6 form-group">
                                     <label htmlFor="sectionNameInput">Section Name</label>
                                     <input
                                        type="text"
