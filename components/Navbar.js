@@ -16,7 +16,7 @@ import ProfileMenu from "./ProfileMenu";
 import jwtDecode from "jwt-decode";
 import axios from "axios";
 import { BASE_URL } from "../config/API";
-import Cookies from 'universal-cookie';
+import Cookies from "universal-cookie";
 import { Router } from "next/router";
 
 function classNames(...classes) {
@@ -39,34 +39,31 @@ export default function Navbar() {
   const [isLogin, setIslogin] = useState(false);
   const [dataUser, setDataUser] = useState();
   const cookies = new Cookies();
-  
-  
-  
 
   const handleLogin = () => {
-  
-  let token = cookies.get("token")
-  
+    let token = cookies.get("token");
 
-    if(token){
+    if (token) {
       let userId = jwtDecode(token).jti;
-      console.log(userId)
-      axios.get(`${BASE_URL}/user`, { headers: {"Authorization" : `Bearer ${token}`} }).then((res) => {
-        setIslogin(true);
-        setDataUser(res.data.data)
-      }).catch((error) => {
-        alert(error);
-      })
+      console.log(userId);
+      axios
+        .get(`${BASE_URL}/user`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((res) => {
+          setIslogin(true);
+          setDataUser(res.data.data);
+        })
+        .catch((error) => {
+          alert(error);
+        });
     }
-
-    
-
-  }
+  };
 
   useEffect(() => {
     handleLogin();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="flex justify-between w-full h-[76px] px-5 md:px-20 shadow sticky z-50 bg-white">
@@ -282,9 +279,7 @@ export default function Navbar() {
           </div>
 
           <div className="inline-flex justify-center bg-white font-medium text-gray-700 px-2 py-[0.5rem]">
-           <Link href="/request">
-            Request
-           </Link>
+            <Link href="/request">Request</Link>
           </div>
         </div>
       </div>
@@ -307,11 +302,23 @@ export default function Navbar() {
 
       {/* navbar mobile */}
       <div className=" md:hidden block py-5 grid grid-cols-12 pl-20 content-right">
-        <div className="grid col-span-10 w-fit ml-14">
-          <ProfileMenu dataUser={dataUser} />
-        </div>
-        <Menu as="div" className="relative inline-block text-left col-span-2">
+        {isLogin ? (
+          <div className="grid col-span-10 w-fit ml-14">
+            <ProfileMenu dataUser={dataUser} />
+          </div>
+        ) : (
+          <div className="grid col-span-10 w-fit ml-14">
+            <div className="grid content-center px-4 py-2 rounded-md text-white bg-[#126E64] hover:bg-[#09423c] hover:-translate-y-[0.1rem] hover:transition hover:duration-100 hover:ease-in-out hover:drop-shadow-md">
+              <button className="text-sm">
+                <Link href="/auth/login">
+                  <a>LOGIN</a>
+                </Link>
+              </button>
+            </div>
+          </div>
+        )}
 
+        <Menu as="div" className="relative inline-block text-left col-span-2">
           <div>
             <Menu.Button className="focus:outline-0  inline-flex justify-center w-full bg-white font-medium px-2 py-[0.5rem] rounded text-gray-700 hover:bg-gray-50">
               <div className="text-xl leading-none text-black bg-transparent border border-transparent border-solid rounded opacity-50 cursor-pointer md:hidden">
@@ -330,16 +337,6 @@ export default function Navbar() {
           >
             <Menu.Items className="absolute right-0 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg w-80 ring-1 ring-black ring-opacity-5 focus:outline-none">
               <div className="mx-4 ">
-                <Menu.Item>
-                  <div className=" mt-5 mb-1 grid content-center px-4 py-2 rounded-md text-white bg-[#126E64] hover:bg-[#09423c] hover:-translate-y-[0.1rem] hover:transition hover:duration-100 hover:ease-in-out hover:drop-shadow-md">
-                    <button className="text-sm">
-                      <Link href="/login">
-                        <a>LOGIN</a>
-                      </Link>
-                    </button>
-                  </div>
-                </Menu.Item>
-
                 <Menu.Item>
                   <div className="grid content-center bg-white px-4 py-2 text-[#126E64] rounded-md border-[1px] border-[#E0E0E0] text-[11px] hover:border-[#126E64] hover:-translate-y-[0.15rem] hover:transition hover:duration-100 hover:ease-in-out hover:drop-shadow-md">
                     <button className="text-sm">Request</button>

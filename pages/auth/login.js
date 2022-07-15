@@ -10,6 +10,7 @@ import { BASE_URL } from "../../config/API";
 import Cookies from 'universal-cookie';
 import Router from "next/router";
 import jwtDecode from "jwt-decode";
+import Swal from "sweetalert2";
 
 function Login(req) {
   const [email, setEmail] = useState();
@@ -41,7 +42,12 @@ function Login(req) {
       .then((res) => {
         cookies.set('token', res.data.token, { path: '/', maxAge: 10800 });
         let userId = jwtDecode(res.data.token).jti;
-        axios.get(`${BASE_URL}/user/${userId}`, { headers: { "Authorization": `Bearer ${res.data.token}` } }).then((result) => {
+        axios.get(`${BASE_URL}/user/`, { headers: { "Authorization": `Bearer ${res.data.token}` } }).then((result) => {
+          Swal.fire(
+            'Welcome!',
+            'Succes to login!',
+            'success'
+          )
           setUserDetail(result.data.data);
           let userinfo = result.data.data;
           if (userinfo.roles[0].name === "ROLE_ADMIN") {
@@ -52,7 +58,11 @@ function Login(req) {
         });
       })
       .catch((error) => {
-        alert("user tidak di temukan");
+        Swal.fire(
+          'Ooops..!',
+          'User not found!',
+          'warning'
+        )
       });
   };
   return (

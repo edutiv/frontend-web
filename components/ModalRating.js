@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { BASE_URL } from "../config/API";
 import Cookies from "universal-cookie";
 import jwtDecode from "jwt-decode";
+import Swal from "sweetalert2";
 
 export default function ModalRating({ dataCourse, handleHidden }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -42,6 +43,11 @@ export default function ModalRating({ dataCourse, handleHidden }) {
             setComment("");
             setRating(0);
             setIsOpen(false);
+            Swal.fire(
+              'yohoo!!',
+              'Thanks for the feedback ;)',
+              'success'
+            )
           })
           .catch((err) => {
             alert(err);
