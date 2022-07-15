@@ -159,7 +159,11 @@ export default function Learn() {
       // Use the toLowerCase() method to make it case-insensitive
     });
 
-    let material = materials[0];
+    let material;
+
+    if (materials) {
+      material = materials[0];
+    }
 
     if (material?.is_completed) {
       return (
@@ -170,7 +174,7 @@ export default function Learn() {
     } else {
       return (
         <button
-          onClick={() => handleCompleteMaterial(material.id)}
+          onClick={() => handleCompleteMaterial(idMaterial)}
           className="px-5 py-2 bg-[#126E64] sm:mr-2 rounded-md text-white text-[11px] hover:bg-[#09423c] hover:-translate-y-[0.15rem] hover:transition hover:duration-100 hover:ease-in-out hover:drop-shadow-md focus:outline-none"
         >
           FINISH

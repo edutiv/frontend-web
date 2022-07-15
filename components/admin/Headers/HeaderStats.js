@@ -11,6 +11,7 @@ export default function HeaderStats() {
   const course = counterValue?.course;
   const material = counterValue?.material;
   const member = counterValue?.member;
+  const request = counterValue?.request;
   // console.log(member);
 
   return (
@@ -51,7 +52,7 @@ export default function HeaderStats() {
               <div className="w-full px-4 lg:w-6/12 xl:w-3/12">
                 <CardStats
                   statSubtitle="Total Request"
-                  statTitle="24"
+                  statTitle={request?.toString()}
                   statIconName="fas fa-file-invoice-dollar"
                   statIconColor="bg-orange-500"
                 />

@@ -17,17 +17,9 @@ export default function Admin({ children }) {
 
   const [counterData, setCounterData] = useState();
   const [counterMember, setCounterMember] = useState();
+  const [counterRequest, setCounterRequest] = useState();
   const cookies = new Cookies();
   let token = cookies.get('token');
-
-
-  // let endpoints = [
-  //   `${BASE_URL}/user/all`,
-  // ]
-
-  // Promise.all(endpoints.map((endpoint) => axios.get(endpoint))).then(([{ data: course }]) => {
-  //   setDataCourse(course.data)
-  // });
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const counterFresh = () => {
@@ -50,12 +42,26 @@ export default function Admin({ children }) {
     })
   }
 
+  const requestCounter = () => {
+    axios.get(`${BASE_URL}/request`, {
+      headers: { "Authorization" : `Bearer ${token}` }
+    })
+    .then(function (res) {
+      console.log('request', res);
+      setCounterRequest(res.data.data);
+    })
+  }
+
   const refreshCourse = useCallback(() => {
-    counterFresh()
+    counterFresh();
+    requestCounter();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [counterFresh])
 
   const refreshMember = useCallback(() => {
-    memberCounter()
+    memberCounter();
+    requestCounter();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [memberCounter])
 
   useEffect(() => {
@@ -67,9 +73,16 @@ export default function Admin({ children }) {
     counterFresh();
   }, []);
 
+  useEffect(() => {
+    requestCounter();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const totalMember = counterMember?.length;
 
   const totalCourse = counterData?.length;
+
+  const totalRequest = counterRequest?.length;
 
   const totalMaterial = counterData?.reduce((f, n) => {
     const countTotalMaterial = n.sections.reduce((f2, n2) => f2 + n2.materials.length, 0)
@@ -77,7 +90,7 @@ export default function Admin({ children }) {
   }, 0);
 
   return (
-    <CounterContext.Provider value={{ course: totalCourse, material: totalMaterial, member: totalMember, refreshCourse, refreshMember }}>
+    <CounterContext.Provider value={{ course: totalCourse, material: totalMaterial, member: totalMember, request: totalRequest, refreshCourse, refreshMember }}>
       <Head>
         <title>Edutiv Admin Dashboard</title>
       </Head>

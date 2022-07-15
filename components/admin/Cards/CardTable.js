@@ -423,6 +423,46 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
       })
   }
 
+  const handleDeleteRequest = (id) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.delete(`${BASE_URL}/request/${id}`, {
+          headers: { "Authorization": `Bearer ${token}` }
+        })
+          .then(function (response) {
+            console.log(response);
+            counterValue.refreshCourse();
+            refresh();
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
+        Swal.fire(
+          'Deleted!',
+          'Course has been deleted.',
+          'success'
+        )
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        Swal.fire(
+          'Cancelled',
+          'Delete Course Canceled',
+          'error'
+        )
+      }
+    })
+  }
+
   // const handleEditCourse = (id) => {
   //   axios.put(``)
   // }
@@ -486,7 +526,7 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
                           : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
                       }
                     >
-                      First Name
+                      Title
                     </th>
                     <th
                       className={
@@ -496,7 +536,27 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
                           : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
                       }
                     >
-                      Categories
+                      Category
+                    </th>
+                    <th
+                      className={
+                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                        (color === "light"
+                          ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                          : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
+                      }
+                    >
+                      Request Type
+                    </th>
+                    <th
+                      className={
+                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                        (color === "light"
+                          ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                          : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
+                      }
+                    >
+                      Request By
                     </th>
                     <th
                       className={
@@ -702,7 +762,45 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
                     </td>
                   </tr>
                 </tbody>
-              )) : ('')
+              )) : type === 'request' & data.length !== 0 ? data?.map((items) => (
+                <tbody key={items.id}>
+                  <tr>
+                    <td className="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+                      <p
+                        className={
+                          "font-bold "
+                          + (color === "light" ? "text-blueGray-600" : "text-white")
+                        }
+                      >
+                        {items.title}
+                      </p>
+                    </td>
+                    <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+                      {items.category.category_name}
+                    </td>
+                    <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+                      {items.request_type}
+                    </td>
+                    <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+                      {items.user.username}
+                    </td>
+                    <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+                      {moment(items.created_at).format('LLL')}
+                    </td>
+                    <td className="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+                      <div className="flex flex-row gap-3">
+                        {/* <button className="focus:outline-none">
+                          <PencilIcon className="w-4 h-4"></PencilIcon>
+                        </button> */}
+                        <button onClick={() => handleDeleteRequest(items.id)} className="focus:outline-none">
+                          <TrashIcon className="w-4 h-4"></TrashIcon>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              )) 
+              : ('')
             }
           </table>
         </div>
