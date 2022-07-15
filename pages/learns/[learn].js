@@ -126,6 +126,7 @@ export default function Learn() {
 
   useEffect(() => {
     getUserEnrolled();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
