@@ -127,6 +127,7 @@ export default function ModalRating({ dataCourse, handleHidden }) {
 
   useEffect(() => {
     getUserEnrolled();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

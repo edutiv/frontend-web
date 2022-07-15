@@ -116,8 +116,8 @@ export default function Detail() {
 
   useEffect(() => {
     getEdutivData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     handleLogin();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

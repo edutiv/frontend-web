@@ -28,6 +28,7 @@ export default function CardProgressContainer() {
 
   useEffect(() => {
     getHistoryData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -35,7 +36,7 @@ export default function CardProgressContainer() {
       <p className="text-base text-[#126E64]">Learning Progress</p>
       <div className="flex flex-col md:flex-row md:justify-between">
         <h1 className="md:mb-12 mb-6 text-[30px] md:text-[2.5rem] w-full md:w-7/12">
-          Let's continue to improve your skills
+          Let&apos;s continue to improve your skills
         </h1>
       </div>
       <div className="grid md:grid-cols-2 gap-3 grid-cols-1">
