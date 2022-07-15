@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const Footer = () => {
    return (
       <>
@@ -141,12 +143,15 @@ const Footer = () => {
                                  </a>
                               </li>
                               <li>
+                                 <Link  href="/faqs">
                                  <a
                                     className="text-white hover:text-blueGray-800 block pb-2 text-sm"
-                                    href="#"
+                                   
                                  >
                                     FAQ
                                  </a>
+                                 </Link>
+                                 
                               </li>
                            </ul>
                         </div>

@@ -18,13 +18,6 @@ export default function Tables() {
   let token = cookies.get('token');
 
   const getEdutivData = () => {
-    // let endpoints = [
-    //   `${BASE_URL}/user/all`,
-    // ]
-
-    // Promise.all(endpoints.map((endpoint) => axios.get(endpoint))).then(([{ data: course }]) => {
-    //   setDataCourse(course.data)
-    // });
     axios.get(`${BASE_URL}/user/all`, { 
       headers: { "Authorization": `Bearer ${token}` } 
     })

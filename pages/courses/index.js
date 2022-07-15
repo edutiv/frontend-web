@@ -5,6 +5,7 @@ import Navbar from "../../components/Navbar";
 import axios from "axios";
 import mentorCourseBs from "../../public/assets/img/mentor.png";
 import { BASE_URL } from '../../config/API';
+import Footer from "../../components/Footer"
 
 export default function CourseListPage() {
   // const [data, setData] = useState();
@@ -66,7 +67,8 @@ export default function CourseListPage() {
           // Use the toLowerCase() method to make it case-insensitive
         });
         setDataFilterCourse(results);
-        if (datafilterCourse.length <= 1) {
+        console.log(datafilterCourse.length)
+        if (datafilterCourse.length >= 0) {
           setChecked(true);
           console.log("yakin");
         }
@@ -98,6 +100,10 @@ export default function CourseListPage() {
     
     
   };
+
+  if(!dataCourse){
+    return <div>loading...</div>
+  }
 
   return (
     <div>
@@ -219,6 +225,7 @@ export default function CourseListPage() {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   );
 }

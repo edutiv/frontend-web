@@ -1,39 +1,58 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState, Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import ReactStars from "react-rating-stars-component";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { BASE_URL } from "../config/API";
+import Cookies from "universal-cookie";
+import jwtDecode from "jwt-decode";
+import Swal from "sweetalert2";
 
-export default function ModalRating({ dataCourse, handleHidden}) {
+export default function ModalRating({ dataCourse, handleHidden }) {
   const [isOpen, setIsOpen] = useState(false);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState();
   const { query } = useRouter();
+  const [dataUser, setDataUser] = useState();
+  const [dataEnrolled, setDataEnrolled] = useState();
+  const [idEnrolled, setIdEnrolled] = useState();
+  let cookies = new Cookies();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    let token = cookies.get("token");
     let idCourse = query.succes;
-    if (idCourse) {
-      axios
-        .post(
-          `${BASE_URL}/course/${idCourse}/review`,
-          {
-            user_id: 2,
-            rating: rating,
-            review: comment,
-          }
-        )
-        .then((response) => {
-          console.log(response);
-          handleHidden();
-        });
-      setComment('');
-      setRating(0);
-      setIsOpen(false);
 
-      
+    if (idCourse) {
+      if (token) {
+        axios
+          .put(
+            `${BASE_URL}/enrolled/${idEnrolled}`,
+            {
+              rating: rating,
+              review: comment,
+            },
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          )
+          .then((response) => {
+            console.log(response);
+            handleHidden();
+            setComment("");
+            setRating(0);
+            setIsOpen(false);
+            Swal.fire(
+              'yohoo!!',
+              'Thanks for the feedback ;)',
+              'success'
+            )
+          })
+          .catch((err) => {
+            alert(err);
+          });
+      }
     }
 
     console.log(rating, comment);
@@ -59,7 +78,62 @@ export default function ModalRating({ dataCourse, handleHidden}) {
     setComment(e.target.value);
   };
 
-  console.log("yakin bisa");
+  const getUserEnrolled = () => {
+    let token = cookies.get("token");
+    let idCourse = query.succes;
+
+    if (token) {
+      let userId = jwtDecode(token).jti;
+      axios
+        .get(`${BASE_URL}/user`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((res) => {
+          setDataUser(res.data.data);
+          console.log(res.data.data);
+        })
+        .catch((error) => {
+          alert(error);
+        });
+    }
+
+    if (idCourse) {
+      axios
+        .get(`${BASE_URL}/enrolled/courses/${idCourse}`)
+        .then((res) => {
+          setDataEnrolled(res.data.data);
+          console.log(res.data.data);
+        })
+        .catch((error) => {
+          alert(error);
+        });
+    }
+  };
+
+  const checkUserEnrolled = () => {
+    const userLogin = dataUser?.firstname;
+    let userEnrolled;
+
+    userEnrolled = dataEnrolled?.filter((user) => {
+      return user.user.firstname == userLogin;
+      // Use the toLowerCase() method to make it case-insensitive
+    });
+    console.log("jalan", idEnrolled);
+
+    userEnrolled?.slice(0).map((item) => {
+      return setIdEnrolled(item.id);
+    });
+  };
+
+  useEffect(() => {
+    getUserEnrolled();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    checkUserEnrolled();
+  });
+
   return (
     <div>
       <button

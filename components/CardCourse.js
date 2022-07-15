@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ClockIcon, VideoCameraIcon, StarIcon, ArrowRightIcon } from "@heroicons/react/solid";
 
-export default function CardCourse({image, mentor, title, mentorName, courseId, totaltimes, totalvideo}) {
+export default function CardCourse({image, mentor, title, mentorName, courseId, totaltimes, totalvideo, totalRating}) {
   return (
     <div className="">
       <div className="px-4 py-4 border-[1px] border-[#C2C2C2] rounded-md md:min-h-[391px]">
@@ -41,7 +41,7 @@ export default function CardCourse({image, mentor, title, mentorName, courseId, 
 
             <div className=" h-[25px] bg-[#126E6433] grid place-content-center rounded-sm">
               <div className="flex">
-                <StarIcon className="text-[#4A5568] w-4 sm:w-5" /> <p className="text-[10px] sm:text-xs border-2 border-transparent ">4.6</p>
+                <StarIcon className="text-[#4A5568] w-4 sm:w-5" /> <p className="text-[10px] sm:text-xs border-2 border-transparent ">{totalRating}</p>
               </div>
             </div>
           </div>
