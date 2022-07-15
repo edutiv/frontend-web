@@ -17,6 +17,7 @@ import { BASE_URL } from "../../config/API";
 import { data } from "autoprefixer";
 import Cookies from "universal-cookie";
 import jwtDecode from "jwt-decode";
+import Swal from "sweetalert2";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -97,7 +98,11 @@ export default function Detail() {
           { headers: { Authorization: `Bearer ${token}` } }
         )
         .then((res) => {
-          alert("succes to enroll user");
+          Swal.fire(
+            'Congratulation!',
+            'You can Access the Course',
+            'success'
+          )
           setIsUserEnrolled(true);
           setIsUserLogin(true);
         })
@@ -111,8 +116,8 @@ export default function Detail() {
 
   useEffect(() => {
     getEdutivData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     handleLogin();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
