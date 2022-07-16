@@ -88,6 +88,7 @@ export default function Request() {
   useEffect(() => {
     getDataUser();
     getDataCategory();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

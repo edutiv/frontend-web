@@ -126,6 +126,7 @@ export default function Learn() {
 
   useEffect(() => {
     getUserEnrolled();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -161,7 +162,8 @@ export default function Learn() {
 
     let material;
 
-    if(materials) {
+
+    if (materials) {
       material = materials[0];
     }
 
