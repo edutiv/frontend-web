@@ -1,7 +1,36 @@
 import CardProfile from "../../components/CardProfile";
 import Head from "next/head";
+import Cookies from "universal-cookie";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { BASE_URL } from "../../config/API";
 
 function EditProfile() {
+	let cookies = new Cookies();
+	const [dataUser, setDataUser] = useState()
+
+	const handleLogin = () => {
+		let token = cookies.get("token");
+	
+		if (token) {
+		  axios
+			.get(`${BASE_URL}/user`, {
+			  headers: { Authorization: `Bearer ${token}` },
+			})
+			.then((res) => {
+			  setDataUser(res.data.data);
+			  console.log(res.data.data)
+			})
+			.catch((error) => {
+			  alert(error);
+			});
+		}
+	  };
+
+	  useEffect(() => {
+		handleLogin();
+	  }, [])
+
 	return (
 		<div>
 			<Head>
@@ -38,7 +67,7 @@ function EditProfile() {
 											name="firstName"
 											id="firstName"
 											className="w-[420px] text-sm text-[#C2C2C2] rounded-lg px-3 py-1 focus:outline-none focus:ring focus:ring-sky-200 focus:border-sky-700 transition duration-200 border-[#C2C2C2] border bg-neutral-100"
-											placeholder="Annette"
+											placeholder={dataUser?.firstname}
 										/>
 									</div>
 									<div>
@@ -53,7 +82,7 @@ function EditProfile() {
 											name="lastName"
 											id="lastName"
 											className="w-[420px] text-sm text-[#C2C2C2] rounded-lg px-3 py-1 focus:outline-none focus:ring focus:ring-sky-200 focus:border-sky-700 transition duration-200 border-[#C2C2C2] border bg-neutral-100"
-											placeholder="Black"
+											placeholder={dataUser?.lastname}
 										/>
 									</div>
 								</div>
@@ -69,7 +98,7 @@ function EditProfile() {
 										name="email"
 										id="email"
 										className="w-full text-sm text-[#C2C2C2] rounded-lg px-3 py-1 focus:outline-none focus:ring focus:ring-sky-200 focus:border-sky-700 transition duration-200 border-[#C2C2C2] border bg-neutral-100"
-										placeholder="annetteblack@gmail.com"
+										placeholder={dataUser?.username}
 									/>
 								</div>
 								<div>

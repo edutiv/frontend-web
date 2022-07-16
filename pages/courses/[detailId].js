@@ -18,6 +18,7 @@ import { data } from "autoprefixer";
 import Cookies from "universal-cookie";
 import jwtDecode from "jwt-decode";
 import Swal from "sweetalert2";
+import Footer from "../../components/Footer"
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -228,13 +229,13 @@ export default function Detail() {
           <div className=" col-span-9 mt-10 md:mt-0 mx-5 md:mx-0">
             <div className="w-full px-2 sm:px-0">
               <Tab.Group>
-                <Tab.List className="flex space-x-1 rounded-xl md:p-1 px-10">
+                <Tab.List className="flex rounded-xl md:p-1">
                   <div className=" flex ">
                     {/* ====== tab about ====== */}
                     <Tab
                       className={({ selected }) =>
                         classNames(
-                          "py-2.5 text-sm font-medium w-[71px]",
+                          "py-2.5 text-sm font-medium md:w-[71px] w-[60px] ",
                           selected
                             ? " border-b-2 border-black focus-visible:outline-none focus:outline-0"
                             : ""
@@ -291,7 +292,7 @@ export default function Detail() {
                   {/* =================  tab about =================*/}
                   <Tab.Panel>
                     <div>
-                      <div className=" my-12 text-center md:text-left">
+                      <div className=" my-12 text-left">
                         <p>{dataCourse?.description}</p>
                       </div>
 
@@ -363,11 +364,11 @@ export default function Detail() {
                         Complete all the supports below before learning
                       </p>
                     </div>
-                    <div className="flex ">
+                    <div className="md:flex flex-col">
                       {dataCourse?.tools?.map((data) => (
                         <div
                           key={data.id}
-                          className=" ml-3 w-[147px] bg-[#F5F5F5] p-2 text-center grid place-content-center"
+                          className="  mx-auto md:w-[147px] w-full md:mt-0 mt-3 bg-[#F5F5F5] p-2 text-center grid place-content-center"
                         >
                           <div className=" flex justify-center mb-3">
                             <img
@@ -415,7 +416,7 @@ export default function Detail() {
 
           {/* mentor profil */}
 
-          <div className="grid col-span-7 md:col-span-3 border-2 h-[173px] p-3 content-center">
+          <div className="grid col-span-7 md:col-span-3 border-2 h-[173px] p-3 content-center w-full">
             <h1 className=" pb-4 font-bold">Mentor Expert</h1>
             <div className="flex">
               <div className=" w-10 rounded-full">
@@ -439,6 +440,8 @@ export default function Detail() {
 
         {/* content detail */}
       </div>
+
+      <Footer />
     </div>
   );
 }
