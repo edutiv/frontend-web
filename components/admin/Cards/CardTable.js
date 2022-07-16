@@ -65,6 +65,8 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
   const [confirmPass, setConfirmPass] = useState("");
   const [detailMember, setDetailMember] = useState(0);
 
+  const [errorMessage, setErrorMessage] = useState([]);
+
   const cookies = new Cookies();
   let token = cookies.get("token");
 
@@ -210,6 +212,57 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
 
   const handleAddMember = (e) => {
     e.preventDefault();
+    const fnameValid = document.querySelector('#firstname').value;
+    const lnameValid = document.querySelector('#lastname').value;
+    const emailValid = document.querySelector('#email').value;
+    const passwordValid = document.querySelector('#password').value;
+    const confirmpassValid = document.querySelector('#confirmpass').value;
+
+    if (!fnameValid) {
+      Swal.fire({
+        title: "Please Enter First Name",
+        text: "",
+        icon: 'warning',
+      })
+      return false;
+    }
+
+    if (!lnameValid) {
+      Swal.fire({
+        title: "Please Enter Last Name",
+        text: "",
+        icon: 'warning',
+      })
+      return false;
+    }
+
+    if (!emailValid) {
+      Swal.fire({
+        title: "Please Enter Email",
+        text: "",
+        icon: 'warning',
+      })
+      return false;
+    }
+
+    if (!passwordValid) {
+      Swal.fire({
+        title: "Please Enter Password",
+        text: "",
+        icon: 'warning',
+      })
+      return false;
+    }
+
+    if (!confirmpassValid) {
+      Swal.fire({
+        title: "Please Enter Password Confirmation",
+        text: "",
+        icon: 'warning',
+      })
+      return false;
+    }
+
     if (password === confirmPass) {
       axios.post(`${BASE_URL}/user/register`, {
         firstname: firstName,
@@ -241,7 +294,11 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
           console.log(error)
         });
     } else {
-      alert("Kedua password tidak cocok")
+      Swal.fire({
+        title: "Kedua Password tidak cocok",
+        text: "",
+        icon: 'warning',
+      })
     }
   }
 
@@ -292,7 +349,7 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
       .then(function (res) {
         console.log(res);
         setDetailMember(id);
-        console.log('detailmember', detailMember);
+        // console.log('detailmember', detailMember);
         setFirstName(res.data.data.firstname);
         setLastName(res.data.data.lastname);
         setEmail(res.data.data.username);
@@ -314,7 +371,7 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
     })
       .then(function (res) {
         console.log(res);
-        console.log('detailmember put', detailMember);
+        // console.log('detailmember put', detailMember);
         setFirstName("");
         setLastName("");
         setEmail("");
@@ -799,8 +856,8 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
                     </td>
                   </tr>
                 </tbody>
-              )) 
-              : ('')
+              ))
+                : ('')
             }
           </table>
         </div>
@@ -845,6 +902,8 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
                             type="text"
                             className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                             id="firstname"
+                            pattern="[A-Za-z]"
+                            title="Name alphabets (A to z)."
                             aria-describedby="firstName"
                             placeholder="First name"
                             value={firstName}
@@ -856,6 +915,8 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
                           <input type="text"
                             className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                             id="lastname"
+                            pattern="[A-Za-z]"
+                            title="Name alphabets (A to z)."
                             aria-describedby="lastName"
                             placeholder="Last name"
                             value={lastName}
@@ -868,6 +929,8 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
                         <input type="email"
                           className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                           id="email"
+                          pattern=".+@globex\.com"
+                          size="40"
                           placeholder="Email address"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
@@ -878,6 +941,8 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
                         <input type="password"
                           className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                           id="password"
+                          pattern="[a-z0-9]{7,15}"
+                          title="Password should be digits (0 to 9) or alphabets (a to z)."
                           placeholder="Password"
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
@@ -888,6 +953,8 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
                         <input type="password"
                           className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                           id="confirmpass"
+                          pattern="[a-z0-9]{7,15}"
+                          title="Password should be digits (0 to 9) or alphabets (a to z)."
                           placeholder="Confirm Password"
                           value={confirmPass}
                           onChange={(e) => setConfirmPass(e.target.value)}
