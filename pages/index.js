@@ -184,6 +184,7 @@ export default function Home() {
                   image={category.category_image}
                   name={category.category_name}
                   desc={category.description}
+                  id={category.id}
                 />
               ))}
             </div>

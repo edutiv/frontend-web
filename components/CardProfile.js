@@ -48,21 +48,25 @@ export default function CardProfile() {
               </p>
             </div>
           </div>
-          <div className="bg-neutral-200 grid rounded-md hover:bg-[#43a89c63]">
+          <div className="bg-neutral-200 grid rounded-md hover:bg-[#43a89c63] cursor-pointer">
+			<Link href="/profile/MyCourse">
             <div className="flex p-1 font-medium ">
               <AcademicCapIcon className="text-[#4A5568] w-5" />
               <p className="text-sm border-2 text-[#4A5568] border-transparent pl-2  ">
                 My Course
               </p>
             </div>
+			</Link>
           </div>
           <div className="bg-neutral-200 grid rounded-md hover:bg-[#43a89c63] ">
+			<Link href="/profile/ProgresCourse">
             <div className="flex p-1 font-medium ">
               <PresentationChartLineIcon className="text-[#4A5568] w-5 " />
               <p className="text-sm border-2 text-[#4A5568] border-transparent pl-2 ">
                 Progress Course
               </p>
             </div>
+			</Link>
           </div>
           <div className="bg-neutral-200 grid rounded-md hover:bg-[#43a89c63] text-[#126E64]">
             <div className="flex p-1 font-medium ">

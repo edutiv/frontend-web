@@ -17,6 +17,7 @@ import LearnTools from "../../components/LearnTools";
 import { BASE_URL } from "../../config/API";
 import Cookies from "universal-cookie";
 import Swal from "sweetalert2";
+import ButtonCompleteCourse from "../../components/ButtonCompleteCourse";
 
 export default function Learn() {
   let api;
@@ -127,11 +128,11 @@ export default function Learn() {
   useEffect(() => {
     getUserEnrolled();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  });
 
   useEffect(() => {
     checkUserEnrolled();
-  });
+  }, [dataEnrolled]);
 
   const handleCompleteMaterial = (idMaterial) => {
     let token = cookies.get("token");
@@ -315,7 +316,9 @@ export default function Learn() {
                           >
                             NEXT
                           </button>
-                          {handleCheckCompleted(material.id)}
+                          {
+                          <ButtonCompleteCourse idMaterial={material.id} handleCompleteMaterial={handleCompleteMaterial} dataEnrolled={dataEnrolled} dataUser={dataUser}/>
+                          }
                         </div>
                       </div>
 
