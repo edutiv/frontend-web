@@ -303,7 +303,7 @@ export default function Navbar() {
       {/* navbar mobile */}
       <div className=" md:hidden block py-5 grid grid-cols-12 pl-20 content-right">
         {isLogin ? (
-          <div className="grid col-span-10 w-fit ml-14">
+          <div className="grid col-span-10 w-fit">
             <ProfileMenu dataUser={dataUser} />
           </div>
         ) : (

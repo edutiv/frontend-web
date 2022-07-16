@@ -4,12 +4,12 @@ import React from "react";
 export default function CardProgressCourse({title, category , image, progress}) {
   return (
     <div>
-      <div className=" h-[122px] border grid grid-cols-12 p-3 gap-5 bg-[#F5F5F5] rounded-sm">
-        <div className=" col-span-3 rounded-md">
+      <div className=" h-min-[122px] border grid grid-cols-12 p-3 gap-5 bg-[#F5F5F5] rounded-sm">
+        <div className=" col-span-3 rounded-lg">
           <img
                   src={image}
                   alt={title + "-" + category}
-                  className="w-full object-fit"
+                  className="w-full object-cover md:h-full my-auto "
                 />
         </div>
         <div className=" col-span-9">

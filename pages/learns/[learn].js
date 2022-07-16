@@ -162,6 +162,7 @@ export default function Learn() {
 
     let material;
 
+
     if (materials) {
       material = materials[0];
     }
