@@ -37,7 +37,7 @@ export default function ProfileMenu({ dataUser }) {
             <p className=" text-sm my-1 ml-2 ">hi, {dataUser?.firstname}</p>
 
           </div>
-          <div className="w-10 rounded-full ">
+          <div className="w-10 h-10 rounded-full overflow-hidden">
             <img
               src={dataUser?.profile_image}
               alt="Course1"

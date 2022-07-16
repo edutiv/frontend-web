@@ -3,6 +3,7 @@ import Image from "next/image";
 import CardProfile from "../../components/CardProfile";
 import NavbarProfile from "../../components/NavbarProfile";
 import Navbar from "../../components/Navbar";
+import CardProgressContainer from "../../components/CardProgressContainer";
 
 import backendImg from '../../public/assets/img/backendCourse.png';
 import uiuxImg from '../../public/assets/img/uiuxCourse.png';
@@ -28,16 +29,11 @@ function progresCourse() {
 							<div className="content-center mt-2">
 								<p>Progress Course</p>
 							</div>
-							<p className=" text-xs mt-1 text-[#C2C2C2]">
+							<p className=" text-xs mt-1 text-[#C2C2C2] mb-10">
 								Keep upgrading your knowledge and experience your latest
 								technology
 							</p>
-							<div className="flex flex-col gap-5 my-6">
-								<CardProgres image={backendImg} course={"Fundamental Backend Engineer"} category={"Backend Engineer"} progress={14/26}></CardProgres>
-								<CardProgres image={uiuxImg} course={"Mastering UI/UX Designer"} category={"UI/UX Designer"} progress={15/18}></CardProgres>
-								<CardProgres image={mobileImg} course={"Build Your First Android App"} category={"Mobile Engineer"} progress={12/30}></CardProgres>
-								<CardProgres image={figmaImg} course={"Smart Prototyping with Figma"} category={"UI/UX Engineer"} progress={8/16}></CardProgres>
-							</div>
+							<CardProgressContainer gridCol={true} titleHidden={true} />
 						</div>
 					</div>
 				</div>
