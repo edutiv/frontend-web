@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Cookies from "universal-cookie";
 import CardCourse from "../../components/CardCourse";
 import CardProfile from "../../components/CardProfile";
+import Navbar from "../../components/Navbar";
 import { BASE_URL } from "../../config/API";
 
 function ProfileMyCourse() {
@@ -33,9 +34,12 @@ function ProfileMyCourse() {
   return (
     <div>
       <Head>
-        <title>Profile My Course</title>
+        <title>My Course</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
+      <header>
+        <Navbar />
+      </header>
       <main>
         <div className="pl-20 pr-20 grid content-center md:mt-16 ">
           <div className="grid content-center grid-cols-3 gap-8 md:grid-cols-4">

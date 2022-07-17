@@ -67,7 +67,7 @@ export default function ProfileMenu({ dataUser }) {
                   <div className="mx-4 ">
                     <Menu.Item>
                       {({ active }) => (
-                        <MyLink href="/courses">
+                        <MyLink href="/profile/editProfile">
                           <div className="w-full px-2 py-2 text-sm ">
                             <p>Edit Profile</p>
                           </div>
@@ -76,7 +76,7 @@ export default function ProfileMenu({ dataUser }) {
                     </Menu.Item>
                     <Menu.Item>
                       {({ active }) => (
-                        <MyLink href="/courses">
+                        <MyLink href="/profile/MyCourse">
                           <div className="px-2 py-2 text-sm ">
                             <p>My Course</p>
                           </div>
@@ -94,7 +94,7 @@ export default function ProfileMenu({ dataUser }) {
                     </Menu.Item>
                     <Menu.Item>
                       {({ active }) => (
-                        <MyLink href="/courses">
+                        <MyLink href="/profile/ProgresCourse">
                           <div className="px-2 py-2 text-sm ">
                             <p>Progress Course</p>
                           </div>

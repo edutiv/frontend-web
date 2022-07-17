@@ -140,7 +140,7 @@ export default function Navbar() {
 
                     <Menu.Item>
                       {({ active }) => (
-                        <MyLink href="#">
+                        <MyLink href="/courses">
                           <div className="grid grid-cols-5 px-2 py-2">
                             <div className="w-10 h-10 p-0 rounded-full">
                               <Image
@@ -173,7 +173,7 @@ export default function Navbar() {
                     </Menu.Item>
                     <Menu.Item>
                       {({ active }) => (
-                        <MyLink href="/test">
+                        <MyLink href="/courses">
                           <div className="grid grid-cols-5 px-2 py-2">
                             <div className="w-10 h-10 p-0 rounded-full">
                               <Image
@@ -207,7 +207,7 @@ export default function Navbar() {
 
                     <Menu.Item>
                       {({ active }) => (
-                        <MyLink href="#">
+                        <MyLink href="/courses">
                           <div className="grid grid-cols-5 px-2 py-2">
                             <div className="w-10 h-10 p-0 rounded-full">
                               <Image
@@ -241,7 +241,7 @@ export default function Navbar() {
 
                     <Menu.Item>
                       {({ active }) => (
-                        <MyLink href="#">
+                        <MyLink href="/courses">
                           <div className="grid grid-cols-5 px-2 py-2">
                             <div className="w-10 h-10 p-0 rounded-full">
                               <Image
@@ -383,7 +383,7 @@ export default function Navbar() {
 
                 <Menu.Item>
                   {({ active }) => (
-                    <MyLink href="#">
+                    <MyLink href="/courses">
                       <div className="grid grid-cols-5 px-2 py-2">
                         <div className="w-10 h-10 p-0 rounded-full">
                           <Image
@@ -414,7 +414,7 @@ export default function Navbar() {
                 </Menu.Item>
                 <Menu.Item>
                   {({ active }) => (
-                    <MyLink href="/test">
+                    <MyLink href="/courses">
                       <div className="grid grid-cols-5 px-2 py-2">
                         <div className="w-10 h-10 p-0 rounded-full">
                           <Image
@@ -446,7 +446,7 @@ export default function Navbar() {
 
                 <Menu.Item>
                   {({ active }) => (
-                    <MyLink href="#">
+                    <MyLink href="/courses">
                       <div className="grid grid-cols-5 px-2 py-2">
                         <div className="w-10 h-10 p-0 rounded-full">
                           <Image
@@ -478,7 +478,7 @@ export default function Navbar() {
 
                 <Menu.Item>
                   {({ active }) => (
-                    <MyLink href="#">
+                    <MyLink href="/courses">
                       <div className="grid grid-cols-5 px-2 py-2">
                         <div className="w-10 h-10 p-0 rounded-full">
                           <Image
