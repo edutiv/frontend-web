@@ -38,7 +38,16 @@ const MyLink = forwardRef((props, ref) => {
 export default function Navbar() {
   const [isLogin, setIslogin] = useState(false);
   const [dataUser, setDataUser] = useState();
+  const [categories, setCategories] = useState();
   const cookies = new Cookies();
+
+  const getCategoryData = () => {
+    axios
+      .get(`${BASE_URL}/category`)
+      .then((response) => {
+        setCategories(response.data.data);
+      });
+  }
 
   const handleLogin = () => {
     let token = cookies.get("token");
@@ -59,6 +68,10 @@ export default function Navbar() {
         });
     }
   };
+
+  useEffect(() => {
+    getCategoryData();
+  }, [])
 
   useEffect(() => {
     handleLogin();
@@ -138,140 +151,44 @@ export default function Navbar() {
                       )}
                     </Menu.Item>
 
-                    <Menu.Item>
-                      {({ active }) => (
-                        <MyLink href="/courses">
-                          <div className="grid grid-cols-5 px-2 py-2">
-                            <div className="w-10 h-10 p-0 rounded-full">
-                              <Image
-                                src={backendCourse}
-                                alt="Course1"
-                                className="object-scale-down rounded-full"
-                                layout="responsive"
-                                loading="lazy"
-                              />
-                            </div>
-                            <div className="col-span-4 ">
-                              <h1
-                                className={classNames(
-                                  active
-                                    ? " text-gray-400"
-                                    : "text-gray-600/100",
-                                  " text-base font-semibold"
-                                )}
-                              >
-                                Backend Engineer
-                              </h1>
-                              <p className="text-xs text-slate-300 ">
-                                {" "}
-                                Full-Stack Web & Mobile Developer{" "}
-                              </p>
-                            </div>
-                          </div>
-                        </MyLink>
-                      )}
-                    </Menu.Item>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <MyLink href="/courses">
-                          <div className="grid grid-cols-5 px-2 py-2">
-                            <div className="w-10 h-10 p-0 rounded-full">
-                              <Image
-                                src={frontendCourse}
-                                alt="Course1"
-                                className="object-scale-down rounded-full"
-                                layout="responsive"
-                                loading="lazy"
-                              />
-                            </div>
-                            <div className="col-span-4 ">
-                              <h1
-                                className={classNames(
-                                  active
-                                    ? " text-gray-400"
-                                    : "text-gray-600/100",
-                                  " text-base font-semibold"
-                                )}
-                              >
-                                Frontend Engineer
-                              </h1>
-                              <p className="text-xs text-slate-300 ">
-                                {" "}
-                                UI/UX & Graphic Design{" "}
-                              </p>
-                            </div>
-                          </div>
-                        </MyLink>
-                      )}
-                    </Menu.Item>
-
-                    <Menu.Item>
-                      {({ active }) => (
-                        <MyLink href="/courses">
-                          <div className="grid grid-cols-5 px-2 py-2">
-                            <div className="w-10 h-10 p-0 rounded-full">
-                              <Image
-                                src={mobileCourse}
-                                alt="Course1"
-                                className="object-scale-down rounded-full"
-                                layout="responsive"
-                                loading="lazy"
-                              />
-                            </div>
-                            <div className="col-span-4 ">
-                              <h1
-                                className={classNames(
-                                  active
-                                    ? " text-gray-400"
-                                    : "text-gray-600/100",
-                                  " text-base font-semibold"
-                                )}
-                              >
-                                Mobile Engineer
-                              </h1>
-                              <p className="text-xs text-slate-300 ">
-                                {" "}
-                                Improve your skills{" "}
-                              </p>
-                            </div>
-                          </div>
-                        </MyLink>
-                      )}
-                    </Menu.Item>
-
-                    <Menu.Item>
-                      {({ active }) => (
-                        <MyLink href="/courses">
-                          <div className="grid grid-cols-5 px-2 py-2">
-                            <div className="w-10 h-10 p-0 rounded-full">
-                              <Image
-                                src={uiuxCourse}
-                                alt="Course1"
-                                className="object-scale-down rounded-full"
-                                layout="responsive"
-                                loading="lazy"
-                              />
-                            </div>
-                            <div className="col-span-4 ">
-                              <h1
-                                className={classNames(
-                                  active
-                                    ? " text-gray-400"
-                                    : "text-gray-600/100",
-                                  " text-base font-semibold"
-                                )}
-                              >
-                                UI/UX Designer
-                              </h1>
-                              <p className="text-xs text-slate-300 ">
-                                {" "}
-                                Improve your skills{" "}
-                              </p>
-                            </div>
-                          </div>
-                        </MyLink>
-                      )}
-                    </Menu.Item>
+                    {
+                      categories?.map((category) => (
+                        <Menu.Item key={category.id} >
+                          {({ active }) => (
+                            <MyLink href="/courses">
+                              <div className="grid grid-cols-5 px-2 py-2">
+                                <div className="w-10 h-10 p-0 rounded-full">
+                                  <Image
+                                    src={category.category_image}
+                                    alt={category.category_name + "-" + category.id}
+                                    className="object-scale-down rounded-full max-w-10 max-h-10"
+                                    layout="responsive"
+                                    loading="lazy"
+                                    width={40}
+                                    height={40}
+                                  />
+                                </div>
+                                <div className="col-span-4 ">
+                                  <h1
+                                    className={classNames(
+                                      active
+                                        ? " text-gray-400"
+                                        : "text-gray-600/100",
+                                      " text-base font-semibold"
+                                    )}
+                                  >
+                                    {category.category_name}
+                                  </h1>
+                                  <p className="text-xs text-slate-300 ">
+                                    {category.description}
+                                  </p>
+                                </div>
+                              </div>
+                            </MyLink>
+                          )}
+                        </Menu.Item>
+                      ))
+                    }
                   </div>
                 </Menu.Items>
               </Transition>
