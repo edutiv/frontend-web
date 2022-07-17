@@ -75,12 +75,14 @@ export default function CardProfile() {
             </Link>
           </div>
           <div className="bg-neutral-200 grid rounded-md hover:bg-[#43a89c63]">
-            <div className="flex p-1 font-medium ">
-              <KeyIcon className="text-[#4A5568] w-5" />
-              <p className="text-sm border-2 text-[#4A5568] border-transparent pl-2 ">
-                Change Password
-              </p>
-            </div>
+            <Link href="/profile/ChangePassword">
+              <div className="flex p-1 font-medium ">
+                <KeyIcon className="text-[#4A5568] w-5" />
+                <p className="text-sm border-2 text-[#4A5568] border-transparent pl-2 ">
+                  Change Password
+                </p>
+              </div>
+            </Link>
           </div>
           <div className="bg-neutral-200 grid rounded-md hover:bg-[#43a89c63] cursor-pointer">
             <Link href="/profile/MyCourse">
@@ -107,7 +109,7 @@ export default function CardProfile() {
             <div className="flex p-1 font-medium ">
               <GiftIcon className="text-[#4A5568] w-5" />
               <p className="text-sm border-2 text-[#4A5568] border-transparent pl-2 ">
-                Centificate
+                Certificate
               </p>
             </div>
             </Link>
