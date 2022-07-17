@@ -60,7 +60,7 @@ const SectionDetail = () => {
             setDetailSection(data);
          });
    }, [api]);
-   console.log('detailsection', detailSection);
+   // console.log('detailsection', detailSection);
    // console.log('detailcourse section', detailCourse?.sections);
    // console.log('detailcourse id', detailCourse?.id);
 

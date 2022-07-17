@@ -17,6 +17,7 @@ import LearnTools from "../../components/LearnTools";
 import { BASE_URL } from "../../config/API";
 import Cookies from "universal-cookie";
 import Swal from "sweetalert2";
+import ButtonCompleteCourse from "../../components/ButtonCompleteCourse";
 
 export default function Learn() {
   let api;
@@ -127,11 +128,11 @@ export default function Learn() {
   useEffect(() => {
     getUserEnrolled();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  },[]);
 
   useEffect(() => {
     checkUserEnrolled();
-  });
+  }, [dataEnrolled]);
 
   const handleCompleteMaterial = (idMaterial) => {
     let token = cookies.get("token");
@@ -148,42 +149,13 @@ export default function Learn() {
       )
       .then((res) => {
         Swal.fire("completed!!", "you are so great", "success");
+        getUserEnrolled();
       })
       .catch((err) => {
         Swal.fire("oops!!", "there is something wrong", "error");
       });
   };
 
-  const handleCheckCompleted = (idMaterial) => {
-    let materials = materialsReport?.filter((material) => {
-      return material.material.id == idMaterial;
-      // Use the toLowerCase() method to make it case-insensitive
-    });
-
-    let material;
-
-
-    if (materials) {
-      material = materials[0];
-    }
-
-    if (material?.is_completed) {
-      return (
-        <button className="bg-white px-5 py-2 text-[#126E64] rounded-md border-[1px] border-[#E0E0E0] text-[11px] hover:border-[#126E64] hover:-translate-y-[0.15rem] hover:transition hover:duration-100 hover:ease-in-out hover:drop-shadow-md focus:outline-none">
-          COMPLETED
-        </button>
-      );
-    } else {
-      return (
-        <button
-          onClick={() => handleCompleteMaterial(idMaterial)}
-          className="px-5 py-2 bg-[#126E64] sm:mr-2 rounded-md text-white text-[11px] hover:bg-[#09423c] hover:-translate-y-[0.15rem] hover:transition hover:duration-100 hover:ease-in-out hover:drop-shadow-md focus:outline-none"
-        >
-          FINISH
-        </button>
-      );
-    }
-  };
 
   return (
     <>
@@ -315,7 +287,9 @@ export default function Learn() {
                           >
                             NEXT
                           </button>
-                          {handleCheckCompleted(material.id)}
+                          {
+                          <ButtonCompleteCourse idMaterial={material.id} handleCompleteMaterial={handleCompleteMaterial} dataEnrolled={dataEnrolled} dataUser={dataUser}/>
+                          }
                         </div>
                       </div>
 

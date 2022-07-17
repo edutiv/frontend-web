@@ -41,13 +41,15 @@ function Login(req) {
       })
       .then((res) => {
         cookies.set('token', res.data.token, { path: '/', maxAge: 10800 });
-        let userId = jwtDecode(res.data.token).jti;
         axios.get(`${BASE_URL}/user/`, { headers: { "Authorization": `Bearer ${res.data.token}` } }).then((result) => {
-          Swal.fire(
-            'Welcome!',
-            'Succes to login!',
-            'success'
-          )
+          Swal.fire({
+            title: 'Welcome!',
+            text: 'Succes to login!',
+            icon: 'success',
+            timer: 1600,
+            timerProgressBar: true,
+            showConfirmButton: false
+          })
           setUserDetail(result.data.data);
           let userinfo = result.data.data;
           if (userinfo.roles[0].name === "ROLE_ADMIN") {
@@ -58,11 +60,14 @@ function Login(req) {
         });
       })
       .catch((error) => {
-        Swal.fire(
-          'Ooops..!',
-          'User not found!',
-          'warning'
-        )
+        Swal.fire({
+          title: 'Oops..!',
+          text: 'User not found!',
+          icon: 'warning',
+          timer: 1800,
+          timerProgressBar: true,
+          showConfirmButton: false
+        })
       });
   };
   return (

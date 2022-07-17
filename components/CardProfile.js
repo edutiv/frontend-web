@@ -31,44 +31,50 @@ export default function CardProfile() {
         {/* Menu Edit Profile */}
         <div className="mt-[48px] space-y-4 cursor-pointer w-full">
           <div className="bg-neutral-200 grid rounded-md hover:bg-[#43a89c63] cursor-pointer">
-			<Link href="/profile/editProfile">
-            <div className="flex p-1 font-medium ">
-              <PencilAltIcon className="text-[#4A5568] w-5" />
-              <p className="text-sm border-2 text-[#4A5568] border-transparent pl-2 ">
-                Edit profile
-              </p>
-            </div>
-			</Link>
+            <Link href="/profile/editProfile">
+              <div className="flex p-1 font-medium ">
+                <PencilAltIcon className="text-[#4A5568] w-5" />
+                <p className="text-sm border-2 text-[#4A5568] border-transparent pl-2 ">
+                  Edit profile
+                </p>
+              </div>
+            </Link>
           </div>
           <div className="bg-neutral-200 grid rounded-md hover:bg-[#43a89c63]">
-            <div className="flex p-1 font-medium ">
-              <KeyIcon className="text-[#4A5568] w-5" />
-              <p className="text-sm border-2 text-[#4A5568] border-transparent pl-2 ">
-                Change Password
-              </p>
-            </div>
+            <Link href="/profile/ChangePassword">
+              <div className="flex p-1 font-medium ">
+                <KeyIcon className="text-[#4A5568] w-5" />
+                <p className="text-sm border-2 text-[#4A5568] border-transparent pl-2 ">
+                  Change Password
+                </p>
+              </div>
+            </Link>
           </div>
-          <div className="bg-neutral-200 grid rounded-md hover:bg-[#43a89c63]">
-            <div className="flex p-1 font-medium ">
-              <AcademicCapIcon className="text-[#4A5568] w-5" />
-              <p className="text-sm border-2 text-[#4A5568] border-transparent pl-2  ">
-                My Course
-              </p>
-            </div>
+          <div className="bg-neutral-200 grid rounded-md hover:bg-[#43a89c63] cursor-pointer">
+            <Link href="/profile/MyCourse">
+              <div className="flex p-1 font-medium ">
+                <AcademicCapIcon className="text-[#4A5568] w-5" />
+                <p className="text-sm border-2 text-[#4A5568] border-transparent pl-2  ">
+                  My Course
+                </p>
+              </div>
+            </Link>
           </div>
           <div className="bg-neutral-200 grid rounded-md hover:bg-[#43a89c63] ">
-            <div className="flex p-1 font-medium ">
-              <PresentationChartLineIcon className="text-[#4A5568] w-5 " />
-              <p className="text-sm border-2 text-[#4A5568] border-transparent pl-2 ">
-                Progress Course
-              </p>
-            </div>
+            <Link href="/profile/ProgresCourse">
+              <div className="flex p-1 font-medium ">
+                <PresentationChartLineIcon className="text-[#4A5568] w-5 " />
+                <p className="text-sm border-2 text-[#4A5568] border-transparent pl-2 ">
+                  Progress Course
+                </p>
+              </div>
+            </Link>
           </div>
           <div className="bg-neutral-200 grid rounded-md hover:bg-[#43a89c63] text-[#126E64]">
             <div className="flex p-1 font-medium ">
               <GiftIcon className="text-[#4A5568] w-5" />
               <p className="text-sm border-2 text-[#4A5568] border-transparent pl-2 ">
-                Centificate
+                Certificate
               </p>
             </div>
           </div>
