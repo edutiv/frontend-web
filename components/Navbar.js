@@ -155,7 +155,7 @@ export default function Navbar() {
                       categories?.map((category) => (
                         <Menu.Item key={category.id} >
                           {({ active }) => (
-                            <MyLink href="/courses">
+                            <MyLink href={`/courses/searchCategory/${category.id}`}>
                               <div className="grid grid-cols-5 px-2 py-2">
                                 <div className="w-10 h-10 p-0 rounded-full">
                                   <Image

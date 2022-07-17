@@ -29,6 +29,7 @@ export default function Learn() {
   const [dataEnrolled, setDataEnrolled] = useState();
   const [idEnrolled, setIdEnrolled] = useState();
   const [materialsReport, setMaterialsReport] = useState();
+  const [progress, setProgress] = useState();
 
   useEffect(() => {
     axios.get(`${BASE_URL}/course`).then(async (response) => {
@@ -116,19 +117,22 @@ export default function Learn() {
     });
 
     userEnrolled?.slice(0).map((item) => {
+      return setProgress(item.progress);
+    });
+
+    userEnrolled?.slice(0).map((item) => {
       return setIdEnrolled(item.id);
     });
 
     userEnrolled?.slice(0).map((item) => {
       return setMaterialsReport(item.reports);
     });
-    
   };
 
   useEffect(() => {
     getUserEnrolled();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     checkUserEnrolled();
@@ -155,7 +159,6 @@ export default function Learn() {
         Swal.fire("oops!!", "there is something wrong", "error");
       });
   };
-
 
   return (
     <>
@@ -227,17 +230,31 @@ export default function Learn() {
                   </div>
                 ))}
               </Tab.List>
-              <div className="mb-8 prepatation">
-                <h2 className=" text-[13px] mb-4">Certificate</h2>
-                <Link href={`/learns/succes/${selectedCourseId}`}>
-                  <a>
-                    <ButtonLearnNav
-                      icon={"preparation"}
-                      title={"Download Certificate"}
-                    />
-                  </a>
-                </Link>
-              </div>
+
+              {progress == 100 ? (
+                <div className="mb-8 prepatation">
+                  <h2 className=" text-[13px] mb-4">Certificate</h2>
+                  <Link href={`/learns/succes/${selectedCourseId}`}>
+                    <a>
+                      <ButtonLearnNav
+                        icon={"preparation"}
+                        title={"Download Certificate"}
+                      />
+                    </a>
+                  </Link>
+                </div>
+              ) : (
+                <div className="mb-8 prepatation">
+                  <h2 className=" text-[13px] mb-4">Certificate</h2>
+                    <a>
+                      <ButtonLearnNav
+                        icon={"preparation"}
+                        title={"Download Certificate"}
+                        disabled={true}
+                      />
+                    </a>
+                </div>
+              )}
             </div>
             {/* side navbar */}
 
@@ -288,7 +305,12 @@ export default function Learn() {
                             NEXT
                           </button>
                           {
-                          <ButtonCompleteCourse idMaterial={material.id} handleCompleteMaterial={handleCompleteMaterial} dataEnrolled={dataEnrolled} dataUser={dataUser}/>
+                            <ButtonCompleteCourse
+                              idMaterial={material.id}
+                              handleCompleteMaterial={handleCompleteMaterial}
+                              dataEnrolled={dataEnrolled}
+                              dataUser={dataUser}
+                            />
                           }
                         </div>
                       </div>

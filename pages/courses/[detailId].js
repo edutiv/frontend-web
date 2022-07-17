@@ -69,20 +69,29 @@ export default function Detail() {
   const getEdutivData = () => {
     let idCourse = query.detailId;
     let endpoints = [
-      `${BASE_URL}/course/${idCourse}`,
-      `${BASE_URL}/enrolled/courses/${idCourse}`,
+      `${BASE_URL}/course/${idCourse}`
     ];
 
     if (idCourse) {
       Promise.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
-        ([{ data: course }, { data: dataEnrolled }]) => {
+        ([{ data: course }]) => {
           setDataCourse(course.data);
           setVideo(course.data?.sections[0]?.materials[0]?.material_url);
-          setDataEnrolled(dataEnrolled.data);
+          
           console.log(course.data);
         }
       );
+
+      axios.get(`${BASE_URL}/enrolled/courses/${idCourse}`).then((res)=>{
+        setDataEnrolled(res.data.data);
+      }).catch((err)=>{
+  
+      })
     }
+
+    
+
+    
   };
 
   const handleEnrollUser = () => {
@@ -138,7 +147,14 @@ export default function Detail() {
         <div className=" flex justify-center mt-6">
           <div className="flex-col justify-center text-center">
             <h1 className="flex justify-center">Member</h1>
-            <p>{`${dataEnrolled?.length} enrolled`}</p>
+            {
+              dataEnrolled? (
+                <p>{`${dataEnrolled?.length} enrolled`}</p>
+              ) : (
+                <p>{`0 enrolled`}</p>
+              )
+            }
+            
           </div>
           <div className=" mx-12 flex-col justify-center">
             <h1>Serifikat</h1>
