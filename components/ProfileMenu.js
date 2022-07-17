@@ -85,7 +85,7 @@ export default function ProfileMenu({ dataUser }) {
                     </Menu.Item>
                     <Menu.Item>
                       {({ active }) => (
-                        <MyLink href="/courses">
+                        <MyLink href="/profile/profileCertificate">
                           <div className="px-2 py-2 text-sm ">
                             <p>Certificate</p>
                           </div>

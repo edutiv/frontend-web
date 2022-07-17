@@ -9,6 +9,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { BASE_URL } from "../../config/API";
 import Cookies from "universal-cookie";
+import Navbar from "../../components/Navbar";
 
 function profileCertificate() {
   let cookies = new Cookies();
@@ -44,7 +45,7 @@ function profileCertificate() {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <header>
-        <NavbarProfile />
+        <Navbar />
       </header>
       <main>
         <div className="pl-20 pr-20 grid content-center md:mt-16 ">
