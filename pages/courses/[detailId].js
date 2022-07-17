@@ -364,11 +364,11 @@ export default function Detail() {
                         Complete all the supports below before learning
                       </p>
                     </div>
-                    <div className="md:flex flex-col">
+                    <div className="md:flex-row flex flex-col md:w-fit ">
                       {dataCourse?.tools?.map((data) => (
                         <div
                           key={data.id}
-                          className="  mx-auto md:w-[147px] w-full md:mt-0 mt-3 bg-[#F5F5F5] p-2 text-center grid place-content-center"
+                          className=" mr-2  mx-auto md:w-[147px] w-full md:mt-0 mt-3 bg-[#F5F5F5] p-2 text-center grid place-content-center"
                         >
                           <div className=" flex justify-center mb-3">
                             <img
