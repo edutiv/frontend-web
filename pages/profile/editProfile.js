@@ -93,6 +93,7 @@ function EditProfile() {
                       id="firstName"
                       className="w-[420px] text-sm text-[#C2C2C2] rounded-lg px-3 py-1 focus:outline-none focus:ring focus:ring-sky-200 focus:border-sky-700 transition duration-200 border-[#C2C2C2] border bg-neutral-100"
                       placeholder={dataUser?.firstname}
+                      disabled
                     />
                   </div>
                   <div>
@@ -108,6 +109,7 @@ function EditProfile() {
                       id="lastName"
                       className="w-[420px] text-sm text-[#C2C2C2] rounded-lg px-3 py-1 focus:outline-none focus:ring focus:ring-sky-200 focus:border-sky-700 transition duration-200 border-[#C2C2C2] border bg-neutral-100"
                       placeholder={dataUser?.lastname}
+                      disabled
                     />
                   </div>
                 </div>
@@ -124,6 +126,7 @@ function EditProfile() {
                     id="email"
                     className="w-full text-sm text-[#C2C2C2] rounded-lg px-3 py-1 focus:outline-none focus:ring focus:ring-sky-200 focus:border-sky-700 transition duration-200 border-[#C2C2C2] border bg-neutral-100"
                     placeholder={dataUser?.username}
+                    disabled
                   />
                 </div>
                 <div>

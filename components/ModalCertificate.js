@@ -3,8 +3,9 @@ import React from "react";
 import { useState, Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import Certificate from "./Certificate";
+import { DownloadIcon } from "@heroicons/react/solid";
 
-export default function ModalCertificate({ dataCourse }) {
+export default function ModalCertificate({ dataCourse, iconDownload }) {
   const [isOpen, setIsOpen] = useState(false);
 
   console.log(dataCourse);
@@ -18,12 +19,22 @@ export default function ModalCertificate({ dataCourse }) {
   }
   return (
     <div>
-      <button
-        onClick={() => setIsOpen(true)}
-        className="md:w-80 w-full py-3 bg-[#126E64] rounded-md text-white text-[11px] hover:bg-[#09423c] hover:-translate-y-[0.15rem] hover:transition hover:duration-100 hover:ease-in-out hover:drop-shadow-md"
-      >
-        Download Certificate
-      </button>
+      {iconDownload ? (
+        <p
+          className="col-span-2 w-full text-sm text-slate-400 cursor-pointer"
+          onClick={() => setIsOpen(true)}
+        >
+          <DownloadIcon className="w-5 h-5 ml-auto"></DownloadIcon>
+        </p>
+      ) : (
+        <button
+          onClick={() => setIsOpen(true)}
+          className="md:w-80 w-full py-3 bg-[#126E64] rounded-md text-white text-[11px] hover:bg-[#09423c] hover:-translate-y-[0.15rem] hover:transition hover:duration-100 hover:ease-in-out hover:drop-shadow-md"
+        >
+          Download Certificate
+        </button>
+      )}
+
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
           <Transition.Child
@@ -56,7 +67,6 @@ export default function ModalCertificate({ dataCourse }) {
                   ></Dialog.Title>
 
                   <Certificate dataCourse={dataCourse} />
-
                 </Dialog.Panel>
               </Transition.Child>
             </div>
