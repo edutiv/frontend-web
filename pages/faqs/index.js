@@ -69,7 +69,7 @@ export default function Faqs() {
             <form className=" flex justify-center mt-10 mb-20" onSubmit={handleSubmitSearch}>
               <div className="rounded-lg border-2 w-fit flex shadow-md ">
                 <input
-                  className="w-[560px] h-[29px]  border-none rounded-lg"
+                  className="md:w-[560px] h-[29px]  border-none rounded-lg"
                   type="text"
                   name="search"
                   placeholder="Search Course..."
@@ -93,7 +93,7 @@ export default function Faqs() {
                 <Disclosure>
                   {({ open }) => (
                     <>
-                      <Disclosure.Button className="flex w-full justify-between rounded-lg bg-purple-100 px-4 py-2 text-left text-sm font-medium text-purple-900 hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
+                      <Disclosure.Button className="flex w-full justify-between rounded-lg px-4 py-2 text-left text-sm font-medium text-black hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
                         <span>{item.question}</span>
                         {open ? (
                           <MinusCircleIcon className=" h-5 w-5 text-black" />

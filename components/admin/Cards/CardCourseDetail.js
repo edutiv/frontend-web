@@ -195,13 +195,9 @@ const CardCourseDetail = ({ color, title, sidebutton, type, data, refresh, cours
                   <tbody>
                      {
                         type === 'section' & data.length !== 0 ? data?.map((items) => (
-                           // console.log(items)
                            <tr key={items.id}>
                               <td className="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
                                  {items.section_name}
-                                 {
-                                    console.log('section id', items.id)
-                                 }
                               </td>
                               <td className="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
                                  {moment(items.created_at).format('LLL')}

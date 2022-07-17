@@ -10,6 +10,8 @@ import Sidebar from "../components/admin/Sidebar/Sidebar.js";
 import HeaderStats from "../components/admin/Headers/HeaderStats.js";
 
 import { BASE_URL } from "../config/API.js";
+import Router from "next/router.js";
+import Swal from "sweetalert2";
 
 export const CounterContext = createContext(null);
 
@@ -18,8 +20,29 @@ export default function Admin({ children }) {
   const [counterData, setCounterData] = useState();
   const [counterMember, setCounterMember] = useState();
   const [counterRequest, setCounterRequest] = useState();
+  const [dataAdmin, setDataAdmin] = useState();
   const cookies = new Cookies();
   let token = cookies.get('token');
+
+  const userChecking = () => {
+    axios.get(`${BASE_URL}/user/`, { headers: { "Authorization": `Bearer ${token}` } }).then((result) => {
+      let userinfo = result.data.data;
+      if (userinfo.roles[0].name === "ROLE_ADMIN") {
+        setDataAdmin(userinfo);
+      } else {
+        Swal.fire({
+          title: 'Access Denied!',
+          text: "You will be redirected to homepage",
+          icon: 'warning',
+          showConfirmButton: false,
+          timer: 1600,
+          timerProgressBar: true
+        }).then(() => {
+          Router.push('/');
+        })
+      }
+    });
+  }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const counterFresh = () => {
@@ -37,7 +60,7 @@ export default function Admin({ children }) {
       headers: { "Authorization": `Bearer ${token}` } 
     })
     .then(function (res) {
-      console.log('member',res);
+      // console.log('member',res);
       setCounterMember(res.data.data);
     })
   }
@@ -47,7 +70,7 @@ export default function Admin({ children }) {
       headers: { "Authorization" : `Bearer ${token}` }
     })
     .then(function (res) {
-      console.log('request', res);
+      // console.log('request', res);
       setCounterRequest(res.data.data);
     })
   }
@@ -75,6 +98,7 @@ export default function Admin({ children }) {
 
   useEffect(() => {
     requestCounter();
+    userChecking();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -90,7 +114,7 @@ export default function Admin({ children }) {
   }, 0);
 
   return (
-    <CounterContext.Provider value={{ course: totalCourse, material: totalMaterial, member: totalMember, request: totalRequest, refreshCourse, refreshMember }}>
+    <CounterContext.Provider value={{ course: totalCourse, material: totalMaterial, member: totalMember, request: totalRequest, admin: dataAdmin, refreshCourse, refreshMember }}>
       <Head>
         <title>Edutiv Admin Dashboard</title>
       </Head>
