@@ -11,6 +11,8 @@ import { ChevronUpIcon } from "@heroicons/react/solid";
 import axios from "axios";
 import { BASE_URL } from "../../config/API";
 import Footer from "../../components/Footer";
+import Image from "next/image";
+import loader from "../../public/assets/img/load.gif";
 
 export default function Faqs() {
   const [dataFaqs, setDataFaqs] = useState();
@@ -55,7 +57,16 @@ export default function Faqs() {
   }, []);
 
   if(!dataFaqs){
-    return <div>loading....</div>
+    return <div className="flex flex-col h-screen w-full justify-center items-center">
+      <Image 
+        src={loader}
+        alt="loader"
+        height={80}
+        width={80}
+        quality={100}
+      />
+      <p className="text-base text-black">Drink water at least 5 times a day...</p>
+    </div>;
   }
 
   return (

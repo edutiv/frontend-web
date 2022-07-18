@@ -6,6 +6,8 @@ import axios from "axios";
 import mentorCourseBs from "../../public/assets/img/mentor.png";
 import { BASE_URL } from '../../config/API';
 import Footer from "../../components/Footer"
+import Image from "next/image";
+import loader from "../../public/assets/img/load.gif";
 
 export default function CourseListPage() {
   // const [data, setData] = useState();
@@ -102,7 +104,16 @@ export default function CourseListPage() {
   };
 
   if(!dataCourse){
-    return <div>loading...</div>
+    return <div className="flex flex-col h-screen w-full justify-center items-center">
+      <Image 
+        src={loader}
+        alt="loader"
+        height={80}
+        width={80}
+        quality={100}
+      />
+      <p className="text-base text-black">Don&apos; forget to eat...</p>
+    </div>;
   }
 
   return (
@@ -146,7 +157,7 @@ export default function CourseListPage() {
           <div className="md:col-span-3 w-full">
             <div className="h-[370px] border-2 p-6 rounded-md w-full">
               <form>
-                <label>Sort</label>
+                {/* <label>Sort</label>
                 <select
                   name="filterCourse"
                   className=" w-full text-sm h-[36px] rounded-md px-3"
@@ -155,7 +166,7 @@ export default function CourseListPage() {
                   <option value="Longest">Longest</option>
                   <option value="highest">Highest rating</option>
                   <option value="lowest">Lowest rating</option>
-                </select>
+                </select> */}
 
                 <div className="my-5">
                   <label>Filter Categories</label>
@@ -169,7 +180,7 @@ export default function CourseListPage() {
                       value="Backend Engineer"
                       onClick={handleCheckbox}
                     />{" "}
-                    <label>Backeng Engineer</label>
+                    <label>Backend Engineer</label>
                   </div>
 
                   <div className=" mb-2">

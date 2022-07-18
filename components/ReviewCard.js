@@ -8,7 +8,7 @@ import mentor from "../public/assets/img/mentor.png";
 export default function ReviewCard({comment, name, rating }) {
 
   return (
-    <div className=" p-3 h-fit grid grid-cols-1 border place-content-center drop-shadow-lg rounded-md">
+    <div className=" p-3 h-fit grid grid-cols-1 border place-content-center drop-shadow-lg rounded-md hover:border-[#126E64] hover:-translate-y-[0.15rem] hover:transition hover:duration-100 hover:ease-in-out hover:drop-shadow-md hover:cursor-pointer">
       <div className=" w-full rounded-full">
         <div className=" w-10 h-10 rounded-full mx-auto">
           <Image

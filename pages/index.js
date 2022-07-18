@@ -14,6 +14,8 @@ import mentorCourseBs from "../public/assets/img/mentor.png";
 import icons from "../icons";
 import { BASE_URL } from "../config/API";
 import Link from "next/link";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 import { ArrowSmRightIcon } from "@heroicons/react/solid";
 import Footer from "../components/Footer";
@@ -79,6 +81,12 @@ export default function Home() {
   // }, [api]);
   // console.log(data);
 
+  useEffect(() => {
+    AOS.init({
+      duration : 2000
+    });
+  }, []);
+
   return (
     <>
       <header>
@@ -93,18 +101,18 @@ export default function Home() {
 
           </div>
         ) : (
-          <div className="grid content-center px-8 mt-6 md:px-20 md:mt-16">
+          <div className="grid content-center px-8 mt-6 md:px-20 md:mt-16" >
             <div className="grid content-center grid-cols-1 gap-6 md:grid-cols-2">
               {/* title */}
               <div className="grid content-center">
                 <div>
-                  <p className="text-[30px] md:text-[2.5rem] text-center md:text-left">
+                  <p className="text-[30px] md:text-[2.5rem] text-center md:text-left" data-aos={"zoom-in"} data-aos-duration="500" >
                     <strong className=" text-[#126E64]">Grow</strong> Your
                     Skills to <br /> Advance <br />
                     Your{" "}
-                    <strong className="text-[#126E64]">Career Path </strong>
+                    <strong className="text-[#126E64]" >Career Path </strong>
                   </p>
-                  <p className="text-[#9E9E9E] pt-1 text-center md:text-left">
+                  <p className="text-[#9E9E9E] pt-1 text-center md:text-left" data-aos={"fade-up"} data-aos-duration="1000" >
                     Learn from expert professionals and join the largest online
                     community <br /> for creatives
                   </p>
@@ -121,7 +129,7 @@ export default function Home() {
                 </div>
               </div>
               {/* image */}
-              <div className="flex justify-center">
+              <div className="flex justify-center" data-aos={"fade-right"}>
                 <Image
                   className="w-full max-h-[600px]"
                   src={titleImg}
@@ -136,7 +144,7 @@ export default function Home() {
 
         {/* features icon */}
 
-        <div className="px-20 py-6 md:py-24">
+        <div className="px-20 py-6 md:py-24" data-aos={"zoom-in-down"}>
           <div className="flex-col justify-center hidden gap-3 md:flex md:justify-around md:flex-row md:gap-10">
             {icons.icons.map((icon) => (
               <div className="flex items-center" key={icon.src}>
@@ -164,9 +172,9 @@ export default function Home() {
 
         <div className="mx-8 mb-20 md:mx-20">
           <div>
-            <p className="text-base text-[#126E64]">Let’s learning today</p>
+            <p className="text-base text-[#126E64]" data-aos={"fade-right"} data-aos-duration={900}>Let’s learning today</p>
             <div className="flex flex-col md:flex-row md:justify-between">
-              <h1 className="md:mb-12 mb-6 text-[30px] md:text-[2.5rem] w-full md:w-7/12">
+              <h1 className="md:mb-12 mb-6 text-[30px] md:text-[2.5rem] w-full md:w-7/12" data-aos={"zoom-in"} data-aos-duration={1000}>
                 Courses with categories that we have prepared for you
               </h1>
               <Link href="/courses">
@@ -177,7 +185,7 @@ export default function Home() {
                 </button>
               </Link>
             </div>
-            <div className="flex flex-col justify-center w-full gap-3 md:flex-row md:justify-start">
+            <div className="flex flex-col justify-center w-full gap-3 md:flex-row md:justify-start" data-aos={"zoom-in"} data-aos-duration={1000}>
               {categories?.map((category) => (
                 <CardCategory
                   key={category.id}
@@ -208,7 +216,7 @@ export default function Home() {
               </button>
             </Link>
           </div>
-          <div className="grid grid-cols-1 gap-3 lg:grid-cols-4 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-3 lg:grid-cols-4 md:grid-cols-2" data-aos={"zoom-in-down"} data-aos-duration={1500}>
             {dataCourse?.slice(0, 4).map((item) => (
               <CardCourse
                 key={item.id}

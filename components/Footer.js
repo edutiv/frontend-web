@@ -65,20 +65,22 @@ const Footer = () => {
                            </span>
                            <ul className="list-unstyled">
                               <li>
-                                 <a
-                                    className="text-white hover:text-blueGray-800 block pb-2 text-sm"
-                                    href="#"
-                                 >
-                                    Course
-                                 </a>
+                                 <Link href="/courses">
+                                    <a
+                                       className="text-white rounded-md md:w-fit px-2 py-1 block text-sm hover:bg-emerald-600 hover:-translate-y-[0.15rem] hover:shadow-sm hover:transition hover:duration-100"
+                                    >
+                                       Course
+                                    </a>
+                                 </Link>
                               </li>
                               <li>
-                                 <a
-                                    className="text-white hover:text-blueGray-800 block pb-2 text-sm"
-                                    href="#"
-                                 >
-                                    Request
-                                 </a>
+                                 <Link href="/request">
+                                    <a
+                                       className="text-white rounded-md md:w-fit px-2 py-1 block text-sm hover:bg-emerald-600 hover:-translate-y-[0.15rem] hover:shadow-sm hover:transition hover:duration-100"
+                                    >
+                                       Request
+                                    </a>
+                                 </Link>
                               </li>
                            </ul>
                         </div>
@@ -88,36 +90,40 @@ const Footer = () => {
                            </span>
                            <ul className="list-unstyled">
                               <li>
-                                 <a
-                                    className="text-white hover:text-blueGray-800 block pb-2 text-sm"
-                                    href="#"
-                                 >
-                                    Backend Engineer
-                                 </a>
+                                 <Link href="/courses/searchCategory/1">
+                                    <a
+                                       className="text-white rounded-md md:w-fit px-2 py-1 block text-sm hover:bg-emerald-600 hover:-translate-y-[0.15rem] hover:shadow-sm hover:transition hover:duration-100"
+                                    >
+                                       Backend Engineer
+                                    </a>
+                                 </Link>
                               </li>
                               <li>
-                                 <a
-                                    className="text-white hover:text-blueGray-800 block pb-2 text-sm"
-                                    href="#"
-                                 >
-                                    Frontend Engineer
-                                 </a>
+                                 <Link href="/courses/searchCategory/2">
+                                    <a
+                                       className="text-white rounded-md md:w-fit px-2 py-1 block text-sm hover:bg-emerald-600 hover:-translate-y-[0.15rem] hover:shadow-sm hover:transition hover:duration-100"
+                                    >
+                                       Frontend Engineer
+                                    </a>
+                                 </Link>
                               </li>
                               <li>
-                                 <a
-                                    className="text-white hover:text-blueGray-800 block pb-2 text-sm"
-                                    href="#"
-                                 >
-                                    Mobile Engineer
-                                 </a>
+                                 <Link href="/courses/searchCategory/3">
+                                    <a
+                                       className="text-white rounded-md md:w-fit px-2 py-1 block text-sm hover:bg-emerald-600 hover:-translate-y-[0.15rem] hover:shadow-sm hover:transition hover:duration-100"
+                                    >
+                                       Mobile Engineer
+                                    </a>
+                                 </Link>
                               </li>
                               <li>
-                                 <a
-                                    className="text-white hover:text-blueGray-800 block pb-2 text-sm"
-                                    href="#"
-                                 >
-                                    UI/UX
-                                 </a>
+                                 <Link href="/courses/searchCategory/4">
+                                    <a
+                                       className="text-white rounded-md md:w-fit px-2 py-1 block text-sm hover:bg-emerald-600 hover:-translate-y-[0.15rem] hover:shadow-sm hover:transition hover:duration-100"
+                                    >
+                                       UI/UX Designer
+                                    </a>
+                                 </Link>
                               </li>
                            </ul>
                         </div>
@@ -126,32 +132,31 @@ const Footer = () => {
                               About
                            </span>
                            <ul className="list-unstyled">
-                              <li>
+                              {/* <li>
                                  <a
                                     className="text-white hover:text-blueGray-800 block pb-2 text-sm"
                                     href="#"
                                  >
                                     Term & Conditions
                                  </a>
-                              </li>
+                              </li> */}
                               <li>
                                  <a
-                                    className="text-white hover:text-blueGray-800 block pb-2 text-sm"
-                                    href="#"
+                                    className="text-white rounded-md md:w-fit px-2 py-1 block text-sm hover:bg-emerald-600 hover:-translate-y-[0.15rem] hover:shadow-sm hover:transition hover:duration-100"
+                                    href="mailto:edutivsupport@gmail.com?subject=Edutiv%20Support%20Mail%20Inquiry%20"
                                  >
                                     Email Support
                                  </a>
                               </li>
                               <li>
-                                 <Link  href="/faqs">
-                                 <a
-                                    className="text-white hover:text-blueGray-800 block pb-2 text-sm"
-                                   
-                                 >
-                                    FAQ
-                                 </a>
+                                 <Link href="/faqs">
+                                    <a
+                                       className="text-white rounded-md md:w-fit px-2 py-1 block text-sm hover:bg-emerald-600 hover:-translate-y-[0.15rem] hover:shadow-sm hover:transition hover:duration-100"
+                                    >
+                                       FAQ
+                                    </a>
                                  </Link>
-                                 
+
                               </li>
                            </ul>
                         </div>
