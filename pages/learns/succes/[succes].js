@@ -155,7 +155,7 @@ export default function SuccesCourse() {
           ) : (
             <div className="w-full flex flex-col items-center">
               <div className="my-1 md:w-80 w-full">
-                <ModalCertificate dataCourse={dataCourse} />
+                <ModalCertificate dataCourse={dataCourse} dataUser={dataUser}/>
               </div>
               <div className="my-1 md:w-80 w-full">
                 <ModalRating

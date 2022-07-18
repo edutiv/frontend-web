@@ -5,7 +5,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import Certificate from "./Certificate";
 import { DownloadIcon } from "@heroicons/react/solid";
 
-export default function ModalCertificate({ dataCourse, iconDownload }) {
+export default function ModalCertificate({ dataCourse, iconDownload , dataUser}) {
   const [isOpen, setIsOpen] = useState(false);
 
   console.log(dataCourse);
@@ -66,7 +66,7 @@ export default function ModalCertificate({ dataCourse, iconDownload }) {
                     className="text-lg font-medium leading-6 text-gray-900"
                   ></Dialog.Title>
 
-                  <Certificate dataCourse={dataCourse} />
+                  <Certificate dataCourse={dataCourse} dataUser={dataUser}/>
                 </Dialog.Panel>
               </Transition.Child>
             </div>
