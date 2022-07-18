@@ -11,7 +11,7 @@ import { BASE_URL } from "../../config/API";
 import Cookies from "universal-cookie";
 import Navbar from "../../components/Navbar";
 
-function profileCertificate() {
+function ProfileCertificate() {
   let cookies = new Cookies();
   const [historyCourse, setHistoryCourse] = useState();
 
@@ -78,4 +78,4 @@ function profileCertificate() {
   );
 }
 
-export default profileCertificate;
+export default ProfileCertificate;

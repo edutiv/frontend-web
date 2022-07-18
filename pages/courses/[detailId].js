@@ -19,6 +19,7 @@ import Cookies from "universal-cookie";
 import jwtDecode from "jwt-decode";
 import Swal from "sweetalert2";
 import Footer from "../../components/Footer"
+import loader from "../../public/assets/img/load.gif";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -135,7 +136,16 @@ export default function Detail() {
   });
 
   if (!dataCourse) {
-    return <div>loading ...</div>;
+    return <div className="flex flex-col h-screen w-full justify-center items-center">
+      <Image 
+        src={loader}
+        alt="loader"
+        height={80}
+        width={80}
+        quality={100}
+      />
+      <p className="text-base text-black">Don&apos;t forget to sleep...</p>
+    </div>;
   }
   return (
     <div>

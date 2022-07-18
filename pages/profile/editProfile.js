@@ -54,6 +54,7 @@ function EditProfile() {
 
   useEffect(() => {
     handleLogin();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 

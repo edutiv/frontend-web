@@ -7,6 +7,8 @@ import mentorCourseBs from "../../../public/assets/img/mentor.png";
 import { BASE_URL } from "../../../config/API";
 import Footer from "../../../components/Footer";
 import { useRouter } from "next/router";
+import Image from "next/image";
+import loader from "../../public/assets/img/load.gif";
 
 export default function CourseListPage() {
   // const [data, setData] = useState();
@@ -41,6 +43,7 @@ export default function CourseListPage() {
 
   useEffect(() => {
     getEdutivData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleChange = (e) => {
@@ -110,7 +113,16 @@ export default function CourseListPage() {
   };
 
   if (!dataCourse) {
-    return <div>loading...</div>;
+    return <div className="flex flex-col h-screen w-full justify-center items-center">
+      <Image 
+        src={loader}
+        alt="loader"
+        height={80}
+        width={80}
+        quality={100}
+      />
+      <p className="text-base text-black">Have a quality time...</p>
+    </div>;
   }
 
   return (
