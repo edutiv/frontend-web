@@ -1,27 +1,24 @@
+/* eslint-disable @next/next/no-img-element */
 import Image from "next/image";
+import ModalCertificate from "./ModalCertificate";
 
-import { DownloadIcon } from "@heroicons/react/solid";
-
-const CardCertificate = ({ image, course, finish }) => {
-
-    return (
-        <div className="bg-[#f5f5f5] rounded-md py-6 px-4">
-            <div className="w-[11/12] h-24 max-h-[100px]">
-                <Image src={image} alt="backend-course" layout="responsive" quality={100} />
-            </div>
-            <div className="flex flex-row w-full gap-1 pt-20">
-                <h5 className="text-xl font-medium pb-2 basis-1/6">{course}</h5>
-                <p className="m-0 text-sm text-slate-400 pb-3 basis-1/2">
-                    <DownloadIcon className="w-6 h-6"></DownloadIcon>
-                </p>
-                <div className="flex gap-2">
-                    <div>
-                        <div className="m-0 text-sm text-black pb-0" >{finish}</div>
-                    </div>
-                </div>
-            </div>
+const CardCertificate = ({ image, course, finish, dataCourse }) => {
+  return (
+    <div className="bg-[#f5f5f5] rounded-md py-6 px-4">
+      <div className="w-[11/12]">
+        <img src="/assets/img/Certificate.png" alt="backend-course" />
+      </div>
+      <div className="grid grid-cols-12 w-full mt-3">
+        <h5 className="col-span-10 text-md font-medium ">{course}</h5>
+        {
+            <ModalCertificate iconDownload={true} dataCourse={dataCourse}/>
+        }
+        <div className="col-span-12 mt-5">
+          <div className="mt-auto text-sm text-black pb-0">{finish}</div>
         </div>
-    );
-}
+      </div>
+    </div>
+  );
+};
 
 export default CardCertificate;

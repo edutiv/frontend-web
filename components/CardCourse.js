@@ -21,7 +21,7 @@ export default function CardCourse({
 }) {
   return (
     <div className="">
-      <div className="px-4 py-4 border-[1px] border-[#C2C2C2] rounded-md md:min-h-[300px]">
+      <div className="px-4 py-4 border-[1px] border-[#C2C2C2] rounded-md md:min-h-[300px] hover:border-[#126E64] hover:-translate-y-[0.15rem] hover:transition hover:duration-100 hover:ease-in-out hover:drop-shadow-md hover:cursor-pointer">
         <div className="mb-3">
           <img
             src={image}
@@ -35,11 +35,11 @@ export default function CardCourse({
             {mentor ? (
               <div className="flex">
                 <div className="w-5 h-5 rounded-full">
-                  {/* <img
-                  src={mentor}
+                  <img
+                  src="/assets/img/mentor.png"
                   alt="Course1"
                   className="object-cover border-2 rounded-full"
-                /> */}
+                />
                 </div>
                 <p className="my-1 ml-2 text-xs text-slate-300">{mentorName}</p>
               </div>
