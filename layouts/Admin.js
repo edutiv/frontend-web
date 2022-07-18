@@ -25,7 +25,8 @@ export default function Admin({ children }) {
   let token = cookies.get('token');
 
   const userChecking = () => {
-    axios.get(`${BASE_URL}/user/`, { headers: { "Authorization": `Bearer ${token}` } }).then((result) => {
+    axios.get(`${BASE_URL}/user/`, { headers: { "Authorization": `Bearer ${token}` } })
+    .then((result) => {
       let userinfo = result.data.data;
       if (userinfo.roles[0].name === "ROLE_ADMIN") {
         setDataAdmin(userinfo);
@@ -41,6 +42,18 @@ export default function Admin({ children }) {
           Router.push('/');
         })
       }
+    })
+    .catch((err) => {
+      Swal.fire({
+        title: 'Access Denied!',
+        text: "You will be redirected to homepage",
+        icon: 'warning',
+        showConfirmButton: false,
+        timer: 1600,
+        timerProgressBar: true
+      }).then(() => {
+        Router.push('/');
+      })
     });
   }
 
@@ -99,7 +112,7 @@ export default function Admin({ children }) {
   useEffect(() => {
     requestCounter();
     userChecking();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const totalMember = counterMember?.length;
