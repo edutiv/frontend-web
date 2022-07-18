@@ -1,7 +1,7 @@
 import React from "react";
 import ReactToPrint from "react-to-print";
 
-export default function certificate({dataCourse}) {
+export default function certificate({dataCourse, dataUser}) {
     let componentRef;
 
     const handleTopic = () => {
@@ -10,6 +10,8 @@ export default function certificate({dataCourse}) {
       let dataTopic = topic.reduce((a, b) => `${a} - ${b}`);
       return dataTopic
     }
+
+    console.log("profile",dataUser)
     
   return (
     <div>
@@ -30,7 +32,7 @@ export default function certificate({dataCourse}) {
               <strong>{dataCourse.course_name}</strong>
             </p>
             <h1 className="title-certificate">Certificate of Completion</h1>
-            <p className="student-name">Matthew Taylor</p>
+            <p className="student-name">{`${dataUser?.firstname} ${dataUser?.lastname}`}</p>
             <div className="certificate-content">
               <div className="about-certificate">
                 <p></p>

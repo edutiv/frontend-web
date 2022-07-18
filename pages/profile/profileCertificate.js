@@ -14,6 +14,26 @@ import Navbar from "../../components/Navbar";
 function ProfileCertificate() {
   let cookies = new Cookies();
   const [historyCourse, setHistoryCourse] = useState();
+  const [dataUser, setDataUser] = useState();
+
+  const handleLogin = () => {
+    let token = cookies.get("token");
+
+    if (token) {
+      axios
+        .get(`${BASE_URL}/user`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((res) => {
+          setDataUser(res.data.data);
+         
+        })
+        .catch((error) => {
+          alert(error);
+        });
+    }
+  };
+
 
   const getHistoryData = () => {
     let token = cookies.get("token");
@@ -36,6 +56,7 @@ function ProfileCertificate() {
 
   useEffect(() => {
     getHistoryData();
+    handleLogin();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
@@ -67,6 +88,7 @@ function ProfileCertificate() {
                     course={item.course.course_name}
                     finish={`Finish ${item.course.created_at}`}
                     dataCourse={item.course}
+                    dataUser={dataUser}
                   />
                 ))}
               </div>
