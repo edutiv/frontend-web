@@ -157,7 +157,7 @@ export default function CourseListPage() {
           <div className="md:col-span-3 w-full">
             <div className="h-[370px] border-2 p-6 rounded-md w-full">
               <form>
-                <label>Sort</label>
+                {/* <label>Sort</label>
                 <select
                   name="filterCourse"
                   className=" w-full text-sm h-[36px] rounded-md px-3"
@@ -166,7 +166,7 @@ export default function CourseListPage() {
                   <option value="Longest">Longest</option>
                   <option value="highest">Highest rating</option>
                   <option value="lowest">Lowest rating</option>
-                </select>
+                </select> */}
 
                 <div className="my-5">
                   <label>Filter Categories</label>
@@ -180,7 +180,7 @@ export default function CourseListPage() {
                       value="Backend Engineer"
                       onClick={handleCheckbox}
                     />{" "}
-                    <label>Backeng Engineer</label>
+                    <label>Backend Engineer</label>
                   </div>
 
                   <div className=" mb-2">
