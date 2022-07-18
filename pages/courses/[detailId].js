@@ -20,6 +20,8 @@ import jwtDecode from "jwt-decode";
 import Swal from "sweetalert2";
 import Footer from "../../components/Footer"
 import loader from "../../public/assets/img/load.gif";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -135,6 +137,12 @@ export default function Detail() {
     checkUserEnrolled();
   });
 
+  useEffect(() => {
+    AOS.init({
+      duration : 2000
+    });
+  }, []);
+
   if (!dataCourse) {
     return <div className="flex flex-col h-screen w-full justify-center items-center">
       <Image 
@@ -147,11 +155,14 @@ export default function Detail() {
       <p className="text-base text-black">Don&apos;t forget to sleep...</p>
     </div>;
   }
+
+
+
   return (
     <div>
       <Navbar />
       <div className=" mt-20 ">
-        <div className=" text-center">
+        <div className=" text-center" data-aos={"zoom-in"} data-aos-duration={1000}>
           <h1 className=" text-4xl px-3">{dataCourse?.course_name}</h1>
         </div>
         <div className=" flex justify-center mt-6">
@@ -183,7 +194,7 @@ export default function Detail() {
         {/* contents video */}
         <div className="mx-10 md:mx-20 md:grid grid-cols-12 gap-10 my-10 max-h-[424px]">
           {/* video */}
-          <div className="col-span-9 border-2  ">
+          <div className="col-span-9 border-2  " data-aos={"fade-right"}>
             <iframe
               className="w-full h-fit aspect-auto md:h-full "
               src={video}
@@ -192,7 +203,7 @@ export default function Detail() {
           {/* video */}
 
           {/* ennroll button */}
-          <div className=" bg-[#F5F5F5] rounded-md col-span-3 p-6 grid">
+          <div className=" bg-[#F5F5F5] rounded-md col-span-3 p-6 grid" data-aos={"fade-left"}>
             <h1 className=" font-bold mb-4 text-base">
               {`${dataCourse?.sections?.length} Video Lesson (${dataCourse?.total_times})`}
             </h1>
@@ -223,14 +234,14 @@ export default function Detail() {
             </div>
             {isUserEnrolled ? (
               <Link href={`/learns/${query.detailId}`}>
-                <button className=" h-[41px] bg-[#126E64] rounded-md w-full place-self-end text-white">
+                <button className=" h-[41px] bg-[#126E64] rounded-md w-full place-self-end text-white hover:border-[#126E64] hover:-translate-y-[0.15rem] hover:transition hover:duration-100 hover:ease-in-out hover:drop-shadow-md hover:cursor-pointer hover:bg-white hover:text-black">
                   LEARNS NOW
                 </button>
               </Link>
             ) : isUserLogin ? (
               <button
                 onClick={handleEnrollUser}
-                className=" h-[41px] bg-[#126E64] rounded-md w-full place-self-end text-white"
+                className=" h-[41px] bg-[#126E64] rounded-md w-full place-self-end text-white hover:border-[#126E64] hover:-translate-y-[0.15rem] hover:transition hover:duration-100 hover:ease-in-out hover:drop-shadow-md hover:cursor-pointer"
               >
                 ENROLL NOW
               </button>
@@ -238,7 +249,7 @@ export default function Detail() {
               <Link href="/auth/login">
                 <button
                   onClick={handleEnrollUser}
-                  className=" h-[41px] bg-[#126E64] rounded-md w-full place-self-end text-white"
+                  className=" h-[41px] bg-[#126E64] rounded-md w-full place-self-end text-white hover:border-[#126E64] hover:-translate-y-[0.15rem] hover:transition hover:duration-100 hover:ease-in-out hover:drop-shadow-md hover:cursor-pointer"
                 >
                   ENROLL NOW
                 </button>
@@ -250,7 +261,7 @@ export default function Detail() {
         {/* contents video */}
 
         {/* content detail */}
-        <div className=" relative grid md:grid-cols-12 grid-cols-1 gap-10 md:mx-20 mx-10 text-sm md:text-base">
+        <div className=" relative grid md:grid-cols-12 grid-cols-1 gap-10 md:mx-20 mx-10 text-sm md:text-base" data-aos={"fade-down"}>
           {/* tabs content */}
           <div className=" col-span-9 mt-10 md:mt-0 mx-5 md:mx-0">
             <div className="w-full px-2 sm:px-0">
@@ -394,7 +405,7 @@ export default function Detail() {
                       {dataCourse?.tools?.map((data) => (
                         <div
                           key={data.id}
-                          className=" mr-2  mx-auto md:w-[147px] w-full md:mt-0 mt-3 bg-[#F5F5F5] p-2 text-center grid place-content-center"
+                          className=" mr-2  mx-auto md:w-[147px] w-full md:mt-0 mt-3 bg-[#F5F5F5] p-2 text-center grid place-content-center hover:border-[#126E64] hover:-translate-y-[0.15rem] hover:transition hover:duration-100 hover:ease-in-out hover:drop-shadow-md hover:cursor-pointer"
                         >
                           <div className=" flex justify-center mb-3">
                             <img
@@ -419,7 +430,7 @@ export default function Detail() {
 
                   {/* =================  tab Reviews =================*/}
                   <Tab.Panel>
-                    <div className=" md:h-80 grid md:grid-cols-4 w-full gap-4">
+                    <div className=" md:h-80 grid md:grid-cols-4 w-full gap-4 ">
                       {dataEnrolled
                         ?.filter((data) => {
                           return data.review !== null;
@@ -442,7 +453,7 @@ export default function Detail() {
 
           {/* mentor profil */}
 
-          <div className="grid col-span-7 md:col-span-3 border-2 h-[173px] p-3 content-center w-full">
+          <div data-aos={"fade-left"} className="grid col-span-7 md:col-span-3 border h-[173px] p-3 content-center w-full hover:border-[#126E64] hover:-translate-y-[0.15rem] hover:transition hover:duration-100 hover:ease-in-out hover:drop-shadow-md hover:cursor-pointer">
             <h1 className=" pb-4 font-bold">Mentor Expert</h1>
             <div className="flex">
               <div className=" w-10 rounded-full">
