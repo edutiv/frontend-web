@@ -8,7 +8,7 @@ import { BASE_URL } from "../../../config/API";
 import Footer from "../../../components/Footer";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import loader from "../../public/assets/img/load.gif";
+import loader from "../../../public/assets/img/load.gif";
 
 export default function CourseListPage() {
   // const [data, setData] = useState();
