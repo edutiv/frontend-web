@@ -9,6 +9,7 @@ import { Tab, Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/solid";
 import Link from "next/link";
 import LearnTools from "../../components/LearnTools";
+import loader from "../../public/assets/img/load.gif";
 
 // function classNames(...classes) {
 //   return classes.filter(Boolean).join(' ')
@@ -160,6 +161,19 @@ export default function Learn() {
         Swal.fire("oops!!", "there is something wrong", "error");
       });
   };
+
+  if (!data) {
+    return <div className="flex flex-col h-screen w-full justify-center items-center">
+      <Image 
+        src={loader}
+        alt="loader"
+        height={80}
+        width={80}
+        quality={100}
+      />
+      <p className="text-base text-black">Don&apos;t forget to sleep...</p>
+    </div>;
+  }
 
   return (
     <>
