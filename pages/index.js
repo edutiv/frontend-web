@@ -22,11 +22,12 @@ import Footer from "../components/Footer";
 import CardProgressCourse from "../components/CardProgressCourse";
 import Cookies from 'universal-cookie';
 import CardProgressContainer from "../components/CardProgressContainer";
+import loader from "../public/assets/img/load.gif";
 
 export default function Home() {
   let api;
   // const [data, setData] = useState();
-  const [dataCourse, setDataCourse] = useState([]);
+  const [dataCourse, setDataCourse] = useState();
   const [categories, setCategories] = useState([]);
   const [isLogin, setIsLogin] = useState(false);
   const cookies = new Cookies();
@@ -86,6 +87,19 @@ export default function Home() {
       duration : 2000
     });
   }, []);
+
+  if (!dataCourse) {
+    return <div className="flex flex-col h-screen w-full justify-center items-center">
+      <Image 
+        src={loader}
+        alt="loader"
+        height={80}
+        width={80}
+        quality={100}
+      />
+      <p className="text-base text-black">Don&apos;t forget to sleep...</p>
+    </div>;
+  }
 
   return (
     <>
