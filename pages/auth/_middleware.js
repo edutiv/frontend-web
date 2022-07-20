@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import React, { useEffect } from "react";
 
 export default function middleware(req) {
   console.log(req.cookies.token);
