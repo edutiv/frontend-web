@@ -46,6 +46,7 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
   const [courseName, setCourseName] = useState("");
   const [courseImageUrl, setCourseImageUrl] = useState("");
   const [courseDesc, setCourseDesc] = useState("");
+  const [objectiveList, setObjectiveList] = useState([{ objective: "" }]);
   const [courseTotalVideo, setCourseTotalVideo] = useState(0);
   const [courseTotalTimes, setCourseTotalTimes] = useState("");
   const [uploadedCourseId, setUploadedCourseId] = useState(0);
@@ -76,6 +77,25 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
 
   // console.log(data);
   // console.log('category selected', categorySelected);
+
+  const handleObjChange = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...objectiveList];
+    list[index][name] = value;
+    setObjectiveList(list);
+  }
+
+  const handleObjRemove = (index) => {
+    const list = [...objectiveList];
+    list.splice(index, 1);
+    setObjectiveList(list);
+  }
+
+  const handleObjAdd = () => {
+    setObjectiveList([...objectiveList, { objective: "" }]);
+  }
+
+  console.log(objectiveList);
 
   const getCategoryData = () => {
     axios
@@ -1292,6 +1312,47 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
                           onChange={(e) => setCourseDesc(e.target.value)}
                         >
                         </textarea>
+                      </div>
+                      <div className="px-6 mb-6 form-group">
+                        <label htmlFor="">Course Objectives</label>
+                        {
+                          objectiveList.map((singleObjective, index) => (
+                            <div key={index}>
+                              <div className="flex flex-row gap-2">
+                                <input
+                                  name="objective"
+                                  type="text"
+                                  id="objective"
+                                  className="form-control block w-full px-3 py-1.5 my-2 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                  value={singleObjective.objective}
+                                  onChange={(e) => handleObjChange(e, index)}
+                                />
+                                {
+                                  objectiveList.length - 1 === index && objectiveList.length < 4 && (
+                                    <button
+                                      type="button"
+                                      onClick={handleObjAdd}
+                                      className="rounded hover:bg-emerald-500 hover:text-white p-2 my-2 border"
+                                    >
+                                      +
+                                    </button>
+                                  )
+                                }
+                                {
+                                  objectiveList.length !== 1 && (
+                                    <button
+                                      type="button"
+                                      onClick={() => handleObjRemove(index)}
+                                      className="rounded hover:bg-red-600 hover:text-white p-2 my-2 border"
+                                    >
+                                      -
+                                    </button>
+                                  )
+                                }
+                              </div>
+                            </div>
+                          ))
+                        }
                       </div>
                       <div className="px-6 mb-6 form-group">
                         <label htmlFor="">Total Videos</label>

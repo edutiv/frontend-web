@@ -32,7 +32,7 @@ function Login(req) {
 
   const handleSubmitLogin = (e) => {
     e.preventDefault();
-    console.log(email, password);
+    // console.log(email, password);
 
     axios
       .post(`${BASE_URL}/user/login`, {
