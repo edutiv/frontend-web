@@ -346,7 +346,7 @@ export default function Detail() {
                       </div>
 
                       <div className=" mb-12">
-                        <h1>Advantages of using Golang</h1>
+                        <h1>Advantages</h1>
                         <ul>
                           {dataCourse?.advantages?.map((item, index) => (
                             <li key={index}>

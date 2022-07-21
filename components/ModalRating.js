@@ -44,8 +44,8 @@ export default function ModalRating({ dataCourse, handleHidden }) {
             setRating(0);
             setIsOpen(false);
             Swal.fire(
-              'yohoo!!',
-              'Thanks for the feedback ;)',
+              'Thank You',
+              'by making your voice heard. You help us improve Edutiv',
               'success'
             )
           })
