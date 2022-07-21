@@ -47,6 +47,7 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
   const [courseImageUrl, setCourseImageUrl] = useState("");
   const [courseDesc, setCourseDesc] = useState("");
   const [objectiveList, setObjectiveList] = useState([{ objective: "" }]);
+  const [advantageList, setAdvantageList] = useState([{ advantage: "" }]);
   const [courseTotalVideo, setCourseTotalVideo] = useState(0);
   const [courseTotalTimes, setCourseTotalTimes] = useState("");
   const [uploadedCourseId, setUploadedCourseId] = useState(0);
@@ -66,17 +67,10 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
   const [confirmPass, setConfirmPass] = useState("");
   const [detailMember, setDetailMember] = useState(0);
 
-  const [errorMessage, setErrorMessage] = useState([]);
-
   const cookies = new Cookies();
   let token = cookies.get("token");
 
   const counterValue = useContext(CounterContext);
-  // console.log(categorySelected.id);
-  // console.log(token);
-
-  // console.log(data);
-  // console.log('category selected', categorySelected);
 
   const handleObjChange = (e, index) => {
     const { name, value } = e.target;
@@ -95,7 +89,24 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
     setObjectiveList([...objectiveList, { objective: "" }]);
   }
 
-  console.log(objectiveList);
+  const handleAdvChange = (e, index) => {
+    const { name, value } = e.target;
+    const advList = [...advantageList];
+    advList[index][name] = value;
+    setAdvantageList(advList);
+  }
+
+  const handleAdvRemove = (index) => {
+    const list = [...advantageList];
+    list.splice(index, 1);
+    setAdvantageList(list);
+  }
+
+  const handleAdvAdd = () => {
+    setAdvantageList([...advantageList, { advantage: ""}]);
+  }
+
+  // console.log(advantageList);
 
   const getCategoryData = () => {
     axios
@@ -1343,6 +1354,47 @@ export default function CardTable({ color, title, sidebutton, type, data, refres
                                     <button
                                       type="button"
                                       onClick={() => handleObjRemove(index)}
+                                      className="rounded hover:bg-red-600 hover:text-white p-2 my-2 border"
+                                    >
+                                      -
+                                    </button>
+                                  )
+                                }
+                              </div>
+                            </div>
+                          ))
+                        }
+                      </div>
+                      <div className="px-6 mb-6 form-group">
+                        <label htmlFor="">Course Advantage</label>
+                        {
+                          advantageList.map((singleAdvantage, index) => (
+                            <div key={index}>
+                              <div className="flex flex-row gap-2">
+                                <input 
+                                  name="advantage"
+                                  type="text"
+                                  id="advantage"
+                                  className="form-control block w-full px-3 py-1.5 my-2 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                  value={singleAdvantage.advantage}
+                                  onChange={(e) => handleAdvChange(e, index)}
+                                />
+                                {
+                                  advantageList.length - 1 === index && advantageList.length < 4 && (
+                                    <button
+                                      type="button"
+                                      onClick={handleAdvAdd}
+                                      className="rounded hover:bg-emerald-500 hover:text-white p-2 my-2 border"
+                                    >
+                                      +
+                                    </button>
+                                  )
+                                }
+                                {
+                                  advantageList.length !== 1 && (
+                                    <button
+                                      type="button"
+                                      onClick={() => handleAdvRemove(index)}
                                       className="rounded hover:bg-red-600 hover:text-white p-2 my-2 border"
                                     >
                                       -
